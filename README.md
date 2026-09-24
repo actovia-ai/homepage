@@ -19,7 +19,11 @@ what size. Until a file exists, the page shows a window-shaped placeholder
 that says the same. To fill one in, capture the Exodus window at 2x (on macOS,
 ⌘⇧4 then Space, and hold Option while clicking to leave out the shadow),
 export it at the listed size, and save it under `public/` at the listed path.
-The page picks it up on the next build.
+Each shot has a light and a dark capture: `name.png` in light mode and
+`name-dark.png` in dark mode, and visitors see the one for their system (shots
+marked `darkOnly` sit on black sections and need only the dark one). If one is
+missing the other is used for both. The page picks new files up on the next
+build.
 
 ## Brand
 

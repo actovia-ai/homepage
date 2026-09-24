@@ -1,13 +1,30 @@
 /**
- * Every screenshot the page needs, in one place: drop the PNG at `file`
- * (under public/) and it replaces the placeholder. Capture at 2x; `size` is
- * the pixel size to export.
+ * Every screenshot the page needs, in one place. Capture at 2x; `size` is the
+ * pixel size to export.
+ *
+ * Each shot comes in two captures, one per colour scheme: `file` in light
+ * mode, and the same name with `-dark` (`hero-main-window-dark.png`) in dark
+ * mode; visitors get the one for their system. A shot that only ever sits on
+ * a black section is `darkOnly`, and `file` is its dark capture. Drop the PNGs
+ * under public/ and they replace the placeholder; if one scheme's capture is
+ * missing, the other is shown for both.
  */
 export interface ShotSpec {
   file: string
   size: [number, number]
-  /** What to capture — shown inside the placeholder until the file exists. */
+  /** What to capture — shown inside the placeholder until a file exists. */
   brief: string
+  darkOnly?: boolean
+}
+
+/** The dark-mode capture of a shot (the same file for a dark-only shot). */
+export function darkFileOf(spec: ShotSpec): string {
+  return spec.darkOnly ? spec.file : spec.file.replace(/\.png$/u, '-dark.png')
+}
+
+/** Every file a shot can use, for checking which ones exist. */
+export function shotFiles(spec: ShotSpec): string[] {
+  return spec.darkOnly ? [spec.file] : [spec.file, darkFileOf(spec)]
 }
 
 export const SHOTS = {
@@ -15,7 +32,7 @@ export const SHOTS = {
     file: '/shots/hero-main-window.png',
     size: [2880, 1800],
     brief:
-      'Main window, light mode: sidebar with a few chats, a conversation with a finished answer, a tool card and the composer.'
+      'Main window: sidebar with a few chats, a conversation with a finished answer, a tool card and the composer.'
   },
   runAsk: {
     file: '/shots/run-1-ask.png',
@@ -44,10 +61,11 @@ export const SHOTS = {
     brief: 'A Deep Research report open, with its progress and cited sources.'
   },
   philharmonic: {
-    file: '/shots/philharmonic.png',
+    file: '/shots/philharmonic-dark.png',
     size: [2880, 1800],
+    darkOnly: true,
     brief:
-      'Philharmonic, dark mode: a group of agents on a task, plus the Schedule tab.'
+      'Philharmonic, in dark mode: a group of agents on a task, plus the Schedule tab.'
   },
   artifacts: {
     file: '/shots/artifacts.png',
@@ -55,9 +73,11 @@ export const SHOTS = {
     brief: 'An artifact rendered in its sandbox (a small HTML app or chart).'
   },
   computerUse: {
-    file: '/shots/computer-use.png',
+    file: '/shots/computer-use-dark.png',
     size: [1600, 1200],
-    brief: 'A computer_use step driving an allowlisted app window.'
+    darkOnly: true,
+    brief:
+      'In dark mode: a computer_use step driving an allowlisted app window.'
   },
   iphoneChat: {
     file: '/shots/iphone-chat.png',

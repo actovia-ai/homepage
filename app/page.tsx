@@ -14,13 +14,13 @@ import { RunStory } from '@/app/_components/run-story'
 import { ShotsProvider } from '@/app/_components/shot'
 import { Specs } from '@/app/_components/specs'
 import { getLatestRelease, resolveDownloads } from '@/app/_lib/release'
-import { SHOTS } from '@/app/_lib/shots'
+import { SHOTS, shotFiles } from '@/app/_lib/shots'
 
 export default async function Page() {
   const downloads = resolveDownloads(await getLatestRelease())
   // Screenshots that have been dropped into public/ replace their placeholders.
   const ready = Object.values(SHOTS)
-    .map((s) => s.file)
+    .flatMap(shotFiles)
     .filter((f) => existsSync(join(process.cwd(), 'public', f)))
 
   return (

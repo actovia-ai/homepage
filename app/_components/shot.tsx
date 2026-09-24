@@ -2,11 +2,58 @@
 
 import { createContext, useContext } from 'react'
 
-import type { ShotSpec } from '@/app/_lib/shots'
+import { darkFileOf, type ShotSpec } from '@/app/_lib/shots'
 import { cn } from '@/lib/utils'
 
 /** The screenshot files that exist under public/, found at build time. */
 const ReadyShots = createContext<ReadonlySet<string>>(new Set())
+
+/**
+ * The captures to show for each colour scheme, or null while neither exists.
+ * A missing scheme borrows the other's capture.
+ */
+function useSources(spec: ShotSpec): { light: string; dark: string } | null {
+  const ready = useContext(ReadyShots)
+  const light = !spec.darkOnly && ready.has(spec.file) ? spec.file : undefined
+  const dark = ready.has(darkFileOf(spec)) ? darkFileOf(spec) : undefined
+  if (!light && !dark) return null
+  return { light: light ?? dark!, dark: dark ?? light! }
+}
+
+/** Where the captures go, as the placeholder shows it. */
+function filesLabel(spec: ShotSpec): string {
+  const dark = darkFileOf(spec).split('/').pop()
+  return spec.darkOnly ? `public${spec.file}` : `public${spec.file} + ${dark}`
+}
+
+/** A capture that follows the colour scheme, filling its frame. */
+function Capture({
+  sources,
+  width,
+  height,
+  priority
+}: {
+  sources: { light: string; dark: string }
+  width: number
+  height: number
+  priority?: boolean
+}) {
+  return (
+    <picture>
+      {sources.dark !== sources.light && (
+        <source srcSet={sources.dark} media="(prefers-color-scheme: dark)" />
+      )}
+      <img
+        src={sources.light}
+        alt=""
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        className="absolute inset-0 size-full object-cover"
+      />
+    </picture>
+  )
+}
 
 export function ShotsProvider({
   ready,
@@ -37,7 +84,7 @@ export function Shot({
   priority?: boolean
   className?: string
 }) {
-  const ready = useContext(ReadyShots).has(spec.file)
+  const sources = useSources(spec)
   const [w, h] = spec.size
   const dark = tone === 'dark'
 
@@ -52,15 +99,12 @@ export function Shot({
       )}
       style={{ aspectRatio: `${w} / ${h}` }}
     >
-      {ready ? (
-        // eslint-disable-next-line @next/next/no-img-element -- static export-friendly, sized by the wrapper
-        <img
-          src={spec.file}
-          alt=""
+      {sources ? (
+        <Capture
+          sources={sources}
           width={w / 2}
           height={h / 2}
-          loading={priority ? 'eager' : 'lazy'}
-          className="absolute inset-0 size-full object-cover"
+          priority={priority}
         />
       ) : (
         <Placeholder spec={spec} dark={dark} />
@@ -99,7 +143,7 @@ function Placeholder({ spec, dark }: { spec: ShotSpec; dark: boolean }) {
         <div className="max-w-md text-center text-[clamp(0.75rem,1.2vw,0.9375rem)] leading-snug">
           <p className={dark ? 'text-night-ink' : 'text-ink'}>{spec.brief}</p>
           <p className="mt-2 font-mono text-[0.85em] opacity-80">
-            {w} × {h} · public{spec.file}
+            {w} × {h} · {filesLabel(spec)}
           </p>
         </div>
       </div>
@@ -118,7 +162,7 @@ export function PhoneShot({
   spec: ShotSpec
   className?: string
 }) {
-  const ready = useContext(ReadyShots).has(spec.file)
+  const sources = useSources(spec)
   const [w, h] = spec.size
 
   return (
@@ -132,16 +176,8 @@ export function PhoneShot({
         className="bg-surface relative overflow-hidden rounded-[12%/5.6%] dark:bg-black"
         style={{ aspectRatio: `${w} / ${h}` }}
       >
-        {ready ? (
-          // eslint-disable-next-line @next/next/no-img-element -- sized by the frame
-          <img
-            src={spec.file}
-            alt=""
-            width={w / 3}
-            height={h / 3}
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover"
-          />
+        {sources ? (
+          <Capture sources={sources} width={w / 3} height={h / 3} />
         ) : (
           <div
             className="text-graphite absolute inset-0 grid place-items-center p-[10%]"
@@ -153,7 +189,7 @@ export function PhoneShot({
             <div className="text-center text-[clamp(0.6875rem,1vw,0.8125rem)] leading-snug">
               <p className="text-ink">{spec.brief}</p>
               <p className="mt-2 font-mono text-[0.85em] break-all opacity-80">
-                {w} × {h} · public{spec.file}
+                {w} × {h} · {filesLabel(spec)}
               </p>
             </div>
           </div>
