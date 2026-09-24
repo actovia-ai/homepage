@@ -65,12 +65,14 @@ export function Hero({
         >
           <h1 className="font-word type-hero">Exodus</h1>
           <p className="type-headline mt-3">
-            Every model, on your own machine.
+            Your assistant.
+            <br />
+            On your own machine.
           </p>
-          <p className="type-lede text-graphite mt-6 max-w-[36ch]">
-            Chat with OpenAI, Anthropic, Gemini, xAI or a local model, and let
-            it search, read, run and build until the job is done. Your chats,
-            keys and files stay on your computer.
+          <p className="type-lede text-graphite mt-6 max-w-[38ch]">
+            Chat for the quick things. Philharmonic, a team of agents, for the
+            big ones. Everything runs and stays on your computer, and your
+            iPhone can steer it from anywhere in the house.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
