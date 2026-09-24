@@ -104,3 +104,61 @@ function Placeholder({ spec, dark }: { spec: ShotSpec; dark: boolean }) {
     </div>
   )
 }
+
+/**
+ * An iPhone screenshot in a phone-shaped frame: a raw screen capture has no
+ * bezel, so one is drawn around it (and around the placeholder).
+ */
+export function PhoneShot({
+  spec,
+  className
+}: {
+  spec: ShotSpec
+  className?: string
+}) {
+  const ready = useContext(ReadyShots).has(spec.file)
+  const [w, h] = spec.size
+
+  return (
+    <div
+      className={cn(
+        'bg-ink rounded-[15%/7%] p-[3.2%] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5),inset_0_0_0_1px_rgb(255_255_255/0.12)]',
+        className
+      )}
+    >
+      <div
+        className="relative overflow-hidden rounded-[12%/5.6%] bg-white"
+        style={{ aspectRatio: `${w} / ${h}` }}
+      >
+        {ready ? (
+          // eslint-disable-next-line @next/next/no-img-element -- sized by the frame
+          <img
+            src={spec.file}
+            alt=""
+            width={w / 3}
+            height={h / 3}
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover"
+          />
+        ) : (
+          <div
+            className="text-graphite absolute inset-0 grid place-items-center p-[10%]"
+            style={{
+              backgroundImage:
+                'repeating-linear-gradient(135deg, rgb(0 0 0/0.03) 0 1px, transparent 1px 14px)'
+            }}
+          >
+            <div className="text-center text-[clamp(0.6875rem,1vw,0.8125rem)] leading-snug">
+              <p className="text-ink">{spec.brief}</p>
+              <p className="mt-2 font-mono text-[0.85em] break-all opacity-80">
+                {w} × {h} · public{spec.file}
+              </p>
+            </div>
+          </div>
+        )}
+        {/* The Dynamic Island, over the screen as on the device. */}
+        <i className="bg-ink absolute top-[1.6%] left-1/2 h-[3.6%] w-[31%] -translate-x-1/2 rounded-full" />
+      </div>
+    </div>
+  )
+}

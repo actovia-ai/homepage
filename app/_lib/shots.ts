@@ -59,6 +59,23 @@ export const SHOTS = {
     size: [1600, 1200],
     brief: 'A computer_use step driving an allowlisted app window.'
   },
+  iphoneChat: {
+    file: '/shots/iphone-chat.png',
+    size: [1206, 2622],
+    brief:
+      'Exodus for iPhone: a chat streaming from the paired computer, with a tool card.'
+  },
+  iphoneControl: {
+    file: '/shots/iphone-control.png',
+    size: [1206, 2622],
+    brief:
+      'Exodus for iPhone: a run working on the computer — Computer Use or terminal steps.'
+  },
+  iphoneSettings: {
+    file: '/shots/iphone-settings.png',
+    size: [1206, 2622],
+    brief: 'Exodus for iPhone: Settings, showing models and providers.'
+  },
   chatAudit: {
     file: '/shots/chat-audit.png',
     size: [1600, 1200],

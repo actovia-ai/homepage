@@ -6,6 +6,7 @@ import { FeaturePanel } from '@/app/_components/feature-panel'
 import { Footer } from '@/app/_components/footer'
 import { Hero } from '@/app/_components/hero'
 import { Highlights } from '@/app/_components/highlights'
+import { IPhone } from '@/app/_components/iphone'
 import { LocalNav } from '@/app/_components/local-nav'
 import { Models } from '@/app/_components/models'
 import { Privacy } from '@/app/_components/privacy'
@@ -41,6 +42,7 @@ export default async function Page() {
           body="Philharmonic puts agents into groups, each with its own role, memory and workspace. Hand them a task now, or give them a schedule: every weekday at nine, or once on Friday."
           shot={SHOTS.philharmonic}
         />
+        <IPhone />
         <Privacy />
         <Specs />
         <Download downloads={downloads} />

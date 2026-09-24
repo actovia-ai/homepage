@@ -11,7 +11,10 @@ const PROVIDERS = [
 
 export function Models() {
   return (
-    <section className="bg-night text-night-ink py-28 sm:py-36">
+    <section
+      data-nav-tone="dark"
+      className="bg-night text-night-ink py-28 sm:py-36"
+    >
       <div className="mx-auto max-w-[980px] px-6 text-center">
         <h2 className="type-headline">Bring your own models.</h2>
         <p className="type-lede text-night-graphite mx-auto mt-6 max-w-[40ch]">

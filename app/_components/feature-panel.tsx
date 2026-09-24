@@ -19,6 +19,7 @@ export function FeaturePanel({
   const dark = tone === 'dark'
   return (
     <section
+      data-nav-tone={dark ? 'dark' : undefined}
       className={cn(
         'overflow-hidden py-28 sm:py-36',
         dark ? 'bg-night text-night-ink' : 'bg-paper text-ink'
