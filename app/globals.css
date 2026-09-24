@@ -25,6 +25,8 @@
     -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
     system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-word: var(--font-fredoka), ui-rounded, 'SF Pro Rounded', sans-serif;
+  --font-ghost:
+    var(--font-inter-tight), 'SF Pro Display', system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
