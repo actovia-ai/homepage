@@ -1,5 +1,4 @@
-import Image from 'next/image'
-
+import { OdyIcon } from '@/app/_components/ody-icon'
 import type { Downloads } from '@/app/_lib/release'
 import { RELEASES_URL } from '@/app/_lib/release'
 
@@ -28,11 +27,8 @@ export function Download({ downloads }: { downloads: Downloads }) {
   return (
     <section id="download" className="bg-paper pt-12 pb-28 sm:pb-36">
       <div className="mx-auto flex max-w-[980px] flex-col items-center px-6 text-center">
-        <Image
-          src="/brand/ody-icon.png"
-          alt=""
-          width={112}
-          height={112}
+        <OdyIcon
+          size={112}
           className="drop-shadow-[0_14px_24px_rgb(245_163_0/0.25)]"
         />
         <h2 className="type-headline mt-8">Get Exodus.</h2>
@@ -53,7 +49,7 @@ export function Download({ downloads }: { downloads: Downloads }) {
               <p className="text-graphite mt-1 text-sm">{p.needs}</p>
               <a
                 href={p.primary.href}
-                className="bg-sun text-ink hover:bg-sun-deep mt-8 rounded-full px-6 py-2.5 font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
+                className="bg-sun text-coal hover:bg-sun-deep mt-8 rounded-full px-6 py-2.5 font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
               >
                 {p.primary.label}
               </a>

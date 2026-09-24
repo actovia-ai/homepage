@@ -5,12 +5,20 @@
 
   Palette: paper and ink for the light sections, true black for the "night"
   sections, one accent (Ody's sunflower) used as a surface, never as text
-  colour — yellow text on white does not pass contrast.
+  colour — yellow text on white does not pass contrast. Text on sunflower is
+  always `coal`, which does not change with the colour scheme.
+
+  Dark mode follows the system: the tokens below are redefined at the end of
+  this file, so paper/mist/surface/ink/graphite/hairline flip and every
+  component follows without a `dark:` class of its own. Night sections are
+  black in both schemes.
 */
 @theme {
   --color-paper: #fbfbfd;
   --color-mist: #f5f5f7;
+  --color-surface: #ffffff;
   --color-ink: #1d1d1f;
+  --color-coal: #1d1d1f;
   --color-graphite: #6e6e73;
   --color-hairline: #d2d2d7;
   --color-night: #000000;
@@ -34,7 +42,7 @@
 
 @layer base {
   html {
-    color-scheme: light;
+    color-scheme: light dark;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -53,7 +61,7 @@
   }
   ::selection {
     background: var(--color-sun);
-    color: var(--color-ink);
+    color: var(--color-coal);
   }
 }
 
@@ -96,6 +104,35 @@
   text-wrap: pretty;
 }
 
+/*
+  The hero's two motions, in CSS rather than a motion library: the icon and
+  the words arrive once on load, and the app window grows to full size as it
+  scrolls into view (a scroll-driven animation; browsers without
+  animation-timeline simply show it at full size).
+*/
+@keyframes hero-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+}
+@utility hero-arrive {
+  animation: hero-arrive 900ms var(--ease-out) both;
+}
+@keyframes hero-rise {
+  from {
+    transform: translateY(60px) scale(0.86);
+  }
+}
+@supports (animation-timeline: view()) {
+  .hero-rise {
+    transform-origin: top center;
+    animation: hero-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -105,5 +142,23 @@
     transition-duration: 150ms !important;
     transition-property: opacity, color, background-color !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    animation: none;
+  }
+}
+
+/* Dark scheme: the same roles, Apple's dark greys. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #000000;
+    --color-mist: #161617;
+    --color-surface: #1d1d1f;
+    --color-ink: #f5f5f7;
+    --color-graphite: #a1a1a6;
+    --color-hairline: #424245;
   }
 }

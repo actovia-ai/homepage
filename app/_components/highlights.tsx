@@ -75,14 +75,14 @@ const TILES: Tile[] = [
 ]
 
 const TONE: Record<Tone, string> = {
-  white: 'bg-white text-ink',
+  white: 'bg-surface text-ink',
   night: 'bg-night text-night-ink',
-  sun: 'bg-sun text-ink'
+  sun: 'bg-sun text-coal'
 }
 const BODY: Record<Tone, string> = {
   white: 'text-graphite',
   night: 'text-night-graphite',
-  sun: 'text-ink/75'
+  sun: 'text-coal/75'
 }
 
 export function Highlights() {

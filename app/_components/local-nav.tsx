@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
+import { OdyIcon } from '@/app/_components/ody-icon'
 import { cn } from '@/lib/utils'
 
 const LINKS = [
@@ -28,7 +28,7 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
         'sticky top-0 z-50 border-b backdrop-blur-xl backdrop-saturate-180 transition-[background-color,border-color,color] duration-300 ease-out',
         dark
           ? 'bg-night-2/72 text-night-ink border-white/10'
-          : 'bg-paper/72 text-ink border-black/8'
+          : 'bg-paper/72 text-ink border-black/8 dark:border-white/10'
       )}
     >
       <nav
@@ -36,13 +36,7 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
         className="mx-auto flex h-13 max-w-[1024px] items-center justify-between px-4 sm:px-6"
       >
         <a href="#top" className="flex items-center gap-2">
-          <Image
-            src="/brand/ody-icon.png"
-            alt=""
-            width={26}
-            height={26}
-            priority
-          />
+          <OdyIcon size={26} priority />
           <span className="font-word text-[1.3125rem] leading-none tracking-[-0.01em]">
             Exodus
           </span>
@@ -59,7 +53,7 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
           ))}
           <a
             href={downloadHref}
-            className="bg-sun text-ink hover:bg-sun-deep rounded-full px-3.5 py-1 font-medium transition-colors duration-150 active:scale-[0.97]"
+            className="bg-sun text-coal hover:bg-sun-deep rounded-full px-3.5 py-1 font-medium transition-colors duration-150 active:scale-[0.97]"
           >
             Download
           </a>

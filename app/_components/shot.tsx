@@ -47,7 +47,7 @@ export function Shot({
         'relative overflow-hidden rounded-[1.1%/1.7%]',
         dark
           ? 'shadow-[0_40px_90px_-30px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.08)]'
-          : 'shadow-[0_40px_90px_-40px_rgb(0_0_0/0.45),0_0_0_1px_rgb(0_0_0/0.06)]',
+          : 'shadow-[0_40px_90px_-40px_rgb(0_0_0/0.45),0_0_0_1px_rgb(0_0_0/0.06)] dark:shadow-[0_40px_90px_-30px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.1)]',
         className
       )}
       style={{ aspectRatio: `${w} / ${h}` }}
@@ -75,13 +75,15 @@ function Placeholder({ spec, dark }: { spec: ShotSpec; dark: boolean }) {
     <div
       className={cn(
         'absolute inset-0 flex flex-col',
-        dark ? 'bg-night-2 text-night-graphite' : 'text-graphite bg-white'
+        dark ? 'bg-night-2 text-night-graphite' : 'text-graphite bg-surface'
       )}
     >
       <div
         className={cn(
           'flex h-[5.5%] min-h-5 items-center gap-[0.6%] border-b px-[1.4%]',
-          dark ? 'border-white/8 bg-white/4' : 'bg-mist border-black/6'
+          dark
+            ? 'border-white/8 bg-white/4'
+            : 'bg-mist border-black/6 dark:border-white/8'
         )}
       >
         <i className="aspect-square h-[38%] rounded-full bg-[#ff5f57]" />
@@ -122,12 +124,12 @@ export function PhoneShot({
   return (
     <div
       className={cn(
-        'bg-ink rounded-[15%/7%] p-[3.2%] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5),inset_0_0_0_1px_rgb(255_255_255/0.12)]',
+        'bg-coal rounded-[15%/7%] p-[3.2%] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5),inset_0_0_0_1px_rgb(255_255_255/0.12)] dark:bg-[#2c2c2e]',
         className
       )}
     >
       <div
-        className="relative overflow-hidden rounded-[12%/5.6%] bg-white"
+        className="bg-surface relative overflow-hidden rounded-[12%/5.6%] dark:bg-black"
         style={{ aspectRatio: `${w} / ${h}` }}
       >
         {ready ? (
@@ -157,7 +159,7 @@ export function PhoneShot({
           </div>
         )}
         {/* The Dynamic Island, over the screen as on the device. */}
-        <i className="bg-ink absolute top-[1.6%] left-1/2 h-[3.6%] w-[31%] -translate-x-1/2 rounded-full" />
+        <i className="absolute top-[1.6%] left-1/2 h-[3.6%] w-[31%] -translate-x-1/2 rounded-full bg-black" />
       </div>
     </div>
   )
