@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Exodus homepage
 
-## Getting Started
-
-First, run the development server:
+The product page for [Exodus](https://github.com/exodus-ai-org/exodus), in the
+style of an Apple product page: a pinned product bar, a hero with the app
+icon and window, alternating light and dark chapters, a pinned scroll story,
+Tech specs, downloads, and the name edge to edge at the bottom.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm lint
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Every screenshot is listed in `app/_lib/shots.ts` with what to capture and at
+what size. Until a file exists, the page shows a window-shaped placeholder
+that says the same. To fill one in, capture the Exodus window at 2x (on macOS,
+⌘⇧4 then Space, and hold Option while clicking to leave out the shadow),
+export it at the listed size, and save it under `public/` at the listed path.
+The page picks it up on the next build.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Brand
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/brand/` holds the Ody app icon (the Icon Composer Liquid Glass export)
+and Ody's layers, and `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png`
+and `app/opengraph-image.png` are the web set. All of them are generated in
+the app repo by `bun run icons` (`brand/`); copy them over after a change.
+Provider marks in `public/provider-logos/` are LobeHub's AI brand icons
+(`@lobehub/icons-static-svg`, MIT).
