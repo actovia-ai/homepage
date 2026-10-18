@@ -101,8 +101,8 @@ export function Footer() {
         </svg>
 
         <div className="absolute inset-x-0 bottom-0">
-          <div className="mx-auto flex max-w-[1180px] flex-col gap-2 px-6 pb-8 text-xs sm:flex-row sm:justify-between">
-            <p>Copyright © 2025–2026 Exodus. MIT License.</p>
+          <div className="mx-auto flex max-w-295 flex-col gap-2 px-6 pb-8 text-xs sm:flex-row sm:justify-between">
+            <p>Copyright © {new Date().getFullYear()} Exodus. MIT License.</p>
             <p>Made with care, and a marshmallow.</p>
           </div>
         </div>
