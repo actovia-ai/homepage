@@ -23,13 +23,13 @@ export function Hero({
           <OdyIcon
             size={128}
             priority
-            alt="The Exodus app icon: Ody, a marshmallow with a bindle on its shoulder"
+            alt="The Actovia app icon: Ody, a marshmallow with a bindle on its shoulder"
             className="drop-shadow-[0_18px_30px_rgb(245_163_0/0.28)]"
           />
         </div>
 
         <div className="hero-arrive mt-8 flex flex-col items-center [animation-delay:80ms]">
-          <h1 className="font-word type-hero">Exodus</h1>
+          <h1 className="font-word type-hero">Actovia</h1>
           <p className="type-headline mt-3">
             Your assistant.
             <br />

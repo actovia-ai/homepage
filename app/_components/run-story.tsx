@@ -59,7 +59,7 @@ export function RunStory() {
       <div className="mx-auto max-w-[980px] px-6 text-center">
         <h2 className="type-headline">It keeps going until it’s done.</h2>
         <p className="type-lede text-graphite mx-auto mt-6 max-w-[40ch]">
-          Exodus picks its tools, chains them and checks its own work. It stops
+          Actovia picks its tools, chains them and checks its own work. It stops
           only when it needs you, or before anything you can’t undo.
         </p>
       </div>

@@ -31,7 +31,7 @@ export function Download({ downloads }: { downloads: Downloads }) {
           size={112}
           className="drop-shadow-[0_14px_24px_rgb(245_163_0/0.25)]"
         />
-        <h2 className="type-headline mt-8">Get Exodus.</h2>
+        <h2 className="type-headline mt-8">Get Actovia.</h2>
         <p className="type-lede text-graphite mt-4">
           Free and open source.
           {downloads.version

@@ -83,18 +83,18 @@ export const SHOTS = {
     file: '/shots/iphone-chat.png',
     size: [1206, 2622],
     brief:
-      'Exodus for iPhone: a chat streaming from the paired computer, with a tool card.'
+      'Actovia for iPhone: a chat streaming from the paired computer, with a tool card.'
   },
   iphoneControl: {
     file: '/shots/iphone-control.png',
     size: [1206, 2622],
     brief:
-      'Exodus for iPhone: a run working on the computer — Computer Use or terminal steps.'
+      'Actovia for iPhone: a run working on the computer — Computer Use or terminal steps.'
   },
   iphoneSettings: {
     file: '/shots/iphone-settings.png',
     size: [1206, 2622],
-    brief: 'Exodus for iPhone: Settings, showing models and providers.'
+    brief: 'Actovia for iPhone: Settings, showing models and providers.'
   },
   chatAudit: {
     file: '/shots/chat-audit.png',

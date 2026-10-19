@@ -7,7 +7,7 @@ const COLUMNS = [
     title: 'Product',
     links: [
       { label: 'Features', href: '#features' },
-      { label: 'Exodus for iPhone', href: '#iphone' },
+      { label: 'Actovia for iPhone', href: '#iphone' },
       { label: 'Privacy', href: '#privacy' },
       { label: 'Tech specs', href: '#specs' },
       { label: 'Download', href: '#download' }
@@ -25,7 +25,7 @@ const COLUMNS = [
   {
     title: 'Community',
     links: [
-      { label: 'GitHub', href: 'https://github.com/exodus-ai-org' },
+      { label: 'GitHub', href: 'https://github.com/actovia-ai' },
       { label: 'X', href: 'https://x.com/YanceyOfficial' }
     ]
   }
@@ -48,7 +48,7 @@ export function Footer() {
           <a href="#top" className="flex items-center gap-2.5">
             <Image src="/brand/ody-icon.png" alt="" width={36} height={36} />
             <span className="font-word text-night-ink text-[1.5rem] leading-none">
-              Exodus
+              Actovia
             </span>
           </a>
           <p className="max-w-[28ch] text-sm leading-relaxed">
@@ -96,13 +96,13 @@ export function Footer() {
             className="font-ghost"
             style={{ fontSize: 330, fontWeight: 200, letterSpacing: '-0.04em' }}
           >
-            Exodus
+            Actovia
           </text>
         </svg>
 
         <div className="absolute inset-x-0 bottom-0">
           <div className="mx-auto flex max-w-295 flex-col gap-2 px-6 pb-8 text-xs sm:flex-row sm:justify-between">
-            <p>Copyright © {new Date().getFullYear()} Exodus. MIT License.</p>
+            <p>Copyright © {new Date().getFullYear()} Actovia. MIT License.</p>
             <p>Made with care, and a marshmallow.</p>
           </div>
         </div>

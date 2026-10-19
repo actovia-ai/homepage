@@ -18,8 +18,8 @@ const interTight = Inter_Tight({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://exodus.yancey.app'),
-  title: 'Exodus — your assistant, on your own machine',
+  metadataBase: new URL('https://actovia.yancey.app'),
+  title: 'Actovia — your assistant, on your own machine',
   description:
     'A personal AI assistant that lives on your computer: chat for quick answers, Philharmonic agent teams for the big jobs, every model with your own keys, your data kept local, and your iPhone as the remote.'
 }

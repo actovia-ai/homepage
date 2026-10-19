@@ -20,7 +20,7 @@ const SCREENS = [
 ]
 
 /**
- * Exodus for iPhone is a remote, not a second app: the computer stays the
+ * Actovia for iPhone is a remote, not a second app: the computer stays the
  * hub, the phone asks and watches. Three screens, side by side, the way
  * Apple lines up an iPhone app.
  */
@@ -30,7 +30,7 @@ export function IPhone() {
       <div className="mx-auto max-w-[980px] px-6 text-center">
         <h2 className="type-headline">Your computer, in your pocket.</h2>
         <p className="type-lede text-graphite mx-auto mt-6 max-w-[42ch]">
-          Pair Exodus for iPhone with a QR code, and the Exodus on your computer
+          Pair Actovia for iPhone with a QR code, and the Actovia on your computer
           becomes the hub. Ask from anywhere in the house; the work runs on your
           desk, with its tools, its files and its models.
         </p>
@@ -47,7 +47,7 @@ export function IPhone() {
       </ul>
 
       <p className="text-graphite mx-auto mt-16 max-w-[60ch] px-6 text-center text-sm">
-        Face ID on your phone unlocks Exodus on your computer. Pairing works on
+        Face ID on your phone unlocks Actovia on your computer. Pairing works on
         your own network, over an encrypted connection your phone verifies.
         Philharmonic on iPhone is on the way.
       </p>

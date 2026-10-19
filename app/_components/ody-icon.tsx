@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 
 /**
- * The Exodus app icon, the Liquid Glass export for the colour scheme: the
+ * The Actovia app icon, the Liquid Glass export for the colour scheme: the
  * dark one (Ody on a dark glass tile) when the system is dark. A plain
  * <picture> so the browser picks the file itself, with no script.
  */

@@ -70,7 +70,7 @@ export function ShotsProvider({
 /**
  * A product screenshot. Until its file exists this draws a window-shaped
  * placeholder that says what to capture, at what size, and where to put it.
- * A real capture already carries Exodus's own title bar, so it is shown as
+ * A real capture already carries Actovia's own title bar, so it is shown as
  * is, with only the corner radius and shadow a window has on screen.
  */
 export function Shot({

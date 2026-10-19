@@ -52,7 +52,7 @@ const TILES: Tile[] = [
   },
   {
     title: 'Plug in more tools.',
-    body: 'Any MCP server, and skills from skills.sh installed in one click and shared with the exodus command-line tool.',
+    body: 'Any MCP server, and skills from skills.sh installed in one click and shared with the actovia command-line tool.',
     span: 'md:col-span-4'
   },
   {

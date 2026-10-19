@@ -9,11 +9,11 @@ const POINTS = [
   },
   {
     title: 'Locked when you step away.',
-    body: 'Lock Exodus with a PIN or Touch ID. While it is locked, it answers nothing — not the window, not another app on your Mac.'
+    body: 'Lock Actovia with a PIN or Touch ID. While it is locked, it answers nothing — not the window, not another app on your Mac.'
   },
   {
     title: 'Nothing open on your network.',
-    body: 'Exodus listens only to your own computer until you pair a phone with a QR code, over an encrypted connection the phone verifies.'
+    body: 'Actovia listens only to your own computer until you pair a phone with a QR code, over an encrypted connection the phone verifies.'
   }
 ]
 

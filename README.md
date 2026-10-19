@@ -1,6 +1,6 @@
-# Exodus homepage
+# Actovia homepage
 
-The product page for [Exodus](https://github.com/exodus-ai-org/exodus), in the
+The product page for [Actovia](https://github.com/actovia-ai/actovia), in the
 style of an Apple product page: a pinned product bar, a hero with the app
 icon and window, alternating light and dark chapters, a pinned scroll story,
 Tech specs, downloads, and the name edge to edge at the bottom.
@@ -16,7 +16,7 @@ pnpm build
 
 Every screenshot is listed in `app/_lib/shots.ts` with what to capture and at
 what size. Until a file exists, the page shows a window-shaped placeholder
-that says the same. To fill one in, capture the Exodus window at 2x (on macOS,
+that says the same. To fill one in, capture the Actovia window at 2x (on macOS,
 ⌘⇧4 then Space, and hold Option while clicking to leave out the shadow),
 export it at the listed size, and save it under `public/` at the listed path.
 Each shot has a light and a dark capture: `name.png` in light mode and

@@ -32,13 +32,13 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
       )}
     >
       <nav
-        aria-label="Exodus"
+        aria-label="Actovia"
         className="mx-auto flex h-13 max-w-[1024px] items-center justify-between px-4 sm:px-6"
       >
         <a href="#top" className="flex items-center gap-2">
           <OdyIcon size={26} priority />
           <span className="font-word text-[1.3125rem] leading-none tracking-[-0.01em]">
-            Exodus
+            Actovia
           </span>
         </a>
         <div className="flex items-center gap-6 text-[0.8125rem] tracking-[-0.01em]">
