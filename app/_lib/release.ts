@@ -28,8 +28,6 @@ export async function getLatestRelease(): Promise<GithubRelease | null> {
   }
 }
 
-const ASSET_PREFIX = /^(?:Actovia|Exodus)-/u
-
 export interface Downloads {
   version: string | null
   mac: { dmg: string; zip: string }
@@ -39,17 +37,15 @@ export interface Downloads {
 
 /**
  * Asset URLs by the names electron-forge gives them
- * (`Actovia-1.17.0-arm64.dmg`, `Actovia-1.17.0.Setup.exe`, …; releases
- * before the rename carry the `Exodus-` prefix). Anything
+ * (`Actovia-1.17.0-arm64.dmg`, `Actovia-1.17.0.Setup.exe`, …). The patterns
+ * name no product prefix: releases before the rename are `Exodus-…` (Linux
+ * lowercase). Anything
  * missing falls back to the release page rather than a guessed URL.
  */
 export function resolveDownloads(release: GithubRelease | null): Downloads {
   const assets = release?.assets ?? []
-  // Releases before the rename are `Exodus-…`; from the first Actovia
-  // release on they are `Actovia-…`. Both prefixes are accepted.
   const find = (pattern: RegExp) =>
-    assets.find((a) => ASSET_PREFIX.test(a.name) && pattern.test(a.name))
-      ?.browser_download_url ??
+    assets.find((a) => pattern.test(a.name))?.browser_download_url ??
     release?.html_url ??
     RELEASES_URL
   return {
