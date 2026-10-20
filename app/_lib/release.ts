@@ -35,13 +35,6 @@ export interface Downloads {
   linux: { deb: string; rpm: string }
 }
 
-/**
- * Asset URLs by the names electron-forge gives them
- * (`Actovia-1.17.0-arm64.dmg`, `Actovia-1.17.0.Setup.exe`, …). The patterns
- * name no product prefix: releases before the rename are `Exodus-…` (Linux
- * lowercase). Anything
- * missing falls back to the release page rather than a guessed URL.
- */
 export function resolveDownloads(release: GithubRelease | null): Downloads {
   const assets = release?.assets ?? []
   const find = (pattern: RegExp) =>
