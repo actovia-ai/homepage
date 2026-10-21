@@ -1,0 +1,29 @@
+---
+title: Introduction
+description: How Actovia works, for the people who run it.
+---
+
+Actovia is a personal AI assistant that runs on your own computer. These pages
+are the technical side: where things live, how the pieces connect, and what
+every command does.
+
+## The pieces
+
+- **The desktop app** (macOS, Windows, Linux) is the hub. It holds your chats,
+  memories, settings and API keys, talks to the model providers with your own
+  keys, and serves everything else.
+- **The iPhone app** is a remote for the desktop app. Once paired, it chats,
+  edits settings and reads results through the computer — at home over the
+  local network, or from anywhere over Tailscale.
+- **The CLI** (`actovia`) works on the machine the desktop app runs on: it
+  launches the app, pairs phones, manages skills and updates itself. It is
+  what you use on a computer you reach only over SSH.
+
+## Where to start
+
+<Cards>
+  <Card title="Installation" href="/docs/installation" />
+  <Card title="Your data" href="/docs/data" />
+  <Card title="Remote access" href="/docs/remote-access" />
+  <Card title="CLI" href="/docs/cli" />
+</Cards>

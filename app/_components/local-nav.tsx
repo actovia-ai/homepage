@@ -9,7 +9,8 @@ const LINKS = [
   { href: '#features', label: 'Features' },
   { href: '#iphone', label: 'iPhone' },
   { href: '#privacy', label: 'Privacy' },
-  { href: '#specs', label: 'Tech specs' }
+  { href: '#specs', label: 'Tech specs' },
+  { href: '/docs', label: 'Docs' }
 ]
 
 /**

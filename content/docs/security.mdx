@@ -1,0 +1,30 @@
+---
+title: Security
+description: The app lock, and what keeps the model and other programs in their place.
+---
+
+## App lock
+
+Set a PIN in **Settings → General → Lock & Privacy**. Actovia locks after a
+period of inactivity, and while it is locked every API request is refused.
+Unlock with the PIN, Touch ID, or Face ID on a paired phone. Wrong PINs make
+you wait longer each time.
+
+## Only Actovia talks to Actovia
+
+The API refuses requests from web pages and from any origin other than the
+app itself, so a website open in your browser cannot reach it.
+
+The model can run commands on your computer, so it can reach the loopback
+listener too. Anything that stands for "the user said so" — approving a tool
+call, managing paired devices — needs proof the model cannot get: a token only
+the app's own window holds, or, for the CLI, a pass bought with the app-lock
+PIN.
+
+## Asking before secrets
+
+When a tool call would read something that holds secrets outside Actovia —
+`~/.ssh`, cloud credentials, browser profiles, `.env` files outside the chat's
+workspace, a command that prints a token — the run pauses and asks you. Allow
+once applies to that call only. Actovia's own database, backups, PIN file and
+certificate are never readable by a tool.

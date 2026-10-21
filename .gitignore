@@ -15,6 +15,9 @@
 
 # next.js
 /.next/
+
+# fumadocs-mdx
+/.source/
 /out/
 
 # production
