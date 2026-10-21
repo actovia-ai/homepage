@@ -1,7 +1,10 @@
 ---
 title: Introduction
 description: How Actovia works, for the people who run it.
+icon: BookOpen
 ---
+
+import { Database, Download, Smartphone, SquareTerminal } from 'lucide-react'
 
 Actovia is a personal AI assistant that runs on your own computer. These pages
 are the technical side: where things live, how the pieces connect, and what
@@ -16,14 +19,23 @@ every command does.
   edits settings and reads results through the computer — at home over the
   local network, or from anywhere over Tailscale.
 - **The CLI** (`actovia`) works on the machine the desktop app runs on: it
-  launches the app, pairs phones, manages skills and updates itself. It is
-  what you use on a computer you reach only over SSH.
+  reports the app's state, updates, locks and restarts it, reads its log,
+  pairs phones and manages skills. It is what you use on a computer you reach
+  only over SSH.
 
 ## Where to start
 
 <Cards>
-  <Card title="Installation" href="/docs/installation" />
-  <Card title="Your data" href="/docs/data" />
-  <Card title="Remote access" href="/docs/remote-access" />
-  <Card title="CLI" href="/docs/cli" />
+  <Card icon={<Download />} title="Installation" href="/docs/installation">
+    The desktop app, the first launch on macOS, and the CLI.
+  </Card>
+  <Card icon={<Database />} title="Your data" href="/docs/data">
+    What Actovia keeps, where, and the one rule that protects it.
+  </Card>
+  <Card icon={<Smartphone />} title="Remote access" href="/docs/remote-access">
+    How the iPhone app and the CLI reach the desktop app.
+  </Card>
+  <Card icon={<SquareTerminal />} title="CLI" href="/docs/cli">
+    Look after a computer from a shell: status, updates, logs, pairing.
+  </Card>
 </Cards>

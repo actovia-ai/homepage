@@ -1,16 +1,20 @@
 import { getMDXComponents } from '@/components/mdx'
 import { source } from '@/lib/source'
-import { createRelativeLink } from 'fumadocs-ui/mdx'
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
-  DocsTitle
-} from 'fumadocs-ui/page'
+  DocsTitle,
+  MarkdownCopyButton,
+  ViewOptionsPopover
+} from '@fumadocs/base-ui/layouts/spacious/page'
+import { createRelativeLink } from '@fumadocs/base-ui/mdx'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = { params: Promise<{ slug?: string[] }> }
+
+const CONTENT_ON_GITHUB = 'https://github.com/actovia-ai/homepage/blob/main/content/docs'
 
 export default async function Page(props: Props) {
   const params = await props.params
@@ -18,10 +22,16 @@ export default async function Page(props: Props) {
   if (!page) notFound()
 
   const MDX = page.data.body
+  // The page as Markdown, for an agent or a chat (app/llms.mdx, rewritten from `<page>.mdx`).
+  const markdownUrl = `${page.url}.mdx`
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsDescription className="mb-2">{page.data.description}</DocsDescription>
+      <div className="mb-4 flex flex-row flex-wrap items-center gap-2 border-b pb-6">
+        <MarkdownCopyButton markdownUrl={markdownUrl} />
+        <ViewOptionsPopover markdownUrl={markdownUrl} githubUrl={`${CONTENT_ON_GITHUB}/${page.path}`} />
+      </div>
       <DocsBody>
         <MDX
           components={getMDXComponents({

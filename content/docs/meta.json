@@ -1,4 +1,14 @@
 {
   "title": "Actovia",
-  "pages": ["index", "installation", "data", "remote-access", "security", "cli"]
+  "pages": [
+    "---Getting started---",
+    "index",
+    "installation",
+    "---How it works---",
+    "data",
+    "remote-access",
+    "security",
+    "---Command line---",
+    "...cli"
+  ]
 }
