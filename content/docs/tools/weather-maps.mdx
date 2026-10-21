@@ -1,0 +1,39 @@
+---
+title: Weather & maps
+description: A forecast card, and trips laid out on an interactive map.
+icon: Map
+---
+
+## Weather
+
+Ask "what's the weather in Tokyo this week?" and the answer carries a compact
+card: the conditions now, the day's temperature curve and the next three days.
+**Details** opens it in place to the readings — **Feels like**, **Humidity**,
+**Precip**, **Wind**, **UV Index**, **Visibility**, **Pressure**, **Sunrise**,
+**Sunset** — and the week as rows. Weather comes from Open-Meteo and needs no
+key.
+
+<Screenshot
+  id="tool-weather"
+  platform="desktop"
+  theme="light"
+  caption="The weather card for Tokyo: compact view above, and the same card opened on Details with the week's range bars."
+/>
+
+## Map Itinerary
+
+Ask for a trip ("plan two days in Kyoto") or a set of places, and the answer
+draws them on one map: a tab per day, numbered stops, the route between them.
+Click a stop for its panel — **Overview**, **Reviews**, **Hours**, photos and
+whether it is **Open** now. **Open route in Google Maps** hands the day's route
+to Google Maps, and **Copy day as markdown** copies the plan.
+
+The map uses Google Maps and Places with your own key: add a **Google API Key**
+under **Settings → Built-in Tools → Map Itinerary**.
+
+<Screenshot
+  id="tool-map-itinerary"
+  platform="desktop"
+  theme="light"
+  caption="A two-day Kyoto itinerary card: day tabs, numbered pins and route, and a place's detail panel with photos and opening hours."
+/>

@@ -1,0 +1,86 @@
+---
+title: Chatting
+description: The conversation window — sending, stopping, the thinking timeline and the sidebar.
+icon: MessageSquare
+---
+
+A chat is a conversation with the model you picked, carried out on your
+computer with your own API key. The model can answer from what it knows or
+reach for [tools](/docs/tools) — search the web, read a file, run a command —
+and every step it takes is shown as it happens.
+
+<Screenshot
+  id="chat-main"
+  platform="desktop"
+  theme="light"
+  caption="Main window: sidebar with a few chats, a finished answer with citation chips and a tool card, the composer at the foot."
+/>
+
+## Sending a message
+
+Type into **Ask anything** on the home page and press **Enter**. **Shift+Enter**
+starts a new line, and while an input method is composing (Chinese, Japanese,
+Korean) Enter picks the candidate instead of sending. The reply streams in
+place; a title for the chat appears in the sidebar a few seconds later.
+
+- **Stop** ends a reply at once. What was written so far is kept, and you can
+  send the next message straight away.
+- While a reply is still being written, a second Enter shows **Please wait**
+  instead of sending twice.
+- You can leave a chat while it is answering. It carries on in the background,
+  and a **Response ready** notice with **View** tells you when it is done.
+
+## The thinking timeline
+
+Above each answer, a timeline shows what the model did to get there: its
+thinking, every search, file read and command, each as a row you can open.
+While the run is going it says **Thinking…** or **Working…**; afterwards it
+folds into a single line such as **Thought for 12 seconds**. A tool that failed
+is a line of the timeline, not an error box.
+
+<Screenshot
+  id="chat-timeline"
+  platform="desktop"
+  theme="dark"
+  caption="The thinking timeline opened on a finished answer: thinking, web_search and web_fetch rows, with the folded “Thought for …” header."
+/>
+
+## Answers
+
+Answers are Markdown: headings, lists, tables, code blocks with a copy button
+and syntax highlighting, quotes, links and maths (`$$…$$`). Prose stays prose —
+`$200 - $300` is money, not a formula, and `19~32°C` is a range, not
+strikethrough.
+
+When a reply stops because the provider failed (a used-up quota, a bad key),
+what was written is kept and the reason shows at its foot: **This reply stopped
+with an error: …**. See [Answers & sources](/docs/chat/answers) for copying,
+citations, regenerating and reading aloud.
+
+## Long chats
+
+A chat opens on its newest messages. Scroll towards the top and earlier ones
+load in without your reading position jumping. On a long chat an outline on the
+right lists your questions — including ones not loaded yet — and a click jumps
+there. **Scroll to bottom** brings you back to the newest message.
+
+## The sidebar and the header
+
+- **New chat** (⌘N) and **Search chats** (⌘⇧F) sit at the top of the sidebar;
+  ⌘B shows or hides it, and you can drag it wider.
+- Each chat's menu has **Rename**, **Favorite** (favourites get a group of their
+  own), **Copy conversation ID** (see
+  [recall across chats](/docs/memory/long-conversations#across-chats)) and
+  **Delete**.
+- The header shows **Back** / **Forward** arrows over the pages you visited
+  (⌘[ and ⌘]), the chat's title, the model chip (see
+  [Providers & models](/docs/chat/models)), **Chat options** (rename, favourite,
+  export, delete) and the **Files, tools and sources** panel.
+- ⌘W closes the chat on screen and takes you home. Nothing is deleted.
+
+<Screenshot
+  id="chat-panel"
+  platform="desktop"
+  theme="light"
+  caption="The Files, tools and sources panel open beside a chat, listing a generated file, a few tool calls and the cited sources."
+/>

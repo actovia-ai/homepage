@@ -1,0 +1,119 @@
+---
+title: The iPhone app
+description: Your Actovia on the phone — chat, settings and approvals, all through your computer.
+icon: Smartphone
+---
+
+Actovia for iPhone is a remote for the desktop app. It keeps no chats of its
+own: every message goes to your computer, runs there with your keys and tools,
+and streams back. A chat started on the phone is on the computer too, and the
+other way round.
+
+## Pairing
+
+The first time you open the app it offers **Scan pairing code** and **Paste
+pairing link**. On the computer, open **Settings → Integrations → Devices →
+Pair a device** and scan the QR code. The phone needs a passcode, and the
+connection is unlocked with Face ID. At home it connects over your network;
+away, over Tailscale. How pairing works and how to unpair are on
+[Remote access](/docs/remote-access).
+
+<Screenshot
+  id="ios-welcome"
+  platform="iphone"
+  theme="light"
+  caption="The welcome screen of an unpaired iPhone: Ody, Scan pairing code and Paste pairing link."
+/>
+
+<Screenshot
+  id="desktop-pairing-qr"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Devices on the computer: the pairing QR code, the three numbered steps and the countdown."
+/>
+
+A phone can be paired with more than one computer — a Mac mini at home and a
+laptop, say. **Settings → Computer** lists them: tap one to switch, swipe to
+unpair, **Pair another computer** to add one.
+
+## Chat
+
+A slide-out drawer (swipe from the left edge) holds **Recents** and search;
+the chat beside it works as on the desktop — streaming answers with the
+thinking timeline, citations and sources, tool cards (weather, maps, images,
+artifacts, files, Computer Use, Deep Research), questionnaires and
+confirmations, regenerate and compare, and the memory lines under an answer.
+Approval cards can be answered from the phone.
+
+The **+** in the composer adds pictures from the **Photo Library** or **Take
+Photo** (up to ten), sets **Reasoning**, switches on **Deep Research**, and lists
+the **MCP Tools** your computer offers. The microphone records a voice message and
+transcribes it into the field.
+
+<ShotRow>
+  <Screenshot
+    id="ios-chat"
+    platform="iphone"
+    theme="light"
+    caption="A chat on iPhone streaming an answer with citation chips and a weather card."
+  />
+  <Screenshot
+    id="ios-chat-dark"
+    platform="iphone"
+    theme="dark"
+    caption="A chat in dark mode with a map itinerary card and the composer's + menu open (Photo Library, Take Photo, Reasoning, Deep Research, MCP Tools)."
+  />
+</ShotRow>
+
+<ShotRow>
+  <Screenshot
+    id="ios-drawer"
+    platform="iphone"
+    theme="light"
+    caption="The drawer pulled open: workspace list (Chat, Health, Philharmonic · Coming soon), Recents and the search field."
+  />
+  <Screenshot
+    id="ios-compare"
+    platform="iphone"
+    theme="dark"
+    caption="Regenerate on iPhone: two answers as tabs, “Use this one” on the visible one."
+  />
+</ShotRow>
+
+## Settings
+
+The phone edits the computer's settings directly, grouped as on the desktop:
+**Color tone**; **Connection** and **Computer**; **AI Providers**, **Built-in
+Tools**, skills and **MCP Servers**; **Personality** and **Memory**;
+**Profile** and **Backups**. Saved keys show as masks here too.
+
+<ShotRow>
+  <Screenshot
+    id="ios-settings"
+    platform="iphone"
+    theme="light"
+    caption="Settings on iPhone: the grouped list (General, Computer, AI, Behavior, Data) with the paired computer's name."
+  />
+  <Screenshot
+    id="ios-settings-providers"
+    platform="iphone"
+    theme="dark"
+    caption="AI Providers on iPhone: a provider's saved key as “•••• abcd”, the model picker."
+  />
+</ShotRow>
+
+## Locks
+
+- The phone's own lock: after a while in the background the app asks for Face
+  ID before it reconnects — **Actovia is locked** → **Unlock**.
+- The computer's [app lock](/docs/app/app-lock): while the computer is
+  locked, a paired phone can unlock it with its own Face ID.
+
+## Languages
+
+The app follows your iPhone's language: English, Traditional Chinese (Taiwan
+and Hong Kong), Japanese, Korean, French, German, Spanish, Brazilian Portuguese
+and Italian.
+
+The iPhone app also has [Health](/docs/iphone/health) and
+[widgets](/docs/iphone/widgets), which the desktop does not.

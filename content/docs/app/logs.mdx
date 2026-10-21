@@ -1,0 +1,31 @@
+---
+title: Logs
+description: Read what the app did, find an error, and hand it to someone who can help.
+icon: ScrollText
+---
+
+**Settings → Developer → Logger** reads Actovia's log, kept as one file a day
+in `~/.actovia/logs/`.
+
+- Pick a **Date** and a **Scope** (the part of the app, such as `chat`).
+- **Live** follows today's log as it is written.
+- The search box (press `/`) takes words, `-word` to exclude,
+  `scope:chat` and `trace:a1b2`.
+- The chart above the list shows lines over time by level — **Error**,
+  **Warn**, **Info**, **Debug**; click a level in its legend to filter.
+
+Open a line for its details: the message, its fields, and for an error its
+**Stack trace** pointing at the source. ↑/↓ (or k/j) move to the next line.
+**Lines around** shows what happened just before, **Same trace** everything
+that belonged to the same request, and **Copy for AI** copies the line with its
+context ready to paste into a chat. **More actions** has **Open Directory**,
+**Export** and **Clear All**.
+
+The CLI reads the same log: [`actovia logs`](/docs/cli/reference#actovia-logs).
+
+<Screenshot
+  id="settings-logger"
+  platform="desktop"
+  theme="dark"
+  caption="Settings → Logger: the level chart, a filtered list, and an error line open in the side sheet with its stack trace."
+/>

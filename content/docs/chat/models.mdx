@@ -1,0 +1,73 @@
+---
+title: Providers & models
+description: Bring your own keys, pick a model from the provider's live list, and set how hard it thinks.
+icon: Cpu
+---
+
+Actovia does not resell model access. You add a key for the providers you use,
+and every request goes from your computer to that provider with your key.
+
+## Supported providers
+
+| Provider      | What you enter                                   |
+| ------------- | ------------------------------------------------ |
+| OpenAI        | API key, optional base URL                       |
+| Azure OpenAI  | API key, endpoint, API version, deployment name  |
+| Anthropic     | API key, optional base URL                       |
+| Google Gemini | API key, optional base URL                       |
+| xAI           | API key, optional base URL                       |
+| Ollama        | The address of your local Ollama server (no key) |
+
+Open **Settings → AI Providers**, choose a **Provider**, and paste its key under
+**Provider keys**. Then **Retrieve model list**: Actovia asks the provider which
+models your key can use right now and shows them in the **Model** picker,
+searchable. A model the provider is retiring is marked **retiring** with its
+date, and one that is no longer offered asks you to pick a current one.
+
+For Ollama, **Status** says **Ollama is running** once the server answers, and
+the list shows the models installed on your machine.
+
+<Screenshot
+  id="settings-providers"
+  platform="desktop"
+  theme="light"
+  caption="Settings → AI Providers: Anthropic selected, the saved key shown as “•••• abcd · Saved”, the Model picker open on the live list."
+/>
+
+## Saved keys
+
+A saved key is never shown again — only its last four characters, with
+**Saved** beside it. Typing into the field replaces the whole key; deleting it
+clears the key. Changing a provider's **Base URL** clears its saved key (Actovia
+never sends a key to an address it was not saved for), so paste it again after
+the change. If a key ever cannot be read — for example after moving to a new
+computer — **Settings → General** lists the keys to enter again.
+
+## Switching models
+
+The model chip in a chat's header shows the provider and model in use. Pick
+another from it at any time: the next message uses the new model, and earlier
+messages stay as they are.
+
+<Screenshot
+  id="chat-model-chip"
+  platform="desktop"
+  theme="dark"
+  caption="The model chip in the chat header opened: models grouped under the current provider, one ticked."
+/>
+
+## Reasoning
+
+Models that can think before answering get a **Reasoning** choice in the
+composer: **Off**, **Low**, **Medium**, **High**, **Extra high** or **Max** —
+only the levels the current model supports are offered. The chosen level shows
+as a pill (**Reasoning: High**); tap it to turn it off. A higher level takes
+longer and uses more tokens, and the thinking shows in the
+[timeline](/docs/chat#the-thinking-timeline).
+
+<Screenshot
+  id="composer-reasoning"
+  platform="desktop"
+  theme="light"
+  caption="The composer's tools menu with the Reasoning submenu open (Off … Max) and a “Reasoning: High” pill in the composer."
+/>

@@ -1,0 +1,52 @@
+---
+title: Schedules & quotas
+description: Tasks that run on their own, and a PM that deals work according to your coding plans' limits.
+icon: CalendarClock
+---
+
+## Scheduled tasks
+
+A task can run inside a group without you starting it — once at a set time, or
+on a schedule. In Philharmonic's **Dashboard → Schedule**, **Schedule task**
+asks for a **Title**, a **Description**, the **Group** it runs in, and either
+**One-off** (a date and time) or **Recurring** (**Every day at 9:00 AM**,
+**Every Monday at 9:00 AM**, or **Custom**).
+
+The tab lists **Upcoming** one-off tasks and **Recurring** ones with their last
+and next run; each task shows its state (**Pending**, **Running**, **Completed**,
+**Waiting**…) and priority. When a task runs, the group's PM takes it as a
+round of its own, marked **Scheduled** in its decision process. The CLI lists
+them too: [`actovia tasks`](/docs/cli/reference#actovia-tasks).
+
+<Screenshot
+  id="philharmonic-schedule"
+  platform="desktop"
+  theme="light"
+  caption="Dashboard → Schedule: the Upcoming list with a one-off task and a quota-wait task, and the Recurring list with next-run times."
+/>
+
+## Quota-aware dealing
+
+Claude Code and Codex plans have usage limits — a 5-hour window, a weekly
+window, sometimes a limit per model. Actovia reads what each CLI reports about
+them, and the **Members** panel shows each coding agent's line (**5h 42%**,
+**week 87%**, or **limit reached · resets …**).
+
+The PM takes that into account when it hands out steps:
+
+- Hard steps go to the stronger model, easy ones to the lighter one.
+- Near a limit it moves a step to a lighter model or runs it anyway, and says
+  why, with the numbers.
+- When a limit has been reached, it **waits**: the step is parked and a one-off
+  task is scheduled for just after the reset, where it shows in **Schedule**.
+  The group carries on with that step when the window opens again.
+
+An employee whose CLI has refused for its quota is not given new steps until
+the window resets. See also [`actovia quota`](/docs/cli/reference#actovia-quota).
+
+<Screenshot
+  id="philharmonic-quota"
+  platform="desktop"
+  theme="dark"
+  caption="The Members panel with two Claude Code employees' quota lines (one “limit reached · resets …”), and the PM's message explaining the wait."
+/>

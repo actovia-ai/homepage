@@ -1,0 +1,63 @@
+---
+title: Built-in tools
+description: What the model can do on its own, and how to switch each tool off.
+icon: Wrench
+---
+
+Actovia's model does not just talk: it can look things up, work with files,
+run commands and draw things, using the tools below. It uses them without
+asking first and chains them until the task is done — searching, then reading a
+page, then writing a file. It stops to ask only when something is genuinely
+unclear, or before anything on its short list of hard stops: deleting or
+overwriting outside the chat's folder, `sudo`, installing system-wide,
+`git push`, or anything sent or paid for on your behalf.
+
+## Turning tools on and off
+
+**Settings → Built-in Tools** lists every tool with its switch, grouped under
+**Web**, **File System**, **AI & Data** and **Maps**. A tool that is off is never
+offered to the model. A tool that needs a key or has options carries them under
+its row (**Configure** folds them away); while it is on and its key is missing,
+a red hint says so.
+
+<Screenshot
+  id="settings-builtin-tools"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Built-in Tools: grouped rows with switches, Web Search's panel open with the Brave key field, Country and Recency filters."
+/>
+
+| Tool                                                       | What it does                                                                   | Needs                |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------ | -------------------- |
+| Web Search                                                 | Searches the web, with citations ([details](/docs/tools/web))                  | Brave Search API key |
+| Web Fetch                                                  | Reads a page, a doc, an API or a GitHub file                                   | —                    |
+| Weather                                                    | Current weather and a seven-day forecast ([details](/docs/tools/weather-maps)) | —                    |
+| Map Itinerary                                              | Places, routes and multi-day trips on one map                                  | Google API key       |
+| Terminal                                                   | Runs shell commands ([details](/docs/tools/workspace))                         | —                    |
+| Read / Write / Edit File, List Directory, Find Files, Grep | Work with files                                                                | —                    |
+| Image Generation                                           | Makes pictures ([details](/docs/tools/images))                                 | OpenAI API key       |
+| Knowledge Base                                             | Looks things up in your [knowledge base](/docs/memory/knowledge-base)          | A LightRAG server    |
+| Update Memory                                              | Corrects, adds or removes [memories](/docs/memory)                             | —                    |
+| Recall                                                     | Reads back an earlier search result or tool output in full                     | —                    |
+
+A few more abilities are always there or are switched on elsewhere:
+[artifacts](/docs/tools/artifacts),
+[Computer Use](/docs/tools/computer-use) (off by default),
+[Deep Research](/docs/agents/deep-research), and the tools of your
+[MCP servers](/docs/tools/mcp) and [skills](/docs/tools/skills).
+
+## Recall
+
+A tool's full output matters for the step that called it. In later turns the
+model is sent a short digest instead — a line per search result, the last lines
+of a command — which keeps long chats fast and cheap. When you come back to it
+("what exactly did the third source say?", "show me that command's whole
+output"), the model uses **Recall** to read the stored original back, word for
+word, without searching again. Weather is the exception: an old forecast is
+stale, so the model checks again.
+
+## Asking before secrets
+
+Some files and commands touch credentials — SSH keys, cloud logins, browser
+profiles, `.env` files outside the chat's folder. The model can still reach
+them, but only after you say yes. See [Approvals](/docs/tools/approvals).

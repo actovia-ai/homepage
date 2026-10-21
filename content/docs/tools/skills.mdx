@@ -1,0 +1,50 @@
+---
+title: Skills Market
+description: Install Agent Skills from skills.sh — instructions the model reads when a task calls for them.
+icon: Sparkles
+---
+
+A skill is a folder of instructions (and sometimes scripts) that teaches the
+model how to do one kind of task well — write a changelog, fill a PDF form,
+follow a house style. Actovia's skills come from
+[skills.sh](https://skills.sh), the open Agent Skills registry.
+
+Open **Settings → Skills Market**.
+
+## Discover
+
+Search by name or owner, or browse the leaderboards: **All time**, **Trending
+(24h)** and **Hot**. **Curated** lists the registry's publishers with every skill
+each maintains, its featured pick marked. Skills from the same repository fold
+behind **+N more**.
+
+<Screenshot
+  id="skills-discover"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Skills Market → Discover: the All time leaderboard, ranked rows with install counts and an Installed badge."
+/>
+
+## A skill's page
+
+Each skill shows its **Security audit** (how many independent checks passed),
+its **README**, its bundled files, and the command to install it from a
+terminal with the [Actovia CLI](/docs/cli). **Install** puts it in
+`~/.actovia/skills/`, which the CLI shares — a skill installed by either shows
+up in both.
+
+<Screenshot
+  id="skills-detail"
+  platform="desktop"
+  theme="dark"
+  caption="A skill's detail page: security audit card (checks passed), the copyable CLI install command, the README."
+/>
+
+## Installed
+
+The **Installed** tab lists your skills with a switch each (**Active**) and
+**Uninstall**. Active skills are listed for the model by name and a line of
+description; it reads a skill's full instructions only when your request
+matches it, so having many installed costs nothing until one is used.
+[Philharmonic](/docs/agents/philharmonic) employees can be given skills of
+their own.

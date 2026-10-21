@@ -1,0 +1,44 @@
+---
+title: Computer Use
+description: Let the model operate one app window on your Mac, step by step, while you watch.
+icon: MousePointer2
+---
+
+Computer Use lets the model work an app the way a person would: it looks at a
+screenshot of one window, moves a virtual mouse and types, then looks again.
+It is useful for apps that have no other way in.
+
+It is **off by default** and macOS only. To set it up, open **Settings →
+Computer Use**:
+
+1. **Enable Computer Use**.
+2. Add the apps it may touch under **Allowlisted apps** — pick from the apps
+   installed on this Mac. It never touches anything else, and never Actovia
+   itself. An allowlisted app that is not running is opened for it.
+3. Optionally set **Max steps** (default 25) and **Settle delay** (how long to
+   wait after each action before the next screenshot, default 800 ms).
+
+macOS asks once for Accessibility and Screen Recording permission. The model
+needs to be one that understands images.
+
+## Watching a session
+
+Ask for something in an allowlisted app ("write a line in Notes") and a
+**Computer Use** card follows each step with its screenshot and action
+(**Step 3: click …**). If the model needs you, it asks in the card — **Type a
+reply, or leave blank when done**. **Stop** ends the session, and so does
+**⌥⇧⎋** (Option-Shift-Escape) from anywhere. Every session is logged.
+
+<Screenshot
+  id="tool-computer-use"
+  platform="desktop"
+  theme="dark"
+  caption="A Computer Use card mid-session: the Notes window screenshot at step 4, the action list, and the Stop button."
+/>
+
+<Screenshot
+  id="settings-computer-use"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Computer Use: enabled, two allowlisted apps (Notes, Calendar), the app picker open, Max steps and Settle delay."
+/>

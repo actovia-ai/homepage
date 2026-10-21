@@ -2,7 +2,7 @@ const SPECS: { label: string; value: React.ReactNode }[] = [
   {
     label: 'Platforms',
     value:
-      'macOS on Apple silicon, Windows (64-bit), Linux (x86-64, .deb and .rpm)'
+      'macOS on Apple silicon, Windows (64-bit), Linux (x86-64, .deb and .rpm); Actovia for iPhone as a paired remote'
   },
   {
     label: 'Models',
@@ -12,7 +12,7 @@ const SPECS: { label: string; value: React.ReactNode }[] = [
   {
     label: 'Built-in tools',
     value:
-      'Web search, web fetch, Deep Research, knowledge base search, read, write and edit files, find files, grep, list directories, terminal, artifacts, image generation, map itineraries, weather, Computer Use (macOS), and context expand, describe and search'
+      'Web search, web fetch, Deep Research, knowledge base search, read, write and edit files, find files, grep, list directories, terminal, artifacts, image generation, map itineraries, weather, memory updates, Computer Use (macOS), and context recall, expand, describe and search'
   },
   {
     label: 'Extensions',
@@ -26,12 +26,23 @@ const SPECS: { label: string; value: React.ReactNode }[] = [
   {
     label: 'Storage',
     value:
-      'Embedded PostgreSQL with vector search, on your machine. Optional: Elasticsearch for search, a LightRAG server for the knowledge base, S3 for uploads'
+      'Embedded PostgreSQL with vector search, on your machine. Optional: a LightRAG server for the knowledge base, S3 for uploads'
   },
   {
     label: 'Security',
     value:
-      'PIN and Touch ID app lock; API on your own computer only; phone pairing over certificate-pinned TLS; artifacts in an isolated sandbox'
+      'PIN and Touch ID app lock; API keys encrypted at rest; API on your own computer only; phone pairing over certificate-pinned TLS; artifacts in an isolated sandbox'
+  },
+  {
+    label: 'Command line',
+    value: (
+      <>
+        <code className="text-ink text-[0.875em]">
+          npm install -g @actovia-ai/cli
+        </code>{' '}
+        — status, logs, backups, pairing and skills from a terminal
+      </>
+    )
   },
   {
     label: 'Languages',
@@ -41,20 +52,22 @@ const SPECS: { label: string; value: React.ReactNode }[] = [
   { label: 'License', value: 'MIT, open source' }
 ]
 
-/** Apple's Tech Specs: a label column and plain facts, divided by hairlines. */
+/** Plain facts, a label column and hairlines. */
 export function Specs() {
   return (
-    <section id="specs" className="bg-paper py-28 sm:py-36">
-      <div className="mx-auto max-w-[980px] px-6">
-        <h2 className="type-headline">Tech specs</h2>
-        <dl className="mt-12 sm:mt-16">
+    <section id="specs" className="border-hairline border-t py-28 sm:py-36">
+      <div className="mx-auto grid max-w-[1328px] grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+        <h2 className="type-headline lg:col-span-4">Tech specs</h2>
+        <dl className="border-hairline border-b lg:col-span-8">
           {SPECS.map((s) => (
             <div
               key={s.label}
-              className="border-hairline grid gap-2 border-t py-7 sm:grid-cols-[220px_1fr] sm:gap-10"
+              className="border-hairline grid grid-cols-1 gap-2 border-t py-6 sm:grid-cols-[180px_1fr] sm:gap-10"
             >
-              <dt className="text-[1.0625rem] font-semibold">{s.label}</dt>
-              <dd className="text-graphite max-w-[60ch]">{s.value}</dd>
+              <dt className="font-medium">{s.label}</dt>
+              <dd className="text-graphite max-w-[62ch] font-light">
+                {s.value}
+              </dd>
             </div>
           ))}
         </dl>

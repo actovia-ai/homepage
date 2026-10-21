@@ -5,7 +5,7 @@ const POINTS = [
   },
   {
     title: 'Straight to your provider.',
-    body: 'Your API keys are stored on your machine, and each request goes directly to the model provider you chose.'
+    body: 'Your API keys are stored on your machine, encrypted, and each request goes directly to the model provider you chose.'
   },
   {
     title: 'Locked when you step away.',
@@ -19,16 +19,25 @@ const POINTS = [
 
 export function Privacy() {
   return (
-    <section id="privacy" className="bg-mist py-28 sm:py-36">
-      <div className="mx-auto max-w-[980px] px-6">
-        <h2 className="type-headline mx-auto max-w-[14ch] text-center">
-          Your data stays home.
-        </h2>
-        <dl className="mt-16 grid gap-x-16 gap-y-12 sm:mt-20 sm:grid-cols-2">
+    <section
+      id="privacy"
+      className="bg-sunk/60 border-hairline border-t py-28 sm:py-36"
+    >
+      <div className="mx-auto grid max-w-[1328px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-4">
+          <h2 className="type-headline max-w-[10ch]">Your data stays home.</h2>
+          <p className="type-lede text-graphite mt-6 max-w-[36ch]">
+            The app is the server. What you tell it stays on the machine you
+            installed it on.
+          </p>
+        </div>
+        <dl className="bg-hairline border-hairline grid grid-cols-1 gap-px border sm:grid-cols-2 lg:col-span-8">
           {POINTS.map((p) => (
-            <div key={p.title} className="border-hairline border-t pt-6">
-              <dt className="type-tile">{p.title}</dt>
-              <dd className="text-graphite mt-3 max-w-[42ch]">{p.body}</dd>
+            <div key={p.title} className="bg-panel p-8 sm:p-10">
+              <dt className="type-tile max-w-[16ch]">{p.title}</dt>
+              <dd className="text-graphite mt-4 max-w-[42ch] font-light">
+                {p.body}
+              </dd>
             </div>
           ))}
         </dl>

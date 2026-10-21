@@ -1,0 +1,39 @@
+---
+title: Backups & export
+description: Daily backups, a portable export, and starting over.
+icon: Archive
+---
+
+**Settings → Data Controls** looks after the data in
+[`~/.actovia`](/docs/data).
+
+## Backups
+
+- **Automatic Backups** — a backup every day at 3:00 AM, kept in
+  `~/.actovia/backups/`.
+- **Back Up Now** — one straight away. **Last Backup** and **Recent Backups**
+  show what you have.
+
+The CLI does the same: [`actovia backup`](/docs/cli/reference#actovia-backup).
+The iPhone app shows the backups too, under **Settings → Backups**.
+
+## Export & import
+
+- **Export Data** — a ZIP of your conversations, settings and other data, to
+  keep or move. API keys and other secrets are left out, and generated images
+  are not included.
+- **Import Data** — restores from an export, **replacing** everything there is
+  now. A backup is made first.
+
+## Danger zone
+
+**Delete All Data** erases conversations, memories, research and documents;
+your settings and API keys stay. A backup is made first, and you type
+**DELETE** to confirm.
+
+<Screenshot
+  id="settings-data-controls"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Data Controls: Automatic Backups on, Last Backup time, Recent Backups, Export / Import, and the Danger zone."
+/>

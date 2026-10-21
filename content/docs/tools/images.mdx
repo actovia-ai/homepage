@@ -1,0 +1,26 @@
+---
+title: Image generation
+description: Pictures from a description, kept on your computer.
+icon: Image
+---
+
+Ask for a picture ("draw a cat in a hat") and the answer shows a frame that
+shimmers while the image is made — **Generating image**, **Refining details** —
+and the picture appears in the same frame when it is ready. Click to zoom; use
+the download button or right-click to save or copy it.
+
+Image generation uses OpenAI's image models with your OpenAI key. Under
+**Settings → Built-in Tools → Image Generation** choose the **Model**, **Size**,
+**Quality**, **Output Format**, **Background** and **Generated Counts** (1–10
+images per request).
+
+Every image is saved in `~/.actovia/media/` the moment it arrives, so it is
+still there after a restart. Deleting the chat deletes its images. Exports do
+not include them.
+
+<Screenshot
+  id="tool-image-generation"
+  platform="desktop"
+  theme="light"
+  caption="Two image-generation cards: one still forming (the shimmering dither field), one finished picture with its revised prompt."
+/>

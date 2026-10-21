@@ -1,0 +1,32 @@
+---
+title: Chat Audit
+description: Ask questions of your own history in SQL.
+icon: DatabaseZap
+---
+
+**Settings → Developer → Chat Audit** is a SQL console over a copy of your
+data. **Build snapshot** copies your chats, messages, Philharmonic group
+messages and PM decisions, and your logs into a
+[DuckDB](https://duckdb.org) file (`~/.actovia/analytics/`), with any API key
+masked out; **Rebuild** refreshes it. **Open folder** shows the file, so you can
+open it in any DuckDB client too.
+
+The tables are `chats`, `messages`, `logs`, `group_messages` and
+`pm_round_events`. Write a query in the editor (with completion for table and
+column names) and run it with **Run query** or ⌘↩. Results show up to 500 rows
+and can be saved with **Download CSV**.
+
+**Presets** get you started: **Prompt cache by run**, **Messages per day (30
+days)**, **Tokens & cost by model**, **Tool calls**, **Longest chats**, **Errors
+by model**, **Activity by hour (UTC)**, **Search message text**, **Log entries
+by scope & severity** and **PM decisions by group**.
+
+The console is read-only: a query cannot change your data, and cannot read
+other files on your computer.
+
+<Screenshot
+  id="settings-chat-audit"
+  platform="desktop"
+  theme="light"
+  caption="Chat Audit: snapshot built, the “Tokens & cost by model” preset in the SQL editor, the result table with Download CSV."
+/>

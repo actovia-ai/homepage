@@ -1,0 +1,43 @@
+---
+title: Web search & fetch
+description: Search through Brave, read pages, and get answers with numbered sources.
+icon: Globe
+---
+
+## Web Search
+
+Web Search uses the [Brave Search API](https://api-dashboard.search.brave.com)
+with your own key. Add it in **Settings → Built-in Tools → Web Search → Brave
+Search API Key**. When a question needs current information the model searches
+by itself; the results become the [citations](/docs/chat/answers#citations)
+in its answer.
+
+Options under the tool's row:
+
+| Option             | Effect                                                                           |
+| ------------------ | -------------------------------------------------------------------------------- |
+| **Country**        | Bias results towards a region                                                    |
+| **Languages**      | Keep results in the languages you choose                                         |
+| **Max Results**    | Sources a search brings back, 1–20 (default 10)                                  |
+| **Deep recall**    | Searches three phrasings plus a broader pass — more sources, more tokens, slower |
+| **Recency Filter** | Past hour, 24 hours, week, month or year                                         |
+| **Domain Filter**  | Comma-separated; prefix with `-` to exclude (`nature.com, .edu`, `-reddit.com`)  |
+
+Ask for pictures or videos ("show me photos of …") and they come back as a
+gallery and video cards under the answer.
+
+<Screenshot
+  id="tool-web-search"
+  platform="desktop"
+  theme="light"
+  caption="A web-search answer: the timeline row “10 search results” opened, citation chips in the text, Sources button with three favicons."
+/>
+
+## Web Fetch
+
+Give the model a link ("summarise https://…") and it reads the page itself —
+an article, documentation, an API response or a file on GitHub. A fetched page
+is a source like a search result and can be cited.
+
+Web Fetch reads only public addresses: it will not reach your local network or
+Actovia's own API.

@@ -8,11 +8,11 @@ import { Hero } from '@/app/_components/hero'
 import { Highlights } from '@/app/_components/highlights'
 import { IPhone } from '@/app/_components/iphone'
 import { LocalNav } from '@/app/_components/local-nav'
-import { Models } from '@/app/_components/models'
 import { Privacy } from '@/app/_components/privacy'
 import { RunStory } from '@/app/_components/run-story'
 import { ShotsProvider } from '@/app/_components/shot'
 import { Specs } from '@/app/_components/specs'
+import { Terminal, Token } from '@/app/_components/terminal'
 import { getLatestRelease, resolveDownloads } from '@/app/_lib/release'
 import { SHOTS, shotFiles } from '@/app/_lib/shots'
 
@@ -28,7 +28,6 @@ export default async function Page() {
       <LocalNav downloadHref="#download" />
       <main>
         <Hero macHref={downloads.mac.dmg} version={downloads.version} />
-        <Models />
         <Highlights />
         <RunStory />
         <FeaturePanel
@@ -38,10 +37,16 @@ export default async function Page() {
         />
         <FeaturePanel
           tone="dark"
+          flip
           title="Hire a team."
           body="Philharmonic puts agents into groups, each with its own role, memory and workspace. Hand them a task now, or give them a schedule: every weekday at nine, or once on Friday."
           shot={SHOTS.philharmonic}
-        />
+        >
+          <Terminal className="mt-8" label="Their schedule, from a terminal">
+            <span className="text-term-dim">$ </span>actovia{' '}
+            <Token>tasks</Token>
+          </Terminal>
+        </FeaturePanel>
         <IPhone />
         <Privacy />
         <Specs />

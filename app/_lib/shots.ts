@@ -64,8 +64,7 @@ export const SHOTS = {
     file: '/shots/philharmonic-dark.png',
     size: [2880, 1800],
     darkOnly: true,
-    brief:
-      'Philharmonic, in dark mode: a group of agents on a task, plus the Schedule tab.'
+    brief: 'Philharmonic: a group of agents on a task, plus the Schedule tab.' // capture in dark mode
   },
   artifacts: {
     file: '/shots/artifacts.png',
@@ -76,8 +75,7 @@ export const SHOTS = {
     file: '/shots/computer-use-dark.png',
     size: [1600, 1200],
     darkOnly: true,
-    brief:
-      'In dark mode: a computer_use step driving an allowlisted app window.'
+    brief: 'A computer_use step driving an allowlisted app window.' // capture in dark mode
   },
   iphoneChat: {
     file: '/shots/iphone-chat.png',

@@ -1,0 +1,48 @@
+---
+title: Files & terminal
+description: Every chat has a folder of its own where the model writes files and runs commands.
+icon: FolderOpen
+---
+
+Each chat has a working folder, `~/.actovia/workspace/<chat>`, created the first
+time it is used. That is where the file tools and the terminal start, so "make a
+script and run it" happens in a place of its own rather than in your home
+folder.
+
+## Files
+
+When the model creates or edits a file, the answer shows a compact file card —
+**Created** or **Edited**, with its size — with three actions:
+
+- **Open** — in the file's usual app. A file that would run when opened (an app,
+  a script, an installer) is shown in its folder instead.
+- **Reveal in Finder** (**Show in Explorer** on Windows).
+- **Quick look** — a read-only preview inside Actovia: Markdown rendered,
+  anything else as text. Files over 1 MB or that are not text offer **Open**
+  instead.
+
+A path to a workspace file written in an answer is a link too: click to open,
+right-click for the same menu.
+
+<Screenshot
+  id="tool-file-card"
+  platform="desktop"
+  theme="light"
+  caption="An answer with two file cards (Created · 2 KB, Edited · 5 KB) and the Quick look preview open on a Markdown file."
+/>
+
+## Terminal
+
+The terminal card shows the command, its output and its exit code (**exit 0**).
+Commands run in the chat's folder unless the model changes directory. The
+model works on its own here, but the hard stops still apply: it asks before
+`sudo`, a system-wide install, `git push` or deleting outside the folder, and
+anything touching credentials goes through an
+[approval](/docs/tools/approvals).
+
+<Screenshot
+  id="tool-terminal"
+  platform="desktop"
+  theme="dark"
+  caption="A terminal card running “python3 hello.py” in the chat workspace: command, output, exit 0."
+/>

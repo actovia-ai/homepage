@@ -20,6 +20,14 @@ function useSources(spec: ShotSpec): { light: string; dark: string } | null {
   return { light: light ?? dark!, dark: dark ?? light! }
 }
 
+/** In development only: where each capture goes. Visitors see the caption. */
+const SHOW_FILES = process.env.NODE_ENV !== 'production'
+
+/** Whether a real capture exists for this shot. */
+export function useShotReady(spec: ShotSpec): boolean {
+  return useSources(spec) !== null
+}
+
 /** Where the captures go, as the placeholder shows it. */
 function filesLabel(spec: ShotSpec): string {
   const dark = darkFileOf(spec).split('/').pop()
@@ -93,8 +101,8 @@ export function Shot({
       className={cn(
         'relative overflow-hidden rounded-[1.1%/1.7%]',
         dark
-          ? 'shadow-[0_40px_90px_-30px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.08)]'
-          : 'shadow-[0_40px_90px_-40px_rgb(0_0_0/0.45),0_0_0_1px_rgb(0_0_0/0.06)] dark:shadow-[0_40px_90px_-30px_rgb(0_0_0/0.9),0_0_0_1px_rgb(255_255_255/0.1)]',
+          ? 'shadow-[0_20px_40px_-24px_rgb(0_0_0/0.6),0_0_0_1px_rgb(255_255_255/0.08)]'
+          : 'shadow-[0_20px_44px_-28px_rgb(0_0_0/0.3),0_0_0_1px_rgb(0_0_0/0.07)] dark:shadow-[0_20px_40px_-24px_rgb(0_0_0/0.8),0_0_0_1px_rgb(255_255_255/0.08)]',
         className
       )}
       style={{ aspectRatio: `${w} / ${h}` }}
@@ -119,7 +127,7 @@ function Placeholder({ spec, dark }: { spec: ShotSpec; dark: boolean }) {
     <div
       className={cn(
         'absolute inset-0 flex flex-col',
-        dark ? 'bg-night-2 text-night-graphite' : 'text-graphite bg-surface'
+        dark ? 'bg-term-2 text-term-dim' : 'text-graphite bg-panel'
       )}
     >
       <div
@@ -127,24 +135,21 @@ function Placeholder({ spec, dark }: { spec: ShotSpec; dark: boolean }) {
           'flex h-[5.5%] min-h-5 items-center gap-[0.6%] border-b px-[1.4%]',
           dark
             ? 'border-white/8 bg-white/4'
-            : 'bg-mist border-black/6 dark:border-white/8'
+            : 'bg-sunk border-black/6 dark:border-white/8'
         )}
       >
         <i className="aspect-square h-[38%] rounded-full bg-[#ff5f57]" />
         <i className="aspect-square h-[38%] rounded-full bg-[#febc2e]" />
         <i className="aspect-square h-[38%] rounded-full bg-[#28c840]" />
       </div>
-      <div
-        className="grid flex-1 place-items-center p-[6%]"
-        style={{
-          backgroundImage: `repeating-linear-gradient(135deg, ${dark ? 'rgb(255 255 255/0.035)' : 'rgb(0 0 0/0.03)'} 0 1px, transparent 1px 14px)`
-        }}
-      >
+      <div className="grid flex-1 place-items-center p-[6%]">
         <div className="max-w-md text-center text-[clamp(0.75rem,1.2vw,0.9375rem)] leading-snug">
-          <p className={dark ? 'text-night-ink' : 'text-ink'}>{spec.brief}</p>
-          <p className="mt-2 font-mono text-[0.85em] opacity-80">
-            {w} × {h} · {filesLabel(spec)}
-          </p>
+          <p className={dark ? 'text-term-ink' : 'text-ink'}>{spec.brief}</p>
+          {SHOW_FILES && (
+            <p className="mt-2 font-mono text-[0.85em] opacity-80">
+              {w} × {h} · {filesLabel(spec)}
+            </p>
+          )}
         </div>
       </div>
     </div>
@@ -168,29 +173,25 @@ export function PhoneShot({
   return (
     <div
       className={cn(
-        'bg-coal rounded-[15%/7%] p-[3.2%] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.5),inset_0_0_0_1px_rgb(255_255_255/0.12)] dark:bg-[#2c2c2e]',
+        'bg-coal rounded-[15%/7%] p-[3.2%] shadow-[0_24px_48px_-28px_rgb(0_0_0/0.45),inset_0_0_0_1px_rgb(255_255_255/0.12)] dark:bg-[#2c2c2e]',
         className
       )}
     >
       <div
-        className="bg-surface relative overflow-hidden rounded-[12%/5.6%] dark:bg-black"
+        className="bg-panel relative overflow-hidden rounded-[12%/5.6%] dark:bg-term"
         style={{ aspectRatio: `${w} / ${h}` }}
       >
         {sources ? (
           <Capture sources={sources} width={w / 3} height={h / 3} />
         ) : (
-          <div
-            className="text-graphite absolute inset-0 grid place-items-center p-[10%]"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(135deg, rgb(0 0 0/0.03) 0 1px, transparent 1px 14px)'
-            }}
-          >
+          <div className="text-graphite absolute inset-0 grid place-items-center p-[10%]">
             <div className="text-center text-[clamp(0.6875rem,1vw,0.8125rem)] leading-snug">
               <p className="text-ink">{spec.brief}</p>
-              <p className="mt-2 font-mono text-[0.85em] break-all opacity-80">
-                {w} × {h} · {filesLabel(spec)}
-              </p>
+              {SHOW_FILES && (
+                <p className="mt-2 font-mono text-[0.85em] break-all opacity-80">
+                  {w} × {h} · {filesLabel(spec)}
+                </p>
+              )}
             </div>
           </div>
         )}

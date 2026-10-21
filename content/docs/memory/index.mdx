@@ -1,0 +1,67 @@
+---
+title: Memory
+description: What Actovia remembers about you, how it uses it, and how to correct it.
+icon: Brain
+---
+
+The more you talk to Actovia, the better it knows you. It keeps a short,
+tidy memory of lasting things — your setup, your projects, the people you
+mention, preferences that hold — and brings the relevant bits into a chat when
+they help. Everything stays on your computer.
+
+## How memories are kept
+
+Memory is organised by subject: one entry per topic or person, each with a
+title, a one-line summary and a few details. Entries are grouped as **You**,
+**Topics** and **People**.
+
+- **As you say it.** State a lasting fact ("I've switched to Linux") and the
+  model updates its memory right then. A strip at the foot of the answer says
+  **Memory updated · Linux setup**; open it to see the entry before and after,
+  and **Undo** if it got it wrong.
+- **After a conversation.** With **Capture memories** on, Actovia reads each
+  finished conversation and folds what is worth keeping into your memory —
+  updating an entry it already has rather than adding a duplicate, correcting
+  one that has changed, and switching off one that no longer holds.
+- One-off details ("I watched a film yesterday") are not kept.
+
+<Screenshot
+  id="chat-memory-updated"
+  platform="desktop"
+  theme="light"
+  caption="The “Memory updated · …” strip under an answer, expanded to show the entry's before and after, with Undo."
+/>
+
+## How memories are used
+
+With **Use memory in chats** on, Actovia picks the entries relevant to each
+message and gives them to the model with it. The answer says so at its foot:
+**Used 2 memories · Classical Music, Home studio**. Open it to see which, and
+click **Wrong?** beside one to correct it in the chat — the composer is filled
+in for you and Actovia updates the entry.
+
+<Screenshot
+  id="chat-used-memories"
+  platform="desktop"
+  theme="dark"
+  caption="The “Used 2 memories” line opened into its card, each entry with its key and a “Wrong?” link."
+/>
+
+## Settings → Memory
+
+- **Capture memories** and **Use memory in chats** switch the two halves on
+  and off.
+- **Stored memories** lists every entry. Open one to edit its title, summary and
+  details, **Disable** it, or delete it. Entries the background pass switched
+  off wait under **Disabled**, where **Restore** brings them back.
+- The box at the foot takes plain instructions: "Tell the assistant what to
+  remember…", or "change my editor to Zed", "forget the Berlin trip".
+
+<Screenshot
+  id="settings-memory"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Memory: the two switches, stored memories grouped as You / Topics / People, and the instruction box at the foot."
+/>
+
+The same page holds the settings for [long conversations](/docs/memory/long-conversations).

@@ -1,0 +1,48 @@
+---
+title: Knowledge base
+description: Let the model look things up in your own documents, through a LightRAG server you run.
+icon: Library
+---
+
+The knowledge base is optional. It is backed by a
+[LightRAG](https://github.com/HKUDS/LightRAG) server that **you** run — on this
+computer or another — and Actovia only connects to it: it pushes your
+documents there and asks it for the passages relevant to a question. Your chat
+model always writes the answer.
+
+## Setting it up
+
+1. Run a LightRAG server (see its documentation).
+2. In **Settings → Knowledge Base**, enter its **Server URL** and, if you set
+   one, its **API Key** (your `LIGHTRAG_API_KEY`).
+3. **Test Connection** — it reports the server's embedding model and how many
+   documents it holds.
+
+Choose LightRAG's embedding model with care: once a document is in, changing it
+means wiping LightRAG's storage and adding every document again.
+
+**Query mode** decides how LightRAG searches — **Mix** (the knowledge graph and
+vector search together, the best quality) is the default; **Naive**, **Local**,
+**Global** and **Hybrid** are also offered. **Advanced** holds **Top K** and
+**Chunk Top K**.
+
+## Documents
+
+**Documents** on the same page lists what is in the knowledge base, each with
+its state: **Pending**, **Indexing…**, **Indexed**, **Failed** or **Needs
+reindex**. Add one with a title and its content; edit it and it is indexed
+again. **Reindex all** sends everything again.
+
+<Screenshot
+  id="settings-knowledge-base"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Knowledge Base: server URL connected, query mode Mix, the document list with Indexed / Indexing… badges."
+/>
+
+## In a chat
+
+With a server set up, the **Knowledge Base** tool is on in **Settings →
+Built-in Tools**, and the model searches your documents when a question calls
+for it. There is one shared knowledge base for every chat and every
+[Philharmonic](/docs/agents/philharmonic) group.

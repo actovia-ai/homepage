@@ -1,0 +1,220 @@
+---
+title: Features
+description: Everything Actovia does, on the desktop and on the iPhone, in one place.
+icon: LayoutList
+---
+
+import {
+  AppWindow,
+  Brain,
+  CalendarClock,
+  Cpu,
+  DatabaseZap,
+  Globe,
+  HeartPulse,
+  History,
+  Image as ImageIcon,
+  LayoutGrid,
+  Library,
+  Lock,
+  Map as MapIcon,
+  MessageSquare,
+  MousePointer2,
+  Newspaper,
+  Palette,
+  Paperclip,
+  Plug,
+  Quote,
+  Search,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  SquareCode,
+  Telescope,
+  Users,
+  Wrench
+} from 'lucide-react'
+
+Actovia runs on your computer with your own model keys. The desktop app holds
+everything and does the work; the iPhone app reaches it from anywhere. These
+pages describe what each part does and where to find it.
+
+<Screenshot
+  id="hero-overview"
+  platform="desktop"
+  theme="dark"
+  caption="The main window in dark mode: sidebar, a chat mid-run with the thinking timeline, a tool card, and an iPhone beside it showing the same chat."
+/>
+
+## Chat
+
+<Cards>
+  <Card icon={<MessageSquare />} title="Chatting" href="/docs/chat">
+    Streaming answers, the thinking timeline, Stop, the sidebar and the header.
+  </Card>
+  <Card icon={<Cpu />} title="Providers & models" href="/docs/chat/models">
+    OpenAI, Azure, Anthropic, Gemini, xAI and Ollama; live model lists;
+    reasoning levels.
+  </Card>
+  <Card icon={<Quote />} title="Answers & sources" href="/docs/chat/answers">
+    Citations, copy with references, regenerate and compare, questionnaires.
+  </Card>
+  <Card
+    icon={<Paperclip />}
+    title="Pictures, voice & quotes"
+    href="/docs/chat/attachments"
+  >
+    Attach pictures, dictate, read aloud, ask about a selected passage.
+  </Card>
+  <Card
+    icon={<Search />}
+    title="Quick Chat, search & export"
+    href="/docs/chat/finding"
+  >
+    Ask from the menu bar, search every chat, find in page, export.
+  </Card>
+</Cards>
+
+## Tools
+
+<Cards>
+  <Card icon={<Wrench />} title="Built-in tools" href="/docs/tools">
+    What the model can do on its own, and how to switch each tool off.
+  </Card>
+  <Card icon={<Globe />} title="Web search & fetch" href="/docs/tools/web">
+    Brave search with numbered sources, and reading any page.
+  </Card>
+  <Card
+    icon={<SquareCode />}
+    title="Files & terminal"
+    href="/docs/tools/workspace"
+  >
+    A folder per chat for files and commands.
+  </Card>
+  <Card icon={<AppWindow />} title="Artifacts" href="/docs/tools/artifacts">
+    Small apps and charts that run in the chat.
+  </Card>
+  <Card icon={<ImageIcon />} title="Image generation" href="/docs/tools/images">
+    Pictures from a description, saved on your computer.
+  </Card>
+  <Card
+    icon={<MapIcon />}
+    title="Weather & maps"
+    href="/docs/tools/weather-maps"
+  >
+    Forecast cards and trip itineraries on a map.
+  </Card>
+  <Card
+    icon={<MousePointer2 />}
+    title="Computer Use"
+    href="/docs/tools/computer-use"
+  >
+    The model operates an allowlisted app window on your Mac.
+  </Card>
+  <Card icon={<ShieldCheck />} title="Approvals" href="/docs/tools/approvals">
+    It asks before touching your credentials.
+  </Card>
+  <Card icon={<Plug />} title="MCP servers" href="/docs/tools/mcp">
+    Connect Model Context Protocol servers.
+  </Card>
+  <Card icon={<Sparkles />} title="Skills Market" href="/docs/tools/skills">
+    Install Agent Skills from skills.sh.
+  </Card>
+</Cards>
+
+## Memory & knowledge
+
+<Cards>
+  <Card icon={<Brain />} title="Memory" href="/docs/memory">
+    What Actovia remembers about you, and how to correct it.
+  </Card>
+  <Card
+    icon={<Users />}
+    title="Personality & profile"
+    href="/docs/memory/personality"
+  >
+    Tone, custom instructions, and your usage at a glance.
+  </Card>
+  <Card
+    icon={<History />}
+    title="Long conversations & recall"
+    href="/docs/memory/long-conversations"
+  >
+    Compaction that loses nothing, and reading one chat from another.
+  </Card>
+  <Card
+    icon={<Library />}
+    title="Knowledge base"
+    href="/docs/memory/knowledge-base"
+  >
+    Your documents, through a LightRAG server you run.
+  </Card>
+</Cards>
+
+## Research & agents
+
+<Cards>
+  <Card
+    icon={<Telescope />}
+    title="Deep Research"
+    href="/docs/agents/deep-research"
+  >
+    Multi-round research with a cited report and PDF export.
+  </Card>
+  <Card icon={<Users />} title="Philharmonic" href="/docs/agents/philharmonic">
+    A PM and a team of employees that plan and do the work.
+  </Card>
+  <Card
+    icon={<SquareCode />}
+    title="Coding agents"
+    href="/docs/agents/coding-agents"
+  >
+    Claude Code and Codex as employees, in a folder of yours.
+  </Card>
+  <Card
+    icon={<CalendarClock />}
+    title="Schedules & quotas"
+    href="/docs/agents/schedules"
+  >
+    Scheduled tasks, and dealing work by your plans' limits.
+  </Card>
+</Cards>
+
+## iPhone
+
+<Cards>
+  <Card icon={<Smartphone />} title="The iPhone app" href="/docs/iphone">
+    Chat, settings and approvals through your computer.
+  </Card>
+  <Card icon={<HeartPulse />} title="Health" href="/docs/iphone/health">
+    Apple Health, a daily note from Ody, and questions with your numbers.
+  </Card>
+  <Card icon={<LayoutGrid />} title="Widgets" href="/docs/iphone/widgets">
+    Ask from the Home Screen, Lock Screen and Control Center.
+  </Card>
+</Cards>
+
+## App & settings
+
+<Cards>
+  <Card
+    icon={<Palette />}
+    title="Appearance & language"
+    href="/docs/app/appearance"
+  >
+    Light and dark, seven colour tones, ten languages.
+  </Card>
+  <Card icon={<Newspaper />} title="Discover" href="/docs/app/discover">
+    A news feed built from your memory.
+  </Card>
+  <Card icon={<Lock />} title="App lock" href="/docs/app/app-lock">
+    PIN, Touch ID and automatic locking.
+  </Card>
+  <Card
+    icon={<DatabaseZap />}
+    title="Chat Audit & logs"
+    href="/docs/app/chat-audit"
+  >
+    SQL over your own history, and the app's log.
+  </Card>
+</Cards>

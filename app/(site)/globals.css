@@ -1,40 +1,41 @@
 @import 'tailwindcss';
 
 /*
-  Actovia product page — an Apple-style product narrative.
+  Actovia product page — a working document of the product.
 
-  Palette: paper and ink for the light sections, true black for the "night"
-  sections, one accent (Ody's sunflower) used as a surface, never as text
-  colour — yellow text on white does not pass contrast. Text on sunflower is
-  always `coal`, which does not change with the colour scheme.
+  Palette: a pale neutral ground and near-black ink, hairlines between
+  regions instead of cards, black "terminal" blocks for anything the app
+  types, and one accent — Ody's sunflower — used as a marker (callout tags,
+  highlighted command tokens, the arrow in the primary button), never as text
+  on the light ground: yellow text on pale grey fails contrast. Text on
+  sunflower is always `coal`, which does not change with the scheme.
 
-  Dark mode follows the system: the tokens below are redefined at the end of
-  this file, so paper/mist/surface/ink/graphite/hairline flip and every
-  component follows without a `dark:` class of its own. Night sections are
-  black in both schemes.
+  Dark mode follows the system: the tokens are redefined at the end of this
+  file, so every component follows without a `dark:` class of its own.
 */
 @theme {
-  --color-paper: #fbfbfd;
-  --color-mist: #f5f5f7;
-  --color-surface: #ffffff;
-  --color-ink: #1d1d1f;
-  --color-coal: #1d1d1f;
-  --color-graphite: #6e6e73;
-  --color-hairline: #d2d2d7;
-  --color-night: #000000;
-  --color-night-2: #161617;
-  --color-night-ink: #f5f5f7;
-  --color-night-graphite: #86868b;
+  --color-paper: #f5f5f3;
+  --color-panel: #fbfbfa;
+  --color-sunk: #ececea;
+  --color-ink: #141413;
+  --color-graphite: #5f5f5b;
+  --color-hairline: #dcdcd8;
+  --color-coal: #141413;
+  --color-term: #0f0f0e;
+  --color-term-2: #1b1b1a;
+  --color-term-ink: #ededeb;
+  --color-term-dim: #8f8f8a;
   --color-sun: #ffc928;
   --color-sun-deep: #f5a300;
+  --color-go: #1f9d6b;
 
-  /* SF Pro on Apple devices, the platform face elsewhere. */
   --font-sans:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
-    system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    var(--font-sofia), -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI',
+    sans-serif;
+  --font-display: var(--font-sofia-xc), 'Arial Narrow', system-ui, sans-serif;
+  --font-mono:
+    var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-word: var(--font-fredoka), ui-rounded, 'SF Pro Rounded', sans-serif;
-  --font-ghost:
-    var(--font-inter-tight), 'SF Pro Display', system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -45,120 +46,165 @@
     color-scheme: light dark;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+    scrollbar-color: var(--color-hairline) transparent;
   }
   body {
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 17px;
-    line-height: 1.47;
-    letter-spacing: -0.022em;
+    font-weight: 400;
+    line-height: 1.6;
+    caret-color: var(--color-sun-deep);
   }
   :focus-visible {
     outline: 2px solid var(--color-sun-deep);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
   ::selection {
     background: var(--color-sun);
     color: var(--color-coal);
   }
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  code,
+  kbd {
+    font-family: var(--font-mono);
+  }
 }
 
 /*
-  Type scale. Tracking tightens as size grows and leading shrinks — the same
-  table Apple ships with SF Pro Display / Text.
+  Type scale. The display face is extra-condensed and thin, so it is set
+  large and with little tracking; body copy stays light and open.
 */
 @utility type-hero {
-  font-size: clamp(3rem, 9vw, 6rem);
-  line-height: 1.02;
+  font-family: var(--font-sans);
+  font-size: clamp(2.625rem, 5.4vw, 5rem);
+  line-height: 1.12;
   letter-spacing: -0.035em;
   font-weight: 600;
+  text-wrap: balance;
+}
+/* A whole word set on a solid rounded block inside the hero headline. */
+@utility hero-mark {
+  display: inline-flex;
+  border-radius: 0.16em;
+  padding: 0.01em 0.2em 0.07em;
+  line-height: 1.04;
+  white-space: nowrap;
 }
 @utility type-headline {
-  font-size: clamp(2.25rem, 5.4vw, 4rem);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 5vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  font-weight: 300;
   text-wrap: balance;
 }
 @utility type-title {
-  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+  line-height: 1;
+  font-weight: 300;
   text-wrap: balance;
 }
 @utility type-tile {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  line-height: 1.125;
-  letter-spacing: -0.02em;
-  font-weight: 600;
+  font-size: clamp(1.375rem, 1.8vw, 1.625rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 400;
   text-wrap: balance;
 }
 @utility type-lede {
-  font-size: clamp(1.1875rem, 1.8vw, 1.5rem);
-  line-height: 1.38;
-  letter-spacing: -0.015em;
-  font-weight: 500;
+  font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
+  line-height: 1.6;
+  font-weight: 300;
   text-wrap: pretty;
 }
 
+/* A sunflower marker tag: callouts in the hero, the run panel's chips. */
+@utility tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background: var(--color-sun);
+  color: var(--color-coal);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  padding: 0.45em 0.6em;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
 /*
-  The hero's two motions, in CSS rather than a motion library: the icon and
-  the words arrive once on load, and the app window grows to full size as it
-  scrolls into view (a scroll-driven animation; browsers without
-  animation-timeline simply show it at full size).
+  The page's one load-time moment: the hero's run card draws its steps in,
+  one after the other, as the run would. Content is visible by default; the
+  animation only starts from below.
 */
-@keyframes hero-arrive {
+@keyframes step-in {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.94);
+    transform: translateY(6px);
+    filter: blur(3px);
   }
 }
-@utility hero-arrive {
-  animation: hero-arrive 900ms var(--ease-out) both;
+@utility step-in {
+  animation: step-in 600ms var(--ease-out) both;
 }
-@keyframes hero-rise {
+@keyframes callout-in {
   from {
-    transform: translateY(60px) scale(0.86);
+    opacity: 0;
+    transform: translateX(-6px);
   }
 }
-@supports (animation-timeline: view()) {
-  .hero-rise {
-    transform-origin: top center;
-    animation: hero-rise linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 45%;
+@utility callout-in {
+  animation: callout-in 500ms var(--ease-out) both;
+}
+
+@keyframes panel-swap {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(4px);
   }
+}
+@utility panel-swap {
+  animation: panel-swap 360ms var(--ease-out) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 150ms !important;
     transition-property: opacity, color, background-color !important;
-    scroll-behavior: auto !important;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-rise {
-    animation: none;
-  }
-}
-
-/* Dark scheme: the same roles, Apple's dark greys. */
+/* Dark scheme: the same roles on a warm near-black. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-paper: #000000;
-    --color-mist: #161617;
-    --color-surface: #1d1d1f;
-    --color-ink: #f5f5f7;
-    --color-graphite: #a1a1a6;
-    --color-hairline: #424245;
+    --color-paper: #0e0e0d;
+    --color-panel: #161615;
+    --color-sunk: #1c1c1b;
+    --color-ink: #efefec;
+    --color-graphite: #a3a39e;
+    --color-hairline: #2c2c2a;
+    --color-term: #050505;
+    --color-term-2: #121211;
+    --color-go: #3fc48f;
   }
 }

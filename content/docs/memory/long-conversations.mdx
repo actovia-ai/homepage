@@ -1,0 +1,47 @@
+---
+title: Long conversations & recall
+description: Chats that outgrow the model's context keep everything, and one chat can read another.
+icon: Clock
+---
+
+## Long conversations
+
+Every model has a limit to how much conversation it can read at once. When a
+chat approaches it, Actovia compacts the older part into summaries — a card
+says **Compacting conversation history…**, then **Compacted 24 messages · saved
+~18k tokens**. Nothing is thrown away: the original messages stay stored, and
+the model can search them and open any summary back up to the full text when
+you ask about something said long ago.
+
+The newest exchanges are always sent whole. Under **Settings → Memory →
+Context management**:
+
+- **Lossless context management** — on by default.
+- **Compaction threshold** — how full the context gets before compacting,
+  50–95% (default 75%).
+- **Fresh tail size** — how many of your latest messages, with everything that
+  answered them, are never compacted (2–24, default 6).
+
+<Screenshot
+  id="chat-compaction"
+  platform="desktop"
+  theme="light"
+  caption="The compaction card in a long chat: “Compacted 24 messages · saved ~18k tokens”."
+/>
+
+## Across chats
+
+A chat can read another one when you hand it over. In the sidebar, open a
+chat's menu and choose **Copy conversation ID**, then paste the ID into another
+chat with a question — "what did we decide in this one?". The model looks that
+conversation up, reads what it needs, and says which chat it drew on.
+
+This is not long-term memory: nothing is copied anywhere, and a chat only reads
+another when you give it the ID.
+
+<Screenshot
+  id="chat-recall-across"
+  platform="desktop"
+  theme="dark"
+  caption="The sidebar's chat menu with “Copy conversation ID”, and another chat answering a question about that conversation."
+/>

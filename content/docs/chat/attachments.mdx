@@ -1,0 +1,59 @@
+---
+title: Pictures, voice & quotes
+description: Attach pictures, dictate a message, and ask about a passage you selected.
+icon: Paperclip
+---
+
+## Pictures
+
+Add pictures to a message from **+ → Attach files**, by dragging them onto the
+composer, or by pasting a screenshot. They show as previews above the field;
+remove one with its ✕ before sending. You can send several at once, and keep
+talking about them over the following messages.
+
+Large pictures are scaled down before they are sent (to about 2048 px on the
+long side), so a photo straight from a camera does not slow the request. The
+model needs to support images — most current models do.
+
+Save or copy a picture from a chat with its download button, or right-click it
+for **Save Image As…** and **Copy Image**.
+
+<Screenshot
+  id="chat-attachments"
+  platform="desktop"
+  theme="light"
+  caption="Composer with two picture previews above the field, and the sent message showing them over the user's bubble with the answer describing them."
+/>
+
+## Ask about a passage
+
+Select text in an answer — or in one of your own messages — and an **Ask
+Actovia** button appears beside it. Click it and the passage is quoted above the
+composer; type your question and send. The message shows the quote and your
+question together. Remove the quote with **Remove quote**.
+
+<Screenshot
+  id="chat-ask-selection"
+  platform="desktop"
+  theme="dark"
+  caption="A sentence selected in an answer with the “Ask Actovia” button beside it, and the quote waiting above the composer."
+/>
+
+## Voice
+
+- **Dictate** — the microphone in the composer records you and turns it into
+  text in the field. The first time, the system asks for microphone access.
+- **Read aloud** — the speaker on an answer's action bar.
+
+Both use OpenAI's speech models with your OpenAI key. **Settings → Voice** sets
+the **Speech to Text Model**, **Text to Speech Model**, **Text to Speech Voice**,
+**Output Format**, **Speed** and, for `gpt-4o-mini-tts`, **Voice Instructions**
+(for example "Speak in a warm, friendly tone").
+
+## Large files through S3
+
+By default pictures travel inside the request. If you work with many or large
+files, **Settings → AWS S3** lets Actovia upload them to a bucket of yours and
+send a link instead. The page lists what the bucket needs (public read, CORS,
+the IAM permissions) before you fill in **Region**, **Bucket**, **Access Key ID**
+and **Secret Access Key**.

@@ -1,0 +1,42 @@
+---
+title: Approvals
+description: The model asks before it reads your credentials or runs a command that touches them.
+icon: ShieldCheck
+---
+
+The model works without asking — except where your secrets are. Before a tool
+reads a file that may hold credentials, or runs a command that touches them,
+the run pauses and a card appears at the foot of the answer:
+
+**Allow access to a secret?** — with the exact path or command.
+
+- **Allow once** lets that one call through. Nothing is remembered: the next
+  call asks again.
+- **Deny** tells the model you declined, and it carries on without it.
+- A card left alone for ten minutes ends as **Timed out**; stopping the reply
+  ends it as **Stopped**.
+
+The **Allow once** button cannot be clicked for its first moment, so a stray
+click or keypress does not approve anything. A long command is shown whole,
+never cut short.
+
+<Screenshot
+  id="chat-approval"
+  platform="desktop"
+  theme="light"
+  caption="The approval card “Allow access to a secret?” for reading ~/.ssh/config, with Allow once and Deny."
+/>
+
+## What asks
+
+- Credential files and folders: `~/.ssh`, `~/.aws`, `~/.gnupg`, `~/.kube`,
+  `~/.netrc`, `~/.npmrc`, `~/.git-credentials`, `~/.config/gh`, `~/.azure`,
+  the gcloud and 1Password folders, the system keychains, browser profiles and
+  cookies, and similar.
+- `.env`, `.pem`, `.key` and `id_*` files outside the chat's folder.
+- Commands that name those, read passwords from the keychain, print a CLI's
+  login token, or list other programs' command lines.
+- The same checks apply to the arguments of a call to an [MCP tool](/docs/tools/mcp).
+
+Actovia's own database, backups, lock file and certificate are never handed to
+a tool at all — no card, just a refusal. More in [Security](/docs/security).

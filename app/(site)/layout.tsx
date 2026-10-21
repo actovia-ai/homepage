@@ -1,33 +1,52 @@
 import type { Metadata, Viewport } from 'next'
-import { Fredoka, Inter_Tight } from 'next/font/google'
+import {
+  Fredoka,
+  JetBrains_Mono,
+  Sofia_Sans,
+  Sofia_Sans_Extra_Condensed
+} from 'next/font/google'
 import './globals.css'
 
-// The wordmark face — the same Fredoka the app icon's social card uses.
+// The wordmark face — the same Fredoka the app icon's social card uses. Only
+// ever at wordmark size.
 const fredoka = Fredoka({
   variable: '--font-fredoka',
   subsets: ['latin'],
   weight: ['600']
 })
 
-// The footer's ghosted name: an extra-light grotesk, close to SF Pro Display
-// but the same on every platform.
-const interTight = Inter_Tight({
-  variable: '--font-inter-tight',
+// The display voice: thin and extra-condensed, set large.
+const display = Sofia_Sans_Extra_Condensed({
+  variable: '--font-sofia-xc',
   subsets: ['latin'],
-  weight: ['200']
+  weight: ['200', '300', '400']
+})
+
+// Body and UI, from the same family so the two voices agree.
+const sans = Sofia_Sans({
+  variable: '--font-sofia',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600']
+})
+
+// Commands, tool names, SQL — never decoration.
+const mono = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+  weight: ['400', '500']
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://actovia.yancey.app'),
-  title: 'Actovia — your assistant, on your own machine',
+  title: 'Actovia — the AI assistant that runs on your computer and answers your phone',
   description:
     'A personal AI assistant that lives on your computer: chat for quick answers, Philharmonic agent teams for the big jobs, every model with your own keys, your data kept local, and your iPhone as the remote.'
 }
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fbfbfd' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' }
+    { media: '(prefers-color-scheme: light)', color: '#f5f5f3' },
+    { media: '(prefers-color-scheme: dark)', color: '#0e0e0d' }
   ],
   colorScheme: 'light dark'
 }
@@ -36,7 +55,10 @@ export default function RootLayout({
   children
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${interTight.variable}`}>
+    <html
+      lang="en"
+      className={`${fredoka.variable} ${display.variable} ${sans.variable} ${mono.variable}`}
+    >
       <body>{children}</body>
     </html>
   )

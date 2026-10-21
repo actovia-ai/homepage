@@ -1,0 +1,45 @@
+---
+title: App lock
+description: A PIN, Touch ID and automatic locking for the desktop app.
+icon: Lock
+---
+
+The app lock keeps Actovia closed to anyone at your computer. While it is
+locked, the window is covered and the app answers no requests — not from Quick
+Chat, the CLI or a phone — except an unlock. Background work (a running
+research, a scheduled task) carries on.
+
+## Setting a PIN
+
+**Settings → General → Lock & Privacy**: **Enter a 6-digit PIN**, then
+**Confirm your PIN**. Then choose:
+
+- **Unlock with Touch ID** (Macs with Touch ID).
+- **Auto-lock when idle** — **Off**, 1, 5, 15 or 30 minutes.
+- **Lock on app launch**.
+- **Lock on system sleep**.
+
+Lock at any time with **File → Lock Now** (⌘L). Too many wrong PINs in a row
+make you wait before trying again. **Remove lock** turns it off and asks for the
+current PIN.
+
+<ShotRow>
+  <Screenshot
+    id="lock-screen"
+    platform="desktop"
+    theme="dark"
+    caption="The lock screen covering the window: the PIN field and “Unlock with Touch ID”."
+  />
+  <Screenshot
+    id="settings-lock"
+    platform="desktop"
+    theme="light"
+    caption="Settings → General → Lock & Privacy with a PIN set: Touch ID, Auto-lock when idle (5 minutes), lock on launch and on sleep."
+  />
+</ShotRow>
+
+## Unlocking from elsewhere
+
+A paired iPhone can unlock the computer with its own Face ID, and the
+[CLI](/docs/cli/reference#actovia-lock) with the PIN. See
+[Security](/docs/security#app-lock).

@@ -1,0 +1,110 @@
+---
+title: Answers & sources
+description: Citations, copying, reading aloud, regenerating and comparing, and the interactive pieces an answer can carry.
+icon: Quote
+---
+
+## Citations
+
+When an answer draws on a web search or a page the model read, the claim is
+followed by a small citation chip: the site's icon and name in small print.
+Hover it for a card with the page's title, site and extract. A chip that stands
+for several sources reads like **Reuters +2**; its card pages through them with
+← and →.
+
+Sources are numbered through the whole chat, not per answer: a source found in
+the first answer keeps its number when a later answer cites it again.
+
+<Screenshot
+  id="chat-citations"
+  platform="desktop"
+  theme="light"
+  caption="An answer with citation chips; one chip's hover card open on “Reuters +2” showing 2/3 and the pager arrows."
+/>
+
+**Sources** under an answer opens the chat's panel on that answer's sources,
+split into those it cited and the others it found. A search that brings back
+pictures or videos shows them as a gallery under the answer; pictures open in a
+viewer.
+
+<Screenshot
+  id="chat-search-gallery"
+  platform="desktop"
+  theme="dark"
+  caption="An answer to “show me photos of …”: the image gallery under the text, and one picture open in the viewer."
+/>
+
+## The action bar
+
+Each answer ends with a row of actions:
+
+- **Copy** — the answer as text. Citations become `[1]`, `[2]` … with a
+  **References** list at the end, so the copy reads well anywhere you paste it.
+- **Read aloud** — speaks the answer with OpenAI's text-to-speech (voice, speed
+  and format under **Settings → Voice**).
+- **Regenerate** — asks again (below).
+- **Sources** — the answer's sources, as above.
+
+## Regenerate and compare
+
+**Regenerate** asks the same question again and shows the new answer **beside**
+the previous one, so you can compare them. On a narrow window the two become
+tabs, **Answer 1** and **Answer 2**. Pick the one to keep with **Use this one**;
+the other is put away and the conversation carries on from your choice. If you
+just send your next message instead, the newer answer that finished cleanly is
+kept for you.
+
+<Screenshot
+  id="chat-compare"
+  platform="desktop"
+  theme="dark"
+  caption="Regenerate: two answers to one question side by side, each with “Use this one”. Window at least 880 px wide."
+/>
+
+## Questions and confirmations
+
+Sometimes the model needs something from you before it goes on. Instead of a
+wall of text it can ask:
+
+- **A questionnaire** — one question at a time (**Question 1 of 2**), with
+  options, **Other…** for your own answer, **Previous** / **Skip** / **Next**,
+  and **Anything else?** before **Submit**. Your answers appear as a card, and
+  the questionnaire turns into a summary marked **Answered**.
+- **A confirmation** — what it is about to do, with **Approve** and **Reject**
+  (and an optional note). Nothing happens until you choose.
+
+Answered blocks stay answered when you reopen the chat — on the desktop or on
+the iPhone.
+
+<Screenshot
+  id="chat-questionnaire"
+  platform="desktop"
+  theme="light"
+  caption="A questionnaire at the end of an answer: question 1 of 2 with options, Other…, and Previous / Skip / Next."
+/>
+
+## Rich answers
+
+A few kinds of content are drawn rather than written out:
+
+- **Steps** — a how-to as a numbered card, with pictures where the search found
+  them.
+- **Stock charts** — a symbol's chart from TradingView, which opens the symbol's
+  page in your browser. (TradingView sees the symbol and your IP address, as any
+  embedded chart would.)
+- **People, places and things** — a dotted name opens Wikipedia's summary and
+  picture, in your language when Wikipedia has it; **Read more on Wikipedia**
+  opens the article.
+
+<Screenshot
+  id="chat-rich-blocks"
+  platform="desktop"
+  theme="light"
+  caption="One answer with a Steps card and a TradingView stock chart, plus an entity popover open on a dotted name."
+/>
+
+## Pictures from other sites
+
+A picture an answer links to from a site that was not part of its own search
+results shows as a placeholder with **Load image** until you click it, so a page
+cannot make Actovia fetch something by itself.

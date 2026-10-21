@@ -1,0 +1,66 @@
+---
+title: Coding agents
+description: Claude Code and Codex as Philharmonic employees, working in a folder of yours.
+icon: SquareCode
+---
+
+A coding agent is a Philharmonic employee run by a coding CLI you have
+installed and logged into — **Claude Code** or **Codex**. Actovia starts it in
+the group's folder, hands it the step, and shows its work as it goes. It uses
+your own plan with that CLI's provider.
+
+## Setting up
+
+**Settings → Agents** checks each CLI on this Mac — **Ready**, **Not
+installed**, **Too old**, **Not logged in** or **Broken** — with a hint for what
+to do, and **Check** looks again. The same page sets:
+
+- **Projects folder** — where **New project…** creates projects and every
+  project keeps its notes (default `~/Actovia Projects`).
+- **Agents at once** — more steps wait for a free slot.
+- **Keep an agent ready (minutes)** — how long a process waits for the next step.
+- **Separate worktrees** — when two agents work in the same git repository at
+  once, each gets its own worktree and branch. Merging is up to you.
+
+<Screenshot
+  id="settings-agents"
+  platform="desktop"
+  theme="light"
+  caption="Settings → Agents: Claude Code and Codex both Ready with path and version, the projects folder and the run settings."
+/>
+
+Then add an employee in **Workforce** with **Runs on** set to the CLI, a
+**Model** as the CLI names it (`opus`, `sonnet`, `haiku`, or a full id), and
+**Permissions**:
+
+| Claude Code                            | Codex                                              |
+| -------------------------------------- | -------------------------------------------------- |
+| Ask before changes                     | Ask before every command and file change           |
+| Edit files freely, ask before commands | Work freely inside the folder; ask to go beyond it |
+| Auto (the CLI decides what is safe)    | Never ask; only inside the folder, no network      |
+
+Codex always works in a sandbox limited to the group's folder.
+
+## While it works
+
+Each step is a card: **Working**, **Waiting for you**, **Done** or **Stopped**,
+with the steps it took. When the agent wants to do something its permissions
+do not cover, the card says **… wants to use …** with the full command or diff:
+**Allow**, or **Deny** with an optional reason it will follow. If the window is
+in the background, a notification says **… is waiting for you**.
+
+- **Stop** ends the step; the group carries on.
+- **Continue in Terminal** opens the same session in Terminal; Actovia picks it
+  up again on its next step.
+- A later step in the same group continues the same session, so the agent
+  remembers what it did.
+
+Answering an agent's prompt needs you — at the Actovia window or on your paired
+iPhone. Opening folders and continuing in Terminal are desktop only.
+
+<Screenshot
+  id="philharmonic-agent-card"
+  platform="desktop"
+  theme="dark"
+  caption="A Claude Code step card waiting for approval of a file write: the diff, Allow / Deny with a reason field, and Continue in Terminal."
+/>

@@ -1,0 +1,12 @@
+{
+  "title": "App & settings",
+  "pages": [
+    "appearance",
+    "discover",
+    "app-lock",
+    "backups",
+    "shortcuts",
+    "chat-audit",
+    "logs"
+  ]
+}

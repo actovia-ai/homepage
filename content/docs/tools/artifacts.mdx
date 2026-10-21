@@ -1,0 +1,31 @@
+---
+title: Artifacts
+description: Small apps, pages and charts the model builds and runs right in the chat.
+icon: AppWindow
+---
+
+Ask for something visual — "make a Pomodoro timer", "chart these numbers",
+"an HTML page for my recipe" — and the model builds it as an **artifact**: a
+card in the answer that runs the page it wrote. While the code is being written
+the card fills in line by line (**Writing · 42 lines**), then the finished page
+takes its place.
+
+- **Fullscreen** opens it over the window; **Esc** comes back.
+- **Reveal in file manager** shows the saved source file.
+
+Artifacts run in a sandbox of their own: the code can draw and react to clicks,
+but cannot reach the network, your files or the rest of Actovia.
+
+<Screenshot
+  id="tool-artifact"
+  platform="desktop"
+  theme="light"
+  caption="An artifact card in a chat running a small Pomodoro-timer web app, with the Fullscreen and Reveal buttons visible."
+/>
+
+<Screenshot
+  id="tool-artifact-fullscreen"
+  platform="desktop"
+  theme="dark"
+  caption="The same artifact in fullscreen: an interactive chart filling the window."
+/>

@@ -1,0 +1,70 @@
+---
+title: MCP servers
+description: Connect Model Context Protocol servers and their tools become available in every chat.
+icon: Plug
+---
+
+[MCP](https://modelcontextprotocol.io) servers give the model new tools — a
+database, a design tool, your notes app. Register them in **Settings → MCP
+Servers**, then switch each one on or off.
+
+## Adding a server
+
+**Add Server** opens the form. Choose a **Transport**:
+
+- **Stdio (Local Command)** — a program on this computer: a **Command**, its
+  **Args** (one per row) and optional **Environment variables**.
+- **Streamable HTTP (Remote)** or **SSE (Remote Legacy)** — a **URL**, with
+  optional **Headers** such as `{"Authorization":"Bearer …"}`.
+
+Give it a **Name**, optionally a **Description** and **Extra Config**, and
+**Register**. A new server starts switched off; switch it on and its tools are
+offered in chat. The page's summary says how many tools from how many servers
+are active, and each server card can **Show tools**. The **JSON** tab shows the
+whole configuration, read-only.
+
+<Screenshot
+  id="settings-mcp"
+  platform="desktop"
+  theme="light"
+  caption="Settings → MCP Servers: two server cards (one stdio, one HTTP) with switches and tool counts, one expanded to its tool list."
+/>
+
+## Secrets in a server's settings
+
+Header values, environment variables and tokens in a URL are saved encrypted
+and shown only as `••••`. Leave a masked value as it is to keep it. Changing a
+server's URL clears its saved headers, and changing its command clears its
+environment and masked arguments — Actovia never sends a secret to a program or
+address it was not saved for — so enter them again after the change.
+
+A token written into **Args** is visible to other programs on the computer
+while the server runs; the form warns about it and suggests an environment
+variable instead.
+
+## In a chat
+
+**+ → MCP tools** in the composer lists every tool of the servers that are on,
+with its description. You do not need to pick one: the model sees the list and
+calls what it needs, and those calls go through the same
+[approval checks](/docs/tools/approvals) as the built-in tools.
+
+<Screenshot
+  id="chat-mcp-tools"
+  platform="desktop"
+  theme="dark"
+  caption="The composer's “Available MCP Tools” dialog listing a filesystem server's tools with their descriptions."
+/>
+
+## Diagrams from draw.io
+
+Diagrams from a draw.io MCP server render as a card in the chat, with **Open in
+draw.io** to keep editing there. Actovia only draws the card. The diagrams come
+from the draw.io MCP server you register, as with any other server.
+
+<Screenshot
+  id="chat-drawio"
+  platform="desktop"
+  theme="light"
+  caption="A draw.io diagram (a small flowchart) rendered as a card in an answer, with “Open in draw.io”. Needs a draw.io MCP server registered and on."
+/>
