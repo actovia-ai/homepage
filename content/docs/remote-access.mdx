@@ -1,0 +1,46 @@
+---
+title: Remote access
+description: How the iPhone app and the CLI reach the desktop app.
+---
+
+The desktop app serves one API on two listeners:
+
+| Listener | Address                    | Who uses it                         |
+| -------- | -------------------------- | ----------------------------------- |
+| Loopback | `http://127.0.0.1:60223`   | The app's own window, the CLI       |
+| Network  | `https://<computer>:63129` | Paired phones (local network, Tailscale) |
+
+The loopback listener cannot be reached from another machine. The network
+listener is HTTPS only, every request on it needs a paired device's token, and
+it runs only while a phone is paired or a pairing window is open — with nothing
+paired, nothing listens on the network.
+
+## Pairing a phone
+
+Open a pairing window in **Settings → Integrations → Devices**, or from a
+terminal on that computer with [`actovia pair`](/docs/cli/reference#actovia-pair),
+and scan the QR code with the iPhone app. The window lasts two minutes, its
+code works once, and five wrong guesses close it.
+
+The phone keeps the computer's certificate fingerprint and refuses any other.
+The computer keeps only a hash of the phone's token.
+
+## From anywhere
+
+At home the phone finds the computer on the local network. Away from home,
+put both on the same [Tailscale](https://tailscale.com) network: the phone
+reaches the same listener through the computer's Tailscale address, with the
+same pairing.
+
+## Unpairing
+
+Revoke a device in **Settings → Integrations → Devices** or with
+[`actovia devices revoke`](/docs/cli/reference#actovia-devices-revoke). The
+phone learns it the next time it asks; until then the device is listed as
+revoked but not yet told. **Reset** replaces the certificate, and every phone
+has to pair again.
+
+## A locked app
+
+While the app is locked, the API answers only an unlock. A paired phone
+unlocks it with its own Face ID; the CLI with the app-lock PIN.

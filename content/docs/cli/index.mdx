@@ -1,0 +1,91 @@
+---
+title: Overview
+description: What the actovia command does, and how it reaches the desktop app.
+---
+
+`actovia` works on the computer the desktop app runs on. Install it with
+`npm install -g @actovia-ai/cli` or as a standalone binary — see
+[Installation](/docs/installation#cli). Every command and option is in the
+[command reference](/docs/cli/reference).
+
+```bash
+actovia status               # the desktop app: version, lock, LAN, devices, updates
+actovia doctor               # the same as checks, each with a fix
+actovia open                 # launch the desktop app
+actovia app update           # install the newest desktop app (macOS)
+actovia app restart          # quit and start it again
+actovia lock                 # lock it now
+actovia logs -f              # its log, as it is written
+actovia backup               # its database backups; `backup create` makes one
+actovia tasks                # Philharmonic's scheduled tasks
+actovia quota                # what Claude Code and Codex report of your plan
+actovia usage                # what the models have cost
+actovia pair                 # pair a phone: a QR code in the terminal
+actovia devices              # list paired phones
+actovia skills               # browse and install Agent Skills
+actovia update               # update the CLI itself
+```
+
+With these, a Mac that runs Actovia with no screen attached can be looked
+after from a phone and an SSH session alone.
+
+## Talking to the desktop app
+
+Everything but `skills` and `update` talks to the desktop app on the same
+machine, at `http://127.0.0.1:60223`. That is what lets you look after a
+computer you reach only over SSH.
+
+**The app-lock PIN.** Commands that act for the person at the computer —
+`pair`, `devices`, `lock`, `app quit`, `app restart`, and `app update` while
+the app runs — ask for the app's **app-lock PIN** (**Settings → General →
+Lock & Privacy**) and trade it for a ten-minute pass. Commands that only read
+(`logs`, `backup`, `tasks`, `quota`, `usage`) ask for it only when the app is
+locked. `status` never asks: it answers while the app is locked. The PIN is
+read from the terminal only — never from an argument, a variable or a pipe. A
+correct PIN also unlocks a locked app. After ten wrong PINs the app stops
+accepting it from the command line until it is typed on the app's own lock
+screen, or the app restarts.
+
+**Versions.** `pair` and `devices` need Actovia 2.1.0 or later; `status`,
+`lock`, `app quit` and `app restart` need 2.2.0. An older app is reported as
+too old, with where to get a newer one.
+
+## Updating the desktop app
+
+`actovia app check` says whether a newer Actovia is out. `actovia app update`
+(macOS, Apple silicon) downloads the release, checks it against the release's
+`SHA256SUMS` and its code signature, quits the app, swaps the new one in —
+putting the old one back if anything fails — and reopens it. A release without
+checksums changes nothing. On Windows the app updates itself; on Linux, install
+the new package from the [releases page](https://github.com/actovia-ai/actovia/releases/latest).
+
+Until Actovia's macOS builds are signed with a Developer ID, every new version
+is a new app to the Keychain: after an update macOS asks once, at the screen,
+for the login password to let it read "Actovia Safe Storage", and the app
+waits at that prompt until someone allows it.
+
+## Skills
+
+Skills install into `~/.actovia/skills/<slug>/`, the same directory the
+desktop app reads, so a skill installed here is available in the app at once,
+and the other way round. `actovia skills` alone opens an interactive browser;
+`search`, `install`, `list` and `uninstall` are for scripts, and take `--json`.
+
+## Updates
+
+`actovia update` installs the newest version the way the CLI was installed:
+through the same package manager (npm, Bun, pnpm or Yarn) for a global
+package, or, for a standalone binary, by replacing it with the new release's
+binary after checking it against the release's `SHA256SUMS` — a download that
+does not match, or a release without checksums, changes nothing.
+`actovia update --check` only reports.
+
+The CLI looks for a new version at most once a day, in the background, and
+mentions it under a command's output.
+
+## Environment
+
+| Variable                 | Default                         | Purpose                         |
+| ------------------------ | ------------------------------- | ------------------------------- |
+| `ACTOVIA_API_URL`        | `http://127.0.0.1:60223`        | The desktop app's API           |
+| `ACTOVIA_SKILLS_BFF_URL` | `https://skills-md.yancey.app`  | The skills.sh relay             |

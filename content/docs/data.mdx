@@ -1,0 +1,37 @@
+---
+title: Your data
+description: What Actovia keeps, where, and the one rule that protects it.
+---
+
+Everything Actovia knows lives in one directory on your computer:
+**`~/.actovia`**. Nothing is kept on a server of ours — the model providers
+see only the requests made with your own keys.
+
+| Path         | What it holds                                                      |
+| ------------ | ------------------------------------------------------------------ |
+| `database/`  | Chats, memories, settings and keys (an embedded Postgres, PGlite)  |
+| `backups/`   | Automatic database backups                                         |
+| `logs/`      | Structured logs, one JSONL file a day (also in **Settings → Logger**) |
+| `media/`     | Generated images, one folder per chat                              |
+| `workspace/` | Each chat's working folder for its file and shell tools            |
+| `groups/`    | Philharmonic Groups' working folders                               |
+| `skills/`    | Installed Agent Skills (shared with the CLI)                       |
+| `analytics/` | The snapshot **Settings → Developer → Chat Audit** queries         |
+| `lock.dat`   | The app-lock PIN, hashed and encrypted                             |
+| `tls/`       | The certificate paired phones pin                                  |
+
+Set `ACTOVIA_HOME` to run Actovia against another directory.
+
+## One process at a time
+
+The database is single-process. Never run two copies of Actovia against the
+same directory at once — a second launch hands over to the running app instead
+of opening the database itself.
+
+## Keys at rest
+
+API keys and other secrets are encrypted with a key held in the system
+keychain (**Actovia Safe Storage** on macOS) and are shown everywhere else —
+in Settings, to the iPhone app, in exports — only as a mask such as
+`•••• abcd`. Copying `~/.actovia` to another computer does not carry the
+keys: there you paste them in again once.
