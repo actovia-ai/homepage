@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/actovia-ai/homepage/compare/v1.1.0...v1.2.0) (2026-10-21)
+
+
+### Features
+
+* **site:** an itsaplan-style hero, an impeccable pass, and docs for every feature ([6051d66](https://github.com/actovia-ai/homepage/commit/6051d66fba1ff455ebdd65b438828eec12663dcc))
+
 # [1.1.0](https://github.com/actovia-ai/homepage/compare/v1.0.0...v1.1.0) (2026-10-21)
 
 
