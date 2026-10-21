@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/actovia-ai/homepage/compare/v1.0.0...v1.1.0) (2026-10-21)
+
+
+### Features
+
+* **docs:** fumadocs' spacious layout — sidebar sections with icons, Copy Markdown / Open, icon cards ([ae6c328](https://github.com/actovia-ai/homepage/commit/ae6c32888a6d2ebf44b48d639275ea95acb49595))
+
 # 1.0.0 (2026-10-21)
 
 
