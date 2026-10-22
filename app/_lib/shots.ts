@@ -88,6 +88,31 @@ export const SHOTS = {
     size: [1206, 2622],
     brief: 'Actovia for iPhone: Settings, showing models and providers.'
   },
+  sceneMemory: {
+    file: '/shots/scene-memory.png',
+    size: [1600, 1000],
+    brief: 'The memories an answer used, opened at the foot of a run.'
+  },
+  scenePhotos: {
+    file: '/shots/scene-photos.png',
+    size: [1600, 1000],
+    brief: 'A web search’s pictures under the answer, numbered with the sources.'
+  },
+  sceneCompare: {
+    file: '/shots/scene-compare.png',
+    size: [1600, 1000],
+    brief: 'Regenerate: two answers side by side, one to keep.'
+  },
+  sceneSkills: {
+    file: '/shots/scene-skills.png',
+    size: [1600, 1000],
+    brief: 'Settings → Skills Market: the skills.sh leaderboard.'
+  },
+  sceneQuickChat: {
+    file: '/shots/scene-quick-chat.png',
+    size: [1600, 1000],
+    brief: 'The quick-chat pill summoned from the menu bar.'
+  },
   chatAudit: {
     file: '/shots/chat-audit.png',
     size: [1600, 1200],

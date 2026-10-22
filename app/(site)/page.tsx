@@ -10,6 +10,7 @@ import { IPhone } from '@/app/_components/iphone'
 import { LocalNav } from '@/app/_components/local-nav'
 import { Privacy } from '@/app/_components/privacy'
 import { RunStory } from '@/app/_components/run-story'
+import { Scenes } from '@/app/_components/scenes'
 import { ShotsProvider } from '@/app/_components/shot'
 import { Specs } from '@/app/_components/specs'
 import { Terminal, Token } from '@/app/_components/terminal'
@@ -29,6 +30,7 @@ export default async function Page() {
       <main>
         <Hero macHref={downloads.mac.dmg} version={downloads.version} />
         <Highlights />
+        <Scenes />
         <RunStory />
         <FeaturePanel
           title="Ask once. Read the report."

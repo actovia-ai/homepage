@@ -169,6 +169,13 @@ by one-pixel rules rather than separated into floating cards.
 The world explicitly rejects the centred-icon, centred-headline,
 black-chapter Apple pastiche it replaced.
 
+One chapter moves with the scroll: **Scenes** (owner's ask, 2026-10-22). Its
+stage stays put while five screens pass through it, the copy drifting slower
+than the screen — the parallax of a product page, on this page's paper and
+left-set type, never on black. The motion is `transform` and `opacity` only,
+driven by one scroll-progress variable, and under `prefers-reduced-motion`
+the chapter is a plain stacked list.
+
 **Key Characteristics:**
 - Pale neutral ground and near-black ink; one sunflower accent as a marker.
 - Thin, large, left-set extra-condensed display type.
@@ -361,6 +368,9 @@ bottom-right corner. Keycaps carry a 3px bottom border as their only depth.
 - **Do** divide grouped items with a 1px hairline sheet rather than separate cards.
 - **Do** keep terminals black in both schemes and redefine tokens, not components, for dark mode.
 - **Do** ease everything with `cubic-bezier(0.23, 1, 0.32, 1)` and keep UI transitions at 150–360ms.
+- **Do** keep scroll-driven motion to the Scenes chapter: a sticky stage,
+  scenes moved in `transform`/`opacity` from one progress variable, the copy
+  slower than the screen, and a static list under reduced motion.
 
 ### Don't:
 - **Don't** centre the hero or chapter headings, or build black full-bleed
