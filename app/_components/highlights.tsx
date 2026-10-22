@@ -49,8 +49,9 @@ export function Highlights() {
 
           <Cell
             span="md:col-span-6 lg:col-span-5"
+            tag="Experimental"
             title="It can use your Mac."
-            body="Computer Use drives one app you have allowed, window by window. Press Option-Shift-Escape and it stops at once."
+            body="An early Computer Use drives one app you have allowed, window by window, while you watch. Press Option-Shift-Escape and it stops at once."
           >
             <div className="mt-8 flex items-center gap-2" aria-hidden>
               {['⌥', '⇧', 'esc'].map((k) => (
@@ -62,9 +63,6 @@ export function Highlights() {
                 </kbd>
               ))}
               <span className="text-graphite ml-2 text-sm">stops it</span>
-            </div>
-            <div className="mt-10 -mr-8 -mb-10 sm:-mr-12 sm:-mb-12">
-              <Shot spec={SHOTS.computerUse} tone="dark" />
             </div>
           </Cell>
 
@@ -186,12 +184,15 @@ export function Highlights() {
 }
 
 function Cell({
+  tag,
   title,
   body,
   span,
   className,
   children
 }: {
+  /** A small label over the title, e.g. "Experimental". */
+  tag?: string
   title: string
   body: string
   span: string
@@ -207,6 +208,11 @@ function Cell({
       )}
     >
       <div>
+        {tag && (
+          <span className="border-hairline text-graphite mb-4 inline-flex rounded-full border px-2.5 py-0.5 text-xs tracking-wide">
+            {tag}
+          </span>
+        )}
         <h3 className="type-tile max-w-[20ch]">{title}</h3>
         <p className="text-graphite mt-3 max-w-[46ch] font-light">{body}</p>
       </div>

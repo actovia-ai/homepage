@@ -71,12 +71,6 @@ export const SHOTS = {
     size: [1600, 1200],
     brief: 'An artifact rendered in its sandbox (a small HTML app or chart).'
   },
-  computerUse: {
-    file: '/shots/computer-use-dark.png',
-    size: [1600, 1200],
-    darkOnly: true,
-    brief: 'A computer_use step driving an allowlisted app window.' // capture in dark mode
-  },
   iphoneChat: {
     file: '/shots/iphone-chat.png',
     size: [1206, 2622],

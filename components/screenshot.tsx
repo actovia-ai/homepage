@@ -11,22 +11,26 @@ import { cn } from '@/lib/utils'
  * dashed frame showing the id and the brief; once the PNG is in
  * public/docs/shots/, pass `src="/docs/shots/<id>.png"` and it shows instead.
  */
-type Platform = 'desktop' | 'iphone'
+type Platform = 'desktop' | 'iphone' | 'macos'
 type Theme = 'light' | 'dark' | 'either'
 
 const FRAME: Record<Platform, string> = {
   desktop: 'aspect-[16/10] w-full',
-  iphone: 'aspect-[1206/2622] w-full max-w-[240px]'
+  iphone: 'aspect-[1206/2622] w-full max-w-[240px]',
+  // A crop of a macOS window (System Settings): shown at its own aspect.
+  macos: 'w-full max-w-[520px]'
 }
 
 const PLATFORM_LABEL: Record<Platform, string> = {
   desktop: 'Desktop',
-  iphone: 'iPhone'
+  iphone: 'iPhone',
+  macos: 'macOS'
 }
 
 const PLATFORM_ICON: Record<Platform, ReactNode> = {
   desktop: <Monitor className="size-3.5" aria-hidden />,
-  iphone: <Smartphone className="size-3.5" aria-hidden />
+  iphone: <Smartphone className="size-3.5" aria-hidden />,
+  macos: <Monitor className="size-3.5" aria-hidden />
 }
 
 export function Screenshot({
@@ -60,7 +64,8 @@ export function Screenshot({
           loading="lazy"
           className={cn(
             FRAME[platform],
-            'border-fd-border h-auto rounded-xl border object-cover'
+            'border-fd-border h-auto rounded-xl border',
+            platform === 'macos' ? 'object-contain' : 'object-cover'
           )}
         />
       ) : (

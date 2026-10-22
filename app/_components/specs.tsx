@@ -12,7 +12,7 @@ const SPECS: { label: string; value: React.ReactNode }[] = [
   {
     label: 'Built-in tools',
     value:
-      'Web search, web fetch, Deep Research, knowledge base search, read, write and edit files, find files, grep, list directories, terminal, artifacts, image generation, map itineraries, weather, memory updates, Computer Use (macOS), and context recall, expand, describe and search'
+      'Web search, web fetch, Deep Research, knowledge base search, read, write and edit files, find files, grep, list directories, terminal, artifacts, image generation, map itineraries, weather, memory updates, Computer Use (macOS, experimental), and context recall, expand, describe and search'
   },
   {
     label: 'Extensions',
