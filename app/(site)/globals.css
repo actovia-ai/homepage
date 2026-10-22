@@ -184,12 +184,13 @@
   while --p, written by the component from the chapter's scroll position
   (0 → 1), moves the scenes through it. --t is a scene's distance from the
   centre, in scenes: the screen travels 22vh per scene and the copy 10vh, so
-  the two drift apart — the parallax — and a scene is gone half a scene from
-  the centre, so two are never readable at once. Transform and opacity only, on the compositor.
+  the two drift apart — the parallax. A scene is whole within ±0.45 of the
+  centre and gone past ±0.8, so each one rests before the next comes; the
+  component eases --p toward the scroll, the damping. Transform and opacity only, on the compositor.
 */
 .scenes {
   --p: 0;
-  height: calc(var(--n) * 80vh + 60vh);
+  height: calc(var(--n) * 120vh + 60vh);
 }
 .scenes-stage {
   position: sticky;
@@ -201,7 +202,7 @@
 .scene-shot {
   --t: calc(var(--p) * (var(--n) - 1) - var(--i));
   --a: max(var(--t), calc(-1 * var(--t)));
-  --k: clamp(0, calc(1 - var(--a) * 2), 1);
+  --k: clamp(0, calc((0.8 - var(--a)) / 0.35), 1);
   position: absolute;
   inset: 0;
   opacity: var(--k);

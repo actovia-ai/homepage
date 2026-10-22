@@ -81,23 +81,35 @@ function useReducedMotion(): boolean {
   return reduced
 }
 
-/** Writes the chapter's scroll progress, 0 → 1, as `--p` on the section. */
+/**
+ * Writes the chapter's scroll progress, 0 → 1, as `--p` on the section — damped: `--p` eases toward where the
+ * scroll is a little each frame, so a flick of the trackpad does not throw a scene past (owner, 2026-10-22).
+ */
 function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
   useEffect(() => {
     const el = ref.current
     if (!el || !enabled) return
     let raf = 0
-    const read = () => {
-      raf = 0
+    let target = 0
+    let shown = -1
+    const measure = () => {
       const r = el.getBoundingClientRect()
       const range = r.height - window.innerHeight
-      const p = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0
-      el.style.setProperty('--p', p.toFixed(4))
+      target = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0
+    }
+    const step = () => {
+      raf = 0
+      if (shown < 0) shown = target
+      const diff = target - shown
+      shown = Math.abs(diff) < 0.0004 ? target : shown + diff * 0.18
+      el.style.setProperty('--p', shown.toFixed(4))
+      if (shown !== target) raf = requestAnimationFrame(step)
     }
     const tick = () => {
-      if (!raf) raf = requestAnimationFrame(read)
+      measure()
+      if (!raf) raf = requestAnimationFrame(step)
     }
-    read()
+    tick()
     window.addEventListener('scroll', tick, { passive: true })
     window.addEventListener('resize', tick)
     return () => {
