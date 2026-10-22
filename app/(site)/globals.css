@@ -218,9 +218,36 @@
     scale(calc(1 - 0.06 * min(var(--a), 1)));
 }
 
+/*
+  Reveal: a section's blocks fade and rise into view as they arrive
+  (smooth-scroll.tsx marks them). Siblings a beat apart; once in, in.
+*/
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 70ms);
+}
+[data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Lenis smooths the scroll; the browser's own smoothing would fight it. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   *,
   *::before,

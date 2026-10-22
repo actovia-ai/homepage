@@ -2,6 +2,8 @@
 
 import { type CSSProperties, useEffect, useRef, useState } from 'react'
 
+import { useLenis } from 'lenis/react'
+
 import { Shot } from '@/app/_components/shot'
 import { SHOTS, type ShotSpec } from '@/app/_lib/shots'
 
@@ -90,7 +92,9 @@ function useReducedMotion(): boolean {
  * fingers are back on the trackpad (a touch ends the momentum, and a swipe's deltas ramp up). A new gesture during a move is kept and made once the
  * move ends, so two quick swipes are two scenes, in order. A long flick changes one scene. At the first scene
  * scrolling up, and at the last scrolling down, nothing is intercepted: the page leaves the chapter as it
- * entered it.
+ * entered it. The page scrolls under Lenis (smooth-scroll.tsx): while the stage is pinned `<html>` carries
+ * `data-scenes-pinned` and Lenis leaves the wheel to this hook; on the way in, Lenis's own momentum is cut at
+ * the scene edge it reached, and the gesture that brought the page in is spent.
  */
 const MOVE_MS = 450
 /** Wheel events this far apart belong to different gestures. */
@@ -99,13 +103,19 @@ const WHEEL_STEP = 20
 const SWIPE_STEP = 24
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
 
-function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
+function useChapterScenes(
+  ref: React.RefObject<HTMLElement | null>,
+  enabled: boolean,
+  lenis: { scrollTo: (target: number, options?: { immediate?: boolean }) => void } | undefined
+) {
   useEffect(() => {
     const el = ref.current
     if (!el || !enabled) return
     const n = SCENES.length
     let raf = 0
     let lockedUntil = 0
+    /** A move is running (its frames); only then is a new gesture kept for after it. */
+    let moving = false
     let wheelSum = 0
     let lastWheelAt = 0
     let lastDelta = 0
@@ -131,12 +141,31 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       const r = el.getBoundingClientRect()
       return r.top <= 1 && r.bottom >= window.innerHeight - 1
     }
+    let wasPinned = false
+    /** Tells Lenis; on the way in, lands on the scene edge the page reached and spends the gesture that brought it. */
+    const syncPinned = () => {
+      const now = pinned()
+      if (now === wasPinned) return
+      wasPinned = now
+      document.documentElement.toggleAttribute('data-scenes-pinned', now)
+      if (!now) return
+      const { top, range, p } = geometry()
+      const scene = p < 0.5 ? 0 : n - 1
+      const y = top + (scene / (n - 1)) * range
+      if (lenis) lenis.scrollTo(y, { immediate: true })
+      else window.scrollTo({ top: y, behavior: 'instant' })
+      spent = true
+      pending = 0
+      lockedUntil = performance.now() + 300
+      paint()
+    }
     const moveTo = (scene: number) => {
       const { top, range } = geometry()
       const from = window.scrollY
       const to = top + (scene / (n - 1)) * range
       const started = performance.now()
       lockedUntil = started + MOVE_MS
+      moving = true
       cancelAnimationFrame(raf)
       const frame = (now: number) => {
         const k = Math.min(1, Math.max(0, (now - started) / MOVE_MS))
@@ -144,34 +173,47 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
         window.scrollTo({ top: from + (to - from) * easeOut(k), behavior: 'instant' })
         paint()
         if (k < 1) raf = requestAnimationFrame(frame)
-        else if (pending) {
-          const direction = pending
-          pending = 0
-          step(direction)
+        else {
+          moving = false
+          if (pending) {
+            const direction = pending
+            pending = 0
+            step(direction)
+          }
         }
       }
       raf = requestAnimationFrame(frame)
     }
-    /** A gesture in `direction` (1 down, -1 up): handled — and swallowed — unless it leaves the chapter. */
+    /**
+     * A gesture in `direction` (1 down, -1 up): handled — and swallowed — unless it leaves the chapter, in
+     * which case the pin is given up at once so Lenis takes this very event (its listener runs after this one).
+     */
     const step = (direction: 1 | -1): boolean => {
       if (!pinned()) return false
       if (performance.now() < lockedUntil) return true
       const current = Math.round(geometry().p * (n - 1))
       const next = current + direction
-      if (next < 0 || next > n - 1) return false
+      if (next < 0 || next > n - 1) {
+        wasPinned = false
+        document.documentElement.removeAttribute('data-scenes-pinned')
+        return false
+      }
       moveTo(next)
       return true
     }
 
     const onWheel = (e: WheelEvent) => {
-      if (!pinned()) return
+      // Entry is settled here too: at the pin moment a wheel event can land before the scroll event does.
+      syncPinned()
+      // The stream is read whether or not the stage is pinned, so the gesture that brings the page in is
+      // known as one gesture once it is.
       const now = performance.now()
       const delta = e.deltaY
       const abs = Math.abs(delta)
       const gap = now - lastWheelAt
       lastWheelAt = now
       if (abs === 0) {
-        if (spent || now < lockedUntil) e.preventDefault()
+        if (pinned() && (spent || now < lockedUntil)) e.preventDefault()
         return
       }
       const lastAbs = Math.abs(lastDelta)
@@ -182,12 +224,13 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       // After a pause, the other way, or louder after decay: the fingers are back.
       const fresh = gap > QUIET_MS || Math.sign(delta) !== Math.sign(lastDelta) || grows
       lastDelta = delta
+      if (!pinned()) return
       if (fresh) {
         wheelSum = 0
         spent = false
       }
       if (now < lockedUntil) {
-        if (fresh && abs >= WHEEL_STEP) {
+        if (moving && fresh && abs >= WHEEL_STEP) {
           pending = delta > 0 ? 1 : -1
           spent = true
         }
@@ -235,10 +278,12 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       if (step(down ? 1 : -1)) e.preventDefault()
     }
     const onScroll = () => {
+      syncPinned()
       if (performance.now() >= lockedUntil) paint()
     }
 
     paint()
+    syncPinned()
     window.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('touchstart', onTouchStart, { passive: true })
     window.addEventListener('touchmove', onTouchMove, { passive: false })
@@ -253,14 +298,16 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', paint)
       cancelAnimationFrame(raf)
+      document.documentElement.removeAttribute('data-scenes-pinned')
     }
-  }, [ref, enabled])
+  }, [ref, enabled, lenis])
 }
 
 export function Scenes() {
   const chapter = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
-  useChapterScenes(chapter, !reduced)
+  const lenis = useLenis()
+  useChapterScenes(chapter, !reduced, lenis)
 
   if (reduced) {
     return (

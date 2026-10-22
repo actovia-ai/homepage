@@ -52,13 +52,13 @@ export function IPhone() {
               }
             >
               <h3 className="type-tile">{s.title}</h3>
-              <p className="text-graphite mt-2 max-w-[32ch] font-light">
+              <p className="text-graphite mt-2 mb-6 max-w-[32ch] font-light">
                 {s.body}
               </p>
               {/* The phones sit on one line whatever the copy's height. */}
               <PhoneShot
                 spec={s.shot}
-                className="mx-auto mt-auto w-full max-w-[280px] pt-10"
+                className="mx-auto mt-auto w-full max-w-[280px]"
               />
             </li>
           ))}

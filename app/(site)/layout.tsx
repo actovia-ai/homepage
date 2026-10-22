@@ -5,6 +5,8 @@ import {
   Sofia_Sans,
   Sofia_Sans_Extra_Condensed
 } from 'next/font/google'
+import { SmoothScroll } from '@/app/_components/smooth-scroll'
+
 import './globals.css'
 
 // The wordmark face — the same Fredoka the app icon's social card uses. Only
@@ -59,7 +61,9 @@ export default function RootLayout({
       lang="en"
       className={`${fredoka.variable} ${display.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   )
 }

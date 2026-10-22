@@ -372,6 +372,10 @@ bottom-right corner. Keycaps carry a 3px bottom border as their only depth.
   scenes moved in `transform`/`opacity` from one progress variable, the copy
   slower than the screen, one gesture per scene, and a static list under
   reduced motion.
+- **Do** let the page scroll under Lenis (`smooth-scroll.tsx`: 1.2 s
+  ease-out per gesture) and let a section's blocks fade and rise into view
+  once, 700 ms, siblings 70 ms apart (`[data-reveal]`); never animate a
+  block that is already on screen at load, and never under reduced motion.
 
 ### Don't:
 - **Don't** centre the hero or chapter headings, or build black full-bleed

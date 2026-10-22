@@ -9,7 +9,7 @@ import type { Downloads } from '@/app/_lib/release'
 import { RELEASES_URL } from '@/app/_lib/release'
 import { cn } from '@/lib/utils'
 
-type Platform = 'mac' | 'windows' | 'linux' | 'cli'
+type Platform = 'mac' | 'windows' | 'linux' | 'cli' | 'iphone'
 
 /**
  * The close: what to do, in order. The first step is open, with a tab per
@@ -24,7 +24,8 @@ export function Download({ downloads }: { downloads: Downloads }) {
     { id: 'mac', label: 'macOS' },
     { id: 'windows', label: 'Windows' },
     { id: 'linux', label: 'Linux' },
-    { id: 'cli', label: 'CLI' }
+    { id: 'cli', label: 'CLI' },
+    { id: 'iphone', label: 'iPhone' }
   ]
 
   return (
@@ -131,6 +132,29 @@ export function Download({ downloads }: { downloads: Downloads }) {
                       }}
                       secondary={{ label: '.rpm', href: downloads.linux.rpm }}
                     />
+                  </>
+                )}
+                {platform === 'iphone' && (
+                  <>
+                    <p className="text-graphite max-w-[56ch] font-light">
+                      Actovia for iPhone is on its way to the App Store. It
+                      pairs with the Mac app, which works on its own until then.
+                    </p>
+                    {/* Until the App Store listing exists: the badge's place, not a link. */}
+                    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                      <span
+                        aria-disabled
+                        className="border-hairline text-graphite inline-flex items-center gap-3 rounded-[3px] border border-dashed px-5 py-3 font-medium"
+                      >
+                        Coming to the App Store
+                      </span>
+                      <Link
+                        href="/docs/iphone"
+                        className="text-graphite hover:text-ink text-sm underline"
+                      >
+                        What the iPhone app does
+                      </Link>
+                    </div>
                   </>
                 )}
                 {platform === 'cli' && (
