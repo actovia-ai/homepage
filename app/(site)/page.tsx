@@ -38,7 +38,6 @@ export default async function Page() {
           shot={SHOTS.deepResearch}
         />
         <FeaturePanel
-          tone="dark"
           flip
           title="Hire a team."
           body="Philharmonic puts agents into groups, each with its own role, memory and workspace. Hand them a task now, or give them a schedule: every weekday at nine, or once on Friday."

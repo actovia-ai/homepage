@@ -61,10 +61,9 @@ export const SHOTS = {
     brief: 'A Deep Research report open, with its progress and cited sources.'
   },
   philharmonic: {
-    file: '/shots/philharmonic-dark.png',
+    file: '/shots/philharmonic.png',
     size: [2880, 1800],
-    darkOnly: true,
-    brief: 'Philharmonic: a group of agents on a task, plus the Schedule tab.' // capture in dark mode
+    brief: 'Philharmonic: a group of agents on a task, plus the Schedule tab.'
   },
   artifacts: {
     file: '/shots/artifacts.png',
