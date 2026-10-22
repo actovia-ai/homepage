@@ -5,7 +5,7 @@ const SCREENS = [
   {
     shot: SHOTS.iphoneChat,
     title: 'Chat',
-    body: 'Your conversations, streamed from your computer with every tool card and source.'
+    body: 'Your conversations, streamed from your computer with every tool card and source — a three-day plan on a map, here.'
   },
   {
     shot: SHOTS.iphoneControl,
@@ -55,9 +55,10 @@ export function IPhone() {
               <p className="text-graphite mt-2 max-w-[32ch] font-light">
                 {s.body}
               </p>
+              {/* The phones sit on one line whatever the copy's height. */}
               <PhoneShot
                 spec={s.shot}
-                className="mx-auto mt-10 w-full max-w-[280px]"
+                className="mx-auto mt-auto w-full max-w-[280px] pt-10"
               />
             </li>
           ))}

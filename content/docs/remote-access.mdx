@@ -30,8 +30,43 @@ The computer keeps only a hash of the phone's token.
 
 At home the phone finds the computer on the local network. Away from home,
 put both on the same [Tailscale](https://tailscale.com) network: the phone
-reaches the same listener through the computer's Tailscale address, with the
+reaches the same listener through the computer's Tailscale name, with the
 same pairing.
+
+### Setting up Tailscale
+
+1. Install Tailscale on the computer and on the iPhone, and sign both into the
+   same tailnet (the same account).
+2. In the Tailscale admin console, under **DNS**, keep **MagicDNS** on. A
+   pairing link names the computer by its MagicDNS name
+   (`computer.tailnet.ts.net`), never by its bare `100.x` address — iOS trusts
+   the computer's self-signed certificate only for a name — so with MagicDNS
+   off the link holds the local addresses alone, and the phone reaches the
+   computer at home only.
+3. Pair as above. The link carries both the local addresses and the Tailscale
+   name; the phone tries them in order and keeps the one that answered last, so
+   the same pairing works on the sofa and across town.
+
+Nothing else changes: the listener, the port, the certificate the phone pinned
+and the token are the same on both networks.
+
+### Keep the computer awake
+
+The phone can only reach a computer that is running Actovia and not asleep.
+Actovia does not keep the Mac awake by itself, so for use away from home:
+
+- **A desktop Mac**, or a laptop on power with the lid open: in **System
+  Settings → Energy** (on a laptop, under **Options**), turn on **Prevent
+  automatic sleeping when the display is off**. The display can still sleep;
+  the computer keeps answering.
+- **A laptop with the lid closed** sleeps unless it is on power with an
+  external display, or kept awake by a tool such as `caffeinate` from a
+  terminal (`caffeinate -s` while on power) or a utility like Amphetamine.
+- **Wake for network access** does not help here: it answers the Mac's own
+  Bonjour services, not an HTTPS listener, and not over Tailscale.
+
+Lock the app rather than the computer if you want it unattended: a paired
+phone unlocks it with its own Face ID ([a locked app](#a-locked-app)).
 
 ## Unpairing
 

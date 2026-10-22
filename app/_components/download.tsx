@@ -167,7 +167,22 @@ export function Download({ downloads }: { downloads: Downloads }) {
             <Disclosure n={3} title="Pair your iPhone">
               In Settings → Integrations → Devices, start pairing and scan the
               QR code with Actovia for iPhone. It works on your own network, and
-              the phone verifies the computer before it sends anything.
+              the phone verifies the computer before it sends anything. Away
+              from home, put both on one{' '}
+              <a
+                href="https://tailscale.com"
+                className="text-ink underline decoration-hairline underline-offset-4 hover:decoration-ink"
+              >
+                Tailscale
+              </a>{' '}
+              network with MagicDNS on, and keep the computer from sleeping —{' '}
+              <Link
+                href="/docs/remote-access#from-anywhere"
+                className="text-ink underline decoration-hairline underline-offset-4 hover:decoration-ink"
+              >
+                how to set it up
+              </Link>
+              .
             </Disclosure>
           </li>
         </ol>

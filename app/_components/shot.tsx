@@ -195,8 +195,6 @@ export function PhoneShot({
             </div>
           </div>
         )}
-        {/* The Dynamic Island, over the screen as on the device. */}
-        <i className="absolute top-[1.6%] left-1/2 h-[3.6%] w-[31%] -translate-x-1/2 rounded-full bg-black" />
       </div>
     </div>
   )

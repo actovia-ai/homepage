@@ -81,7 +81,6 @@ export function Screenshot({
           )}
         >
           {dark && <source srcSet={dark} media="(prefers-color-scheme: dark)" />}
-          {/* eslint-disable-next-line @next/next/no-img-element -- static captures of known size, no optimisation needed */}
           <img
             src={src}
             alt={caption}
