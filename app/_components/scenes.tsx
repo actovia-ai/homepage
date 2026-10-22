@@ -83,19 +83,31 @@ function useReducedMotion(): boolean {
 
 /**
  * Writes the chapter's scroll progress, 0 → 1, as `--p` on the section — damped: `--p` eases toward where the
- * scroll is a little each frame, so a flick of the trackpad does not throw a scene past (owner, 2026-10-22).
+ * scroll is a little each frame, so a flick of the trackpad does not throw a scene past — and snaps: once the
+ * scroll has come to rest, the page finishes the move to a whole scene. Past 30 % of the way to the next scene
+ * in the direction of travel it goes on to that scene; short of it, back to the one it left (owner,
+ * 2026-10-22). So the chapter never rests on two scenes at once.
  */
+const SNAP_THRESHOLD = 0.3
+
 function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
   useEffect(() => {
     const el = ref.current
     if (!el || !enabled) return
+    const n = SCENES.length
     let raf = 0
     let target = 0
     let shown = -1
+    let settle = 0
+    let lastY = window.scrollY
+    let direction = 1
+    let snapping = false
+
     const measure = () => {
       const r = el.getBoundingClientRect()
       const range = r.height - window.innerHeight
       target = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0
+      return { top: r.top + window.scrollY, range }
     }
     const step = () => {
       raf = 0
@@ -105,9 +117,36 @@ function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: b
       el.style.setProperty('--p', shown.toFixed(4))
       if (shown !== target) raf = requestAnimationFrame(step)
     }
+    // At rest inside the chapter: finish the move to a whole scene.
+    const snap = () => {
+      settle = 0
+      const { top, range } = measure()
+      if (range <= 0 || target <= 0 || target >= 1) return
+      const x = target * (n - 1)
+      const from = direction > 0 ? Math.floor(x) : Math.ceil(x)
+      const travelled = Math.abs(x - from)
+      const to = travelled > SNAP_THRESHOLD ? from + direction : from
+      const scene = Math.min(n - 1, Math.max(0, to))
+      const y = top + (scene / (n - 1)) * range
+      if (Math.abs(window.scrollY - y) < 2) return
+      snapping = true
+      window.scrollTo({ top: y, behavior: 'smooth' })
+    }
     const tick = () => {
+      const y = window.scrollY
+      if (y !== lastY) direction = y > lastY ? 1 : -1
+      lastY = y
       measure()
       if (!raf) raf = requestAnimationFrame(step)
+      window.clearTimeout(settle)
+      if (snapping) {
+        // The smooth scroll's own events: it is over once they stop.
+        settle = window.setTimeout(() => {
+          snapping = false
+        }, 160)
+        return
+      }
+      settle = window.setTimeout(snap, 140)
     }
     tick()
     window.addEventListener('scroll', tick, { passive: true })
@@ -115,6 +154,7 @@ function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: b
     return () => {
       window.removeEventListener('scroll', tick)
       window.removeEventListener('resize', tick)
+      window.clearTimeout(settle)
       cancelAnimationFrame(raf)
     }
   }, [ref, enabled])
