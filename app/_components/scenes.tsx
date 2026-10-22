@@ -84,13 +84,15 @@ function useReducedMotion(): boolean {
 /**
  * One gesture, one scene (owner, 2026-10-22). While the chapter's stage is pinned, a wheel tick, a swipe or an
  * arrow key moves the page to the next or previous scene — `--p` follows the eased move — and every input
- * until that move is over (plus a moment for a trackpad's inertia) is swallowed, so a long flick still changes
- * one scene. At the first scene scrolling up, and at the last scrolling down, nothing is intercepted: the
- * page leaves the chapter as it entered it.
+ * until that move is over is swallowed — and so is the rest of the gesture: a trackpad's inertia keeps sending
+ * wheel events for a second or two after the fingers lift, so the lock holds while the events keep coming and
+ * a new gesture is one that starts after a pause. A long flick changes one scene. At the first scene scrolling
+ * up, and at the last scrolling down, nothing is intercepted: the page leaves the chapter as it entered it.
  */
 const MOVE_MS = 450
-const SETTLE_MS = 220
-const WHEEL_STEP = 12
+/** Wheel events this far apart belong to different gestures. */
+const QUIET_MS = 140
+const WHEEL_STEP = 20
 const SWIPE_STEP = 24
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
 
@@ -102,6 +104,7 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
     let raf = 0
     let lockedUntil = 0
     let wheelSum = 0
+    let lastWheelAt = 0
     let touchY: number | null = null
 
     const geometry = () => {
@@ -123,7 +126,7 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       const from = window.scrollY
       const to = top + (scene / (n - 1)) * range
       const started = performance.now()
-      lockedUntil = started + MOVE_MS + SETTLE_MS
+      lockedUntil = started + MOVE_MS
       cancelAnimationFrame(raf)
       const frame = (now: number) => {
         const k = Math.min(1, Math.max(0, (now - started) / MOVE_MS))
@@ -147,10 +150,16 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
 
     const onWheel = (e: WheelEvent) => {
       if (!pinned()) return
-      if (performance.now() < lockedUntil) {
+      const now = performance.now()
+      const paused = now - lastWheelAt > QUIET_MS
+      lastWheelAt = now
+      if (now < lockedUntil) {
+        // Still the gesture that moved us (or its inertia): the lock lives as long as the events keep coming.
+        lockedUntil = Math.max(lockedUntil, now + QUIET_MS)
         e.preventDefault()
         return
       }
+      if (paused) wheelSum = 0
       wheelSum += e.deltaY
       if (Math.abs(wheelSum) < WHEEL_STEP) {
         e.preventDefault()
