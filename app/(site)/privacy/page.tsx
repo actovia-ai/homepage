@@ -265,7 +265,11 @@ const SECTIONS: { id: string; title: string; body: React.ReactNode }[] = [
           <a href={`${REPO_URL}/issues`} className="text-ink underline">
             the project&rsquo;s issue tracker
           </a>{' '}
-          or to the maintainer by email.{' '}
+          or to{' '}
+          <a href="mailto:developer@yanceyleo.com" className="text-ink underline">
+            developer@yanceyleo.com
+          </a>
+          .{' '}
           <Link href="/" className="text-ink underline">
             Back to Actovia
           </Link>
