@@ -82,79 +82,129 @@ function useReducedMotion(): boolean {
 }
 
 /**
- * Writes the chapter's scroll progress, 0 → 1, as `--p` on the section — damped: `--p` eases toward where the
- * scroll is a little each frame, so a flick of the trackpad does not throw a scene past — and snaps: once the
- * scroll has come to rest, the page finishes the move to a whole scene. Past 30 % of the way to the next scene
- * in the direction of travel it goes on to that scene; short of it, back to the one it left (owner,
- * 2026-10-22). So the chapter never rests on two scenes at once.
+ * One gesture, one scene (owner, 2026-10-22). While the chapter's stage is pinned, a wheel tick, a swipe or an
+ * arrow key moves the page to the next or previous scene — `--p` follows the eased move — and every input
+ * until that move is over (plus a moment for a trackpad's inertia) is swallowed, so a long flick still changes
+ * one scene. At the first scene scrolling up, and at the last scrolling down, nothing is intercepted: the
+ * page leaves the chapter as it entered it.
  */
-const SNAP_THRESHOLD = 0.3
+const MOVE_MS = 450
+const SETTLE_MS = 220
+const WHEEL_STEP = 12
+const SWIPE_STEP = 24
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
 
-function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
+function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boolean) {
   useEffect(() => {
     const el = ref.current
     if (!el || !enabled) return
     const n = SCENES.length
     let raf = 0
-    let target = 0
-    let shown = -1
-    let settle = 0
-    let lastY = window.scrollY
-    let direction = 1
-    let snapping = false
+    let lockedUntil = 0
+    let wheelSum = 0
+    let touchY: number | null = null
 
-    const measure = () => {
+    const geometry = () => {
       const r = el.getBoundingClientRect()
       const range = r.height - window.innerHeight
-      target = range > 0 ? Math.min(1, Math.max(0, -r.top / range)) : 0
-      return { top: r.top + window.scrollY, range }
+      return { top: r.top + window.scrollY, range, p: range > 0 ? -r.top / range : 0 }
     }
-    const step = () => {
-      raf = 0
-      if (shown < 0) shown = target
-      const diff = target - shown
-      shown = Math.abs(diff) < 0.0004 ? target : shown + diff * 0.18
-      el.style.setProperty('--p', shown.toFixed(4))
-      if (shown !== target) raf = requestAnimationFrame(step)
+    const paint = () => {
+      const { p } = geometry()
+      el.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(4))
     }
-    // At rest inside the chapter: finish the move to a whole scene.
-    const snap = () => {
-      settle = 0
-      const { top, range } = measure()
-      if (range <= 0 || target <= 0 || target >= 1) return
-      const x = target * (n - 1)
-      const from = direction > 0 ? Math.floor(x) : Math.ceil(x)
-      const travelled = Math.abs(x - from)
-      const to = travelled > SNAP_THRESHOLD ? from + direction : from
-      const scene = Math.min(n - 1, Math.max(0, to))
-      const y = top + (scene / (n - 1)) * range
-      if (Math.abs(window.scrollY - y) < 2) return
-      snapping = true
-      window.scrollTo({ top: y, behavior: 'smooth' })
+    /** The stage is pinned: the chapter spans the viewport. */
+    const pinned = () => {
+      const r = el.getBoundingClientRect()
+      return r.top <= 1 && r.bottom >= window.innerHeight - 1
     }
-    const tick = () => {
-      const y = window.scrollY
-      if (y !== lastY) direction = y > lastY ? 1 : -1
-      lastY = y
-      measure()
-      if (!raf) raf = requestAnimationFrame(step)
-      window.clearTimeout(settle)
-      if (snapping) {
-        // The smooth scroll's own events: it is over once they stop.
-        settle = window.setTimeout(() => {
-          snapping = false
-        }, 160)
+    const moveTo = (scene: number) => {
+      const { top, range } = geometry()
+      const from = window.scrollY
+      const to = top + (scene / (n - 1)) * range
+      const started = performance.now()
+      lockedUntil = started + MOVE_MS + SETTLE_MS
+      cancelAnimationFrame(raf)
+      const frame = (now: number) => {
+        const k = Math.min(1, Math.max(0, (now - started) / MOVE_MS))
+        // `instant`: the root's `scroll-behavior: smooth` would turn each frame into a smooth scroll of its own.
+        window.scrollTo({ top: from + (to - from) * easeOut(k), behavior: 'instant' })
+        paint()
+        if (k < 1) raf = requestAnimationFrame(frame)
+      }
+      raf = requestAnimationFrame(frame)
+    }
+    /** A gesture in `direction` (1 down, -1 up): handled — and swallowed — unless it leaves the chapter. */
+    const step = (direction: 1 | -1): boolean => {
+      if (!pinned()) return false
+      if (performance.now() < lockedUntil) return true
+      const current = Math.round(geometry().p * (n - 1))
+      const next = current + direction
+      if (next < 0 || next > n - 1) return false
+      moveTo(next)
+      return true
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      if (!pinned()) return
+      if (performance.now() < lockedUntil) {
+        e.preventDefault()
         return
       }
-      settle = window.setTimeout(snap, 140)
+      wheelSum += e.deltaY
+      if (Math.abs(wheelSum) < WHEEL_STEP) {
+        e.preventDefault()
+        return
+      }
+      const direction = wheelSum > 0 ? 1 : -1
+      wheelSum = 0
+      if (step(direction)) e.preventDefault()
     }
-    tick()
-    window.addEventListener('scroll', tick, { passive: true })
-    window.addEventListener('resize', tick)
+    const onTouchStart = (e: TouchEvent) => {
+      touchY = e.touches[0]?.clientY ?? null
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchY === null || !pinned()) return
+      if (performance.now() < lockedUntil) {
+        e.preventDefault()
+        return
+      }
+      const y = e.touches[0]?.clientY ?? touchY
+      const delta = touchY - y
+      if (Math.abs(delta) < SWIPE_STEP) return
+      touchY = null
+      if (step(delta > 0 ? 1 : -1)) e.preventDefault()
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      const target = e.target as HTMLElement | null
+      if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return
+      const down = e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)
+      const up = e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)
+      if (!down && !up) return
+      if (step(down ? 1 : -1)) e.preventDefault()
+    }
+    const onScroll = () => {
+      if (performance.now() >= lockedUntil) {
+        wheelSum = 0
+        paint()
+      }
+    }
+
+    paint()
+    window.addEventListener('wheel', onWheel, { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: false })
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', paint)
     return () => {
-      window.removeEventListener('scroll', tick)
-      window.removeEventListener('resize', tick)
-      window.clearTimeout(settle)
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', paint)
       cancelAnimationFrame(raf)
     }
   }, [ref, enabled])
@@ -163,7 +213,7 @@ function useChapterProgress(ref: React.RefObject<HTMLElement | null>, enabled: b
 export function Scenes() {
   const chapter = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
-  useChapterProgress(chapter, !reduced)
+  useChapterScenes(chapter, !reduced)
 
   if (reduced) {
     return (

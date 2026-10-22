@@ -370,7 +370,8 @@ bottom-right corner. Keycaps carry a 3px bottom border as their only depth.
 - **Do** ease everything with `cubic-bezier(0.23, 1, 0.32, 1)` and keep UI transitions at 150–360ms.
 - **Do** keep scroll-driven motion to the Scenes chapter: a sticky stage,
   scenes moved in `transform`/`opacity` from one progress variable, the copy
-  slower than the screen, and a static list under reduced motion.
+  slower than the screen, one gesture per scene, and a static list under
+  reduced motion.
 
 ### Don't:
 - **Don't** centre the hero or chapter headings, or build black full-bleed
