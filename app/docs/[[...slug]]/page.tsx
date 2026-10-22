@@ -22,8 +22,8 @@ export default async function Page(props: Props) {
   if (!page) notFound()
 
   const MDX = page.data.body
-  // The page as Markdown, for an agent or a chat (app/llms.mdx, rewritten from `<page>.mdx`).
-  const markdownUrl = `${page.url}.mdx`
+  // The page as Markdown, for an agent or a chat (app/llms.mdx, rewritten from `<page>.md`).
+  const markdownUrl = `${page.url}.md`
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
