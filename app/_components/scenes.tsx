@@ -85,9 +85,12 @@ function useReducedMotion(): boolean {
  * One gesture, one scene (owner, 2026-10-22). While the chapter's stage is pinned, a wheel tick, a swipe or an
  * arrow key moves the page to the next or previous scene — `--p` follows the eased move — and every input
  * until that move is over is swallowed — and so is the rest of the gesture: a trackpad's inertia keeps sending
- * wheel events for a second or two after the fingers lift, so the lock holds while the events keep coming and
- * a new gesture is one that starts after a pause. A long flick changes one scene. At the first scene scrolling
- * up, and at the last scrolling down, nothing is intercepted: the page leaves the chapter as it entered it.
+ * wheel events for a second or two after the fingers lift, with deltas that only decay. A new gesture is one
+ * that starts after a pause, one that turns round, or one whose deltas grow again after a run of decay — the
+ * fingers are back on the trackpad (a touch ends the momentum, and a swipe's deltas ramp up). A new gesture during a move is kept and made once the
+ * move ends, so two quick swipes are two scenes, in order. A long flick changes one scene. At the first scene
+ * scrolling up, and at the last scrolling down, nothing is intercepted: the page leaves the chapter as it
+ * entered it.
  */
 const MOVE_MS = 450
 /** Wheel events this far apart belong to different gestures. */
@@ -105,6 +108,13 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
     let lockedUntil = 0
     let wheelSum = 0
     let lastWheelAt = 0
+    let lastDelta = 0
+    /** Consecutive wheel events quieter than the one before: inertia decaying. */
+    let decay = 0
+    /** The gesture under way has had its scene. */
+    let spent = false
+    /** A gesture that began during a move: made when the move ends. */
+    let pending: 1 | -1 | 0 = 0
     let touchY: number | null = null
 
     const geometry = () => {
@@ -134,6 +144,11 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
         window.scrollTo({ top: from + (to - from) * easeOut(k), behavior: 'instant' })
         paint()
         if (k < 1) raf = requestAnimationFrame(frame)
+        else if (pending) {
+          const direction = pending
+          pending = 0
+          step(direction)
+        }
       }
       raf = requestAnimationFrame(frame)
     }
@@ -151,23 +166,49 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
     const onWheel = (e: WheelEvent) => {
       if (!pinned()) return
       const now = performance.now()
-      const paused = now - lastWheelAt > QUIET_MS
+      const delta = e.deltaY
+      const abs = Math.abs(delta)
+      const gap = now - lastWheelAt
       lastWheelAt = now
+      if (abs === 0) {
+        if (spent || now < lockedUntil) e.preventDefault()
+        return
+      }
+      const lastAbs = Math.abs(lastDelta)
+      // Growing again after decaying: a swipe's ramp, not inertia.
+      const grows = abs > lastAbs * 1.3 + 3 && decay >= 2
+      if (abs < lastAbs) decay += 1
+      else if (abs > lastAbs) decay = 0
+      // After a pause, the other way, or louder after decay: the fingers are back.
+      const fresh = gap > QUIET_MS || Math.sign(delta) !== Math.sign(lastDelta) || grows
+      lastDelta = delta
+      if (fresh) {
+        wheelSum = 0
+        spent = false
+      }
       if (now < lockedUntil) {
-        // Still the gesture that moved us (or its inertia): the lock lives as long as the events keep coming.
-        lockedUntil = Math.max(lockedUntil, now + QUIET_MS)
+        if (fresh && abs >= WHEEL_STEP) {
+          pending = delta > 0 ? 1 : -1
+          spent = true
+        }
         e.preventDefault()
         return
       }
-      if (paused) wheelSum = 0
-      wheelSum += e.deltaY
+      if (spent) {
+        e.preventDefault()
+        return
+      }
+      wheelSum += delta
       if (Math.abs(wheelSum) < WHEEL_STEP) {
         e.preventDefault()
         return
       }
       const direction = wheelSum > 0 ? 1 : -1
       wheelSum = 0
-      if (step(direction)) e.preventDefault()
+      if (step(direction)) {
+        spent = true
+        e.preventDefault()
+      }
     }
     const onTouchStart = (e: TouchEvent) => {
       touchY = e.touches[0]?.clientY ?? null
@@ -194,10 +235,7 @@ function useChapterScenes(ref: React.RefObject<HTMLElement | null>, enabled: boo
       if (step(down ? 1 : -1)) e.preventDefault()
     }
     const onScroll = () => {
-      if (performance.now() >= lockedUntil) {
-        wheelSum = 0
-        paint()
-      }
+      if (performance.now() >= lockedUntil) paint()
     }
 
     paint()
