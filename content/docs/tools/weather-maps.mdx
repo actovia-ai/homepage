@@ -29,7 +29,8 @@ whether it is **Open** now. **Open route in Google Maps** hands the day's route
 to Google Maps, and **Copy day as markdown** copies the plan.
 
 The map uses Google Maps and Places with your own key: add a **Google API Key**
-under **Settings → Built-in Tools → Map Itinerary**.
+under **Settings → Built-in Tools → Map Itinerary**. [Getting API keys](/docs/api-keys#google-maps-and-places)
+walks through creating one.
 
 <Screenshot
   id="tool-map-itinerary"
@@ -37,3 +38,23 @@ under **Settings → Built-in Tools → Map Itinerary**.
   theme="light"
   caption="A two-day Kyoto itinerary card: day tabs, numbered pins and route, and a place's detail panel with photos and opening hours."
 />
+
+## When the map won't load
+
+If the map turns grey with "This page can't load Google Maps correctly", or is
+dimmed with "For development purposes only" across it, Google refused the
+key. This is set in your Google Cloud project, not in Actovia:
+
+- **Usage limit reached.** Many maps drawn in a short time (or a daily cap you
+  set yourself under **APIs & Services → Quotas**) use up the key's allowance.
+  It comes back on its own, at the latest when the daily quota resets; raise
+  the cap if it happens often.
+- **No billing account.** Google Maps needs a billing account linked to the
+  project, even within its free monthly usage.
+- **API not enabled.** Both **Maps JavaScript API** and **Places API (New)**
+  must be enabled for the key's project.
+- **Wrong restriction.** A key restricted by **HTTP referrer** fails in a
+  desktop app; restrict it by API instead.
+
+The stops, their details and **Open route in Google Maps** still work while
+the map itself is refused.

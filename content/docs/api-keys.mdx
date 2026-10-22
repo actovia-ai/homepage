@@ -1,0 +1,145 @@
+---
+title: Getting API keys
+description: Where to get each key Actovia uses, and where it goes in Settings.
+icon: KeyRound
+---
+
+Actovia has no account and no server of its own. Every model and every online
+tool is reached with your own key, so you pay each provider directly and
+nothing passes through us. You need **one model provider** to chat. Everything
+else is optional and adds a tool.
+
+| Key                              | Unlocks                                      | Goes in                                       |
+| -------------------------------- | -------------------------------------------- | --------------------------------------------- |
+| A model provider (one is enough) | Chat, memory, Deep Research, Groups          | **Settings → AI Providers**                   |
+| Brave Search API                 | Web Search, Deep Research, the Discover feed | **Settings → Built-in Tools → Web Search**    |
+| Google API key (Maps + Places)   | Map Itinerary                                | **Settings → Built-in Tools → Map Itinerary** |
+| OpenAI                           | Image Generation, read-aloud and dictation   | **Settings → AI Providers → OpenAI**          |
+| LightRAG                         | The knowledge base                           | **Settings → Knowledge Base**                 |
+| AWS S3                           | Sending large attachments as links           | **Settings → AWS S3**                         |
+
+Weather (Open-Meteo) and models running on [Ollama](#ollama) need no key.
+
+<Callout title="Keys stay on your computer">
+  A key is encrypted with your system keychain before it is saved, and Actovia
+  only ever shows it back as `•••• abcd`. See [Your data](/docs/data).
+</Callout>
+
+## Model providers
+
+Pick one or several. After you paste a key under **Provider keys**, **Retrieve
+model list** asks the provider which models the key can use, which also tells
+you the key works before you chat. More on choosing models in [Models & providers](/docs/chat/models).
+
+### OpenAI
+
+1. Sign in at [platform.openai.com](https://platform.openai.com) and add a
+   payment method under **Billing**. The API is billed separately from a
+   ChatGPT subscription.
+2. Open [API keys](https://platform.openai.com/api-keys) and choose **Create new
+   secret key**. Copy it now: it is shown only once.
+3. In Actovia, open **Settings → AI Providers**, choose **OpenAI** and paste it.
+
+The same key powers [Image Generation](/docs/tools/images). OpenAI's GPT Image
+models also need your organization to be **verified**: if image requests fail
+with "you may need to complete the API Organization Verification", open
+**Settings → Organization → General** in the OpenAI dashboard and choose
+**Verify Organization**. It can take a few minutes to apply after it passes.
+
+### Anthropic (Claude)
+
+1. Sign in to the [Claude Console](https://console.anthropic.com) and buy
+   credits under **Billing**. The API is billed separately from a Claude.ai
+   subscription.
+2. Open [API keys](https://console.anthropic.com/settings/keys) and choose
+   **Create Key**. Copy it now: it is shown only once.
+3. In Actovia, choose **Anthropic** under **Settings → AI Providers** and paste
+   it.
+
+### Google Gemini
+
+1. Open [Google AI Studio](https://aistudio.google.com/apikey) and sign in with
+   a Google account.
+2. Choose **Create API key** and copy it.
+3. In Actovia, choose **Google Gemini** and paste it.
+
+AI Studio has a free tier with low rate limits. For heavier use, turn on
+billing for the key's Google Cloud project.
+
+### xAI (Grok)
+
+1. Sign in to the [xAI Console](https://console.x.ai) and add credits.
+2. Open **API Keys**, create a key and copy it.
+3. In Actovia, choose **xAI** and paste it.
+
+### Azure OpenAI
+
+Azure needs a deployed model rather than a single key:
+
+1. In the [Azure portal](https://portal.azure.com), create an **Azure OpenAI**
+   resource, then deploy a model to it in Azure AI Foundry.
+2. On the resource's **Keys and Endpoint** page, copy a key and the
+   **Endpoint**.
+3. In Actovia, choose **Azure OpenAI** and fill in the key, the endpoint, the
+   API version and your deployment's name.
+
+### Ollama
+
+[Ollama](https://ollama.com/download) runs models on your own computer, with no
+key and no cost per message. Install it, pull a model (`ollama pull llama3.2`),
+and choose **Ollama** under **Settings → AI Providers**. Actovia finds it at
+`http://localhost:11434` unless you set another address.
+
+## Brave Search API
+
+[Web Search](/docs/tools/web), [Deep Research](/docs/agents/deep-research) and
+the [Discover](/docs/app/discover) feed all search through Brave with one key.
+
+1. Go to the [Brave Search API dashboard](https://api-dashboard.search.brave.com)
+   and sign up. Brave asks for a card even on its free allowance.
+2. Under **Subscriptions**, choose the **Search** plan. It covers everything
+   Actovia asks for: web results, news, images, videos and page extracts for
+   the model.
+3. Under **API Keys**, create a key and copy it.
+4. In Actovia, open **Settings → Built-in Tools → Web Search** and paste it
+   into **Brave Search API Key**.
+
+Deep Research makes many searches per report. If you use it a lot, set a
+monthly spending limit in the Brave dashboard.
+
+## Google Maps and Places
+
+[Map Itinerary](/docs/tools/weather-maps#map-itinerary) uses two Google APIs:
+the **Maps JavaScript API** draws the map, and **Places API (New)** finds the
+places, their photos, hours and reviews. One key covers both.
+
+1. Open the [Google Cloud console](https://console.cloud.google.com) and create
+   a project (or pick one).
+2. Link a **billing account** to it. Google Maps does not work without one,
+   even inside its free monthly usage.
+3. Under **APIs & Services → Library**, enable **Maps JavaScript API** and
+   **Places API (New)**.
+4. Under [Keys & Credentials](https://console.cloud.google.com/google/maps-apis/credentials),
+   choose **Create credentials → API key** and copy it.
+5. In Actovia, open **Settings → Built-in Tools → Map Itinerary** and paste it
+   into **Google API Key**.
+
+Restrict the key by **API**: under the key's **API restrictions**, allow only
+the two APIs above. Do **not** add an **HTTP referrer** (website) restriction.
+Actovia is a desktop app, not a website, and Places requests are made from
+the app itself, so a referrer rule makes them fail.
+
+If the map shows "This page can't load Google Maps correctly", see
+[When the map won't load](/docs/tools/weather-maps#when-the-map-wont-load).
+
+## LightRAG
+
+The [knowledge base](/docs/memory/knowledge-base) talks to a LightRAG server you
+run yourself. Its key is whatever you set as `LIGHTRAG_API_KEY` when you
+started that server, and it is optional when the server has none.
+
+## AWS S3
+
+S3 is only for sending large or many attachments as links. The bucket, the IAM
+user and the access keys it needs are listed in
+[Attachments](/docs/chat/attachments#large-files-through-s3).
