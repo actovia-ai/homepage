@@ -5,12 +5,12 @@ const COLUMNS = [
   {
     title: 'Product',
     links: [
-      { label: 'Features', href: '#features' },
-      { label: 'How it works', href: '#run' },
-      { label: 'Actovia for iPhone', href: '#iphone' },
-      { label: 'Privacy', href: '#privacy' },
-      { label: 'Tech specs', href: '#specs' },
-      { label: 'Download', href: '#download' }
+      { label: 'Features', href: '/#features' },
+      { label: 'How it works', href: '/#run' },
+      { label: 'Actovia for iPhone', href: '/#iphone' },
+      { label: 'Privacy policy', href: '/privacy' },
+      { label: 'Tech specs', href: '/#specs' },
+      { label: 'Download', href: '/#download' }
     ]
   },
   {

@@ -8,11 +8,11 @@ import { REPO_URL } from '@/app/_lib/release'
 import { cn } from '@/lib/utils'
 
 const LINKS = [
-  { href: '#features', label: 'Features' },
-  { href: '#scenes', label: 'Scenes' },
-  { href: '#run', label: 'How it works' },
-  { href: '#iphone', label: 'iPhone' },
-  { href: '#privacy', label: 'Privacy' },
+  { href: '/#features', label: 'Features' },
+  { href: '/#scenes', label: 'Scenes' },
+  { href: '/#run', label: 'How it works' },
+  { href: '/#iphone', label: 'iPhone' },
+  { href: '/#privacy', label: 'Privacy' },
   { href: '/docs', label: 'Docs' }
 ]
 
@@ -22,7 +22,7 @@ const LINKS = [
  */
 export function LocalNav({ downloadHref }: { downloadHref: string }) {
   const current = useSectionInView(
-    LINKS.filter((l) => l.href.startsWith('#')).map((l) => l.href.slice(1))
+    LINKS.filter((l) => l.href.startsWith('/#')).map((l) => l.href.slice(2))
   )
 
   return (
@@ -39,7 +39,7 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
         </a>
         <div className="flex items-center gap-1 text-[0.9375rem]">
           {LINKS.map((l) => {
-            const active = current === l.href.slice(1)
+            const active = current === l.href.slice(2)
             return (
               <a
                 key={l.href}

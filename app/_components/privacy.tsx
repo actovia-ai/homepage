@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const POINTS = [
   {
     title: 'Kept on your computer.',
@@ -30,6 +32,12 @@ export function Privacy() {
             The app is the server. What you tell it stays on the machine you
             installed it on.
           </p>
+          <Link
+            href="/privacy"
+            className="text-ink mt-8 inline-block underline decoration-hairline underline-offset-4 hover:decoration-ink"
+          >
+            The privacy policy, in full
+          </Link>
         </div>
         <dl className="bg-hairline border-hairline grid grid-cols-1 gap-px border sm:grid-cols-2 lg:col-span-8">
           {POINTS.map((p) => (
