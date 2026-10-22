@@ -98,6 +98,31 @@ export const SHOTS = {
     size: [1600, 1000],
     brief: 'A web search’s pictures under the answer, numbered with the sources.'
   },
+  sceneStocks: {
+    file: '/shots/scene-stocks.png',
+    size: [1600, 1000],
+    brief: 'A stock answer with the TradingView chart card and cited sources.'
+  },
+  sceneMap: {
+    file: '/shots/scene-map.png',
+    size: [1600, 1000],
+    brief: 'The three-day Kyoto itinerary on a map, a stop’s detail panel open.'
+  },
+  sceneWeather: {
+    file: '/shots/scene-weather.png',
+    size: [1600, 1000],
+    brief: 'The weather card for Tokyo’s week, above the answer.'
+  },
+  scenePaint: {
+    file: '/shots/scene-paint.png',
+    size: [1600, 1000],
+    brief: 'An image made in the chat: a watercolor Kyoto lane.'
+  },
+  sceneBuild: {
+    file: '/shots/scene-build.png',
+    size: [1600, 1000],
+    brief: 'A Pomodoro timer built as an artifact, running in the answer.'
+  },
   sceneCompare: {
     file: '/shots/scene-compare.png',
     size: [1600, 1000],

@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
+
 import { Monitor, Smartphone } from 'lucide-react'
 import type { ReactNode } from 'react'
 
@@ -10,6 +13,12 @@ import { cn } from '@/lib/utils'
  * docs/screenshot-shotlist.md. Until the capture exists the slot is a quiet
  * dashed frame showing the id and the brief; once the PNG is in
  * public/docs/shots/, pass `src="/docs/shots/<id>.png"` and it shows instead.
+ *
+ * A capture comes in both colour schemes: `<id>.png` is the light one and
+ * `<id>-dark.png`, when it exists beside it, is served under
+ * `prefers-color-scheme: dark`, so a page never mixes the two (owner,
+ * 2026-10-22). A shot with no dark file (a macOS System Settings crop, the
+ * colour-tone grid) shows its one file in both schemes.
  */
 type Platform = 'desktop' | 'iphone' | 'macos'
 type Theme = 'light' | 'dark' | 'either'
@@ -33,6 +42,12 @@ const PLATFORM_ICON: Record<Platform, ReactNode> = {
   macos: <Monitor className="size-3.5" aria-hidden />
 }
 
+/** The dark-scheme file of a capture, if one is published beside it. */
+function darkSourceOf(src: string): string | undefined {
+  const dark = src.replace(/\.png$/u, '-dark.png')
+  return dark !== src && existsSync(join(process.cwd(), 'public', dark)) ? dark : undefined
+}
+
 export function Screenshot({
   id,
   platform = 'desktop',
@@ -42,12 +57,14 @@ export function Screenshot({
 }: {
   id: string
   platform?: Platform
+  /** The scheme the brief was written for; the capture itself follows the reader's scheme. */
   theme?: Theme
   /** What the shot shows — the brief while it is a slot, the caption once it is filled. */
   caption: string
   src?: string
 }) {
   const mobile = platform !== 'desktop'
+  const dark = src ? darkSourceOf(src) : undefined
   return (
     <figure
       data-shot-id={id}
@@ -57,17 +74,24 @@ export function Screenshot({
       )}
     >
       {src ? (
-        // eslint-disable-next-line @next/next/no-img-element -- static captures of known size, no optimisation needed
-        <img
-          src={src}
-          alt={caption}
-          loading="lazy"
+        <picture
           className={cn(
             FRAME[platform],
-            'border-fd-border h-auto rounded-xl border',
-            platform === 'macos' ? 'object-contain' : 'object-cover'
+            'border-fd-border block overflow-hidden rounded-xl border'
           )}
-        />
+        >
+          {dark && <source srcSet={dark} media="(prefers-color-scheme: dark)" />}
+          {/* eslint-disable-next-line @next/next/no-img-element -- static captures of known size, no optimisation needed */}
+          <img
+            src={src}
+            alt={caption}
+            loading="lazy"
+            className={cn(
+              'size-full',
+              platform === 'macos' ? 'object-contain' : 'object-cover'
+            )}
+          />
+        </picture>
       ) : (
         <div
           role="img"

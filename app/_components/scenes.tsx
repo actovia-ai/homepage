@@ -28,6 +28,31 @@ const SCENES: { title: string; body: string; shot: ShotSpec }[] = [
     shot: SHOTS.scenePhotos
   },
   {
+    title: 'It reads the market.',
+    body: 'Ask about a stock and the answer comes with the chart, the day’s move and the sources behind the story.',
+    shot: SHOTS.sceneStocks
+  },
+  {
+    title: 'It puts the plan on a map.',
+    body: 'A three-day itinerary becomes a map: numbered stops, the route between them, and each place’s hours and photos.',
+    shot: SHOTS.sceneMap
+  },
+  {
+    title: 'It knows the weather.',
+    body: 'A forecast card with the week ahead, in the place’s own time — and the answer says what to do with it.',
+    shot: SHOTS.sceneWeather
+  },
+  {
+    title: 'It paints.',
+    body: 'Describe a picture and it is made, saved on your computer, and kept with the chat.',
+    shot: SHOTS.scenePaint
+  },
+  {
+    title: 'It builds the thing.',
+    body: 'A timer, a chart, a small app: written as an artifact that runs in its own sandbox, right in the answer.',
+    shot: SHOTS.sceneBuild
+  },
+  {
     title: 'Ask again. Keep the better one.',
     body: 'Regenerate puts two answers side by side. Pick one and the conversation carries on from it; the other stays out of the model’s sight.',
     shot: SHOTS.sceneCompare

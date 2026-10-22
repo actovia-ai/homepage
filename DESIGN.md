@@ -170,7 +170,7 @@ The world explicitly rejects the centred-icon, centred-headline,
 black-chapter Apple pastiche it replaced.
 
 One chapter moves with the scroll: **Scenes** (owner's ask, 2026-10-22). Its
-stage stays put while five screens pass through it, the copy drifting slower
+stage stays put while ten screens pass through it, the copy drifting slower
 than the screen — the parallax of a product page, on this page's paper and
 left-set type, never on black. The motion is `transform` and `opacity` only,
 driven by one scroll-progress variable, and under `prefers-reduced-motion`

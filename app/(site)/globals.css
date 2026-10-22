@@ -189,7 +189,7 @@
 */
 .scenes {
   --p: 0;
-  height: calc(var(--n) * 100vh + 40vh);
+  height: calc(var(--n) * 80vh + 60vh);
 }
 .scenes-stage {
   position: sticky;
