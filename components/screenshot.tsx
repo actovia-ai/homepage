@@ -122,10 +122,15 @@ export function Screenshot({
   )
 }
 
-/** Phone shots side by side, wrapping on a narrow screen. */
-export function ShotRow({ children }: { children: ReactNode }) {
+/** Phone shots side by side (two, or three with `cols={3}`), wrapping on a narrow screen. */
+export function ShotRow({ children, cols = 2 }: { children: ReactNode; cols?: 2 | 3 }) {
   return (
-    <div className="not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 [&>figure]:my-0">
+    <div
+      className={cn(
+        'not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 [&>figure]:my-0',
+        cols === 3 && 'lg:grid-cols-3'
+      )}
+    >
       {children}
     </div>
   )
