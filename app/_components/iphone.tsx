@@ -67,7 +67,8 @@ export function IPhone() {
         <p className="text-graphite mt-16 max-w-[64ch] text-sm">
           Face ID on your phone unlocks Actovia on your computer. Pairing works
           on your own network, over an encrypted connection your phone verifies.
-          Philharmonic on iPhone is on the way.
+          Philharmonic comes along too: follow a group&apos;s run, answer the PM
+          and approve a step from wherever you are.
         </p>
       </div>
     </section>

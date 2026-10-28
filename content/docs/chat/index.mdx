@@ -68,17 +68,37 @@ there. **Scroll to bottom** brings you back to the newest message.
 
 ## The sidebar and the header
 
-- **New chat** (⌘N) and **Search chats** (⌘⇧F) sit at the top of the sidebar;
-  ⌘B shows or hides it, and you can drag it wider.
+- The sidebar's title says where you are — **Chat** or **Philharmonic** — and
+  a click switches between them.
+- **New chat** (⌘N), **Search chats** (⌘⇧F) and
+  [**Artifacts**](/docs/tools/artifacts#every-artifact-in-one-place) sit at the
+  top of the sidebar; ⌘B shows or hides it.
+- The menu at its foot has **Settings**, **Get the apps** (the iPhone app,
+  Health and the command-line tool), **Help & docs**, **What's new** and, once
+  a PIN is set, **Lock Actovia**.
 - Each chat's menu has **Rename**, **Favorite** (favourites get a group of their
   own), **Copy conversation ID** (see
   [recall across chats](/docs/memory/long-conversations#across-chats)) and
   **Delete**.
 - The header shows **Back** / **Forward** arrows over the pages you visited
   (⌘[ and ⌘]), the chat's title, the model chip (see
-  [Providers & models](/docs/chat/models)), **Chat options** (rename, favourite,
-  export, delete) and the **Files, tools and sources** panel.
+  [Providers & models](/docs/chat/models)), the context ring (below),
+  **Chat options** (rename, favourite, export as Markdown or PDF, delete) and
+  the **Files, tools and sources** panel.
 - ⌘W closes the chat on screen and takes you home. Nothing is deleted.
+
+## How full the context is
+
+Once a chat has answered, a small ring in the header shows how much of the
+model's context the chat fills — hover it for the numbers. It turns amber when
+the conversation reaches the point where older messages get
+[compacted](/docs/memory/long-conversations).
+
+Click it to open the panel on **Context**: one bar split into what the last
+request carried — the system prompt, skills, MCP, tools, memory, summaries and
+messages — with the free space beside it, the time it was measured and where
+compaction starts. The panel's other tabs list the chat's **Files**, **Tools**
+and **Sources**; a row takes you to the answer it came from.
 
 <Screenshot
   id="chat-panel"

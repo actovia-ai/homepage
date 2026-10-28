@@ -162,9 +162,8 @@ export function Highlights() {
               <span className="text-sun">sum</span>(total_tokens){' '}
               <span className="text-sun">as</span> tokens,
               {'\n       '}
-              <span className="text-sun">round</span>(
-              <span className="text-sun">sum</span>(cost_usd), 2){' '}
-              <span className="text-sun">as</span> usd
+              <span className="text-sun">sum</span>(cache_read_tokens){' '}
+              <span className="text-sun">as</span> cached
               {'\n'}
               <span className="text-sun">from</span> messages
               {'\n'}
@@ -173,7 +172,7 @@ export function Highlights() {
               {'\n'}
               <span className="text-sun">group by</span> model
               {'\n'}
-              <span className="text-sun">order by</span> usd{' '}
+              <span className="text-sun">order by</span> tokens{' '}
               <span className="text-sun">desc</span>;
             </Terminal>
           </Cell>
