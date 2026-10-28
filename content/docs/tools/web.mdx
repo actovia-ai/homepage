@@ -38,13 +38,12 @@ The model also chooses, per search:
 | ------------------- | -------------------------------------------------------------------------------------------------- |
 | **Strict**          | A follow-up when the first results were noisy or off-topic: only pages that clearly match are kept |
 | **Images / videos** | You asked for pictures or videos, or it is building something visual                               |
-| **Structured data** | The question is about live figures — see below                                                     |
 
 ### Structured data
 
-For some questions Brave has more than pages: the data itself. When you ask
-about one of these, the model asks for it, and it arrives as the **first
-source** of the search:
+For some questions Brave has more than pages: the data itself. Every search
+asks Brave whether it has any; Brave decides, and when it does, the data
+arrives as the **first source** of the search. It does for:
 
 - weather and forecasts
 - stocks and market indices, cryptocurrencies, exchange rates
@@ -89,14 +88,15 @@ Under the tool's row in **Settings → Built-in Tools**:
 
 ### What a search costs
 
-Brave counts requests. A plain search is **one** request; the rest are added
-only when they are used:
+Brave counts requests. A search is **two**: the pages, and the question of
+whether Brave has structured data for it. The rest are added only when they
+are used:
 
 | Part of a search | Requests                               |
 | ---------------- | -------------------------------------- |
-| The search       | 1                                      |
+| The search       | 2                                      |
+| Structured data  | +1 when Brave has data                 |
 | Pictures, videos | +1 each                                |
-| Structured data  | +1, and +1 more when Brave has data    |
 | Deep recall      | 6 in all (three phrasings, each twice) |
 
 Deep recall also asks your chat model for the two extra phrasings. Brave's
