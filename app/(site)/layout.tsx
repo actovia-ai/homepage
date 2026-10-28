@@ -1,3 +1,4 @@
+import { SmoothScroll } from '@/app/_components/smooth-scroll'
 import type { Metadata, Viewport } from 'next'
 import {
   Fredoka,
@@ -5,8 +6,8 @@ import {
   Sofia_Sans,
   Sofia_Sans_Extra_Condensed
 } from 'next/font/google'
-import { SmoothScroll } from '@/app/_components/smooth-scroll'
 
+import { openGraph } from '@/app/_lib/og'
 import './globals.css'
 
 // The wordmark face — the same Fredoka the app icon's social card uses. Only
@@ -40,9 +41,17 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://actovia.yancey.app'),
-  title: 'Actovia — the AI assistant that runs on your computer and answers your phone',
+  title:
+    'Actovia — the AI assistant that runs on your computer and answers your phone',
   description:
-    'A personal AI assistant that lives on your computer: chat for quick answers, Philharmonic agent teams for the big jobs, every model with your own keys, your data kept local, and your iPhone as the remote.'
+    'A personal AI assistant that lives on your computer: chat for quick answers, Philharmonic agent teams for the big jobs, every model with your own keys, your data kept local, and your iPhone as the remote.',
+  alternates: { canonical: '/' },
+  openGraph: openGraph(
+    'Actovia — the AI assistant that runs on your computer',
+    'Chat, agent teams and every model with your own keys, on your own computer, with your iPhone as the remote.',
+    '/'
+  ),
+  twitter: { card: 'summary_large_image', creator: '@YanceyOfficial' }
 }
 
 export const viewport: Viewport = {

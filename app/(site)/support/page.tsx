@@ -3,12 +3,17 @@ import Link from 'next/link'
 
 import { Footer } from '@/app/_components/footer'
 import { LocalNav } from '@/app/_components/local-nav'
+import { openGraph } from '@/app/_lib/og'
 import { REPO_URL } from '@/app/_lib/release'
+
+const DESCRIPTION =
+  'Help with Actovia and Actovia for iPhone: the docs, answers to the common questions, and where to report a problem.'
 
 export const metadata: Metadata = {
   title: 'Support — Actovia',
-  description:
-    'Help with Actovia and Actovia for iPhone: the docs, answers to the common questions, and where to report a problem.'
+  description: DESCRIPTION,
+  alternates: { canonical: '/support' },
+  openGraph: openGraph('Support — Actovia', DESCRIPTION, '/support')
 }
 
 const QUESTIONS: { q: string; a: React.ReactNode; href: string }[] = [

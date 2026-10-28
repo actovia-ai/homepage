@@ -9,6 +9,7 @@ const COLUMNS = [
       { label: 'How it works', href: '/#run' },
       { label: 'Actovia for iPhone', href: '/#iphone' },
       { label: 'Privacy policy', href: '/privacy' },
+      { label: 'Terms of use', href: '/terms' },
       { label: 'Tech specs', href: '/#specs' },
       { label: 'Download', href: '/#download' }
     ]

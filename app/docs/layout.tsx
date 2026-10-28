@@ -12,7 +12,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://actovia.yancey.app'),
-  title: { template: '%s · Actovia Docs', default: 'Actovia Docs' }
+  title: { template: '%s · Actovia Docs', default: 'Actovia Docs' },
+  twitter: { card: 'summary_large_image', creator: '@YanceyOfficial' }
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

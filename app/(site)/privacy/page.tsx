@@ -3,12 +3,17 @@ import Link from 'next/link'
 
 import { Footer } from '@/app/_components/footer'
 import { LocalNav } from '@/app/_components/local-nav'
+import { openGraph } from '@/app/_lib/og'
 import { REPO_URL } from '@/app/_lib/release'
+
+const DESCRIPTION =
+  'What Actovia stores, where it stays, and the only things that leave your devices: the requests you send to the model provider and tools you chose.'
 
 export const metadata: Metadata = {
   title: 'Privacy policy — Actovia',
-  description:
-    'What Actovia stores, where it stays, and the only things that leave your devices: the requests you send to the model provider and tools you chose.'
+  description: DESCRIPTION,
+  alternates: { canonical: '/privacy' },
+  openGraph: openGraph('Privacy policy — Actovia', DESCRIPTION, '/privacy')
 }
 
 const EFFECTIVE = '23 October 2026'
