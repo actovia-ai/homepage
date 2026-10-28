@@ -1,6 +1,6 @@
 ---
 title: Web search & fetch
-description: Search through Brave, read pages, and get answers with numbered sources.
+description: Search through Brave, read pages, get structured live data, and answers with numbered sources.
 icon: Globe
 ---
 
@@ -12,20 +12,6 @@ Search API Key** ([how to get one](/docs/api-keys#brave-search-api)). When a que
 by itself; the results become the [citations](/docs/chat/answers#citations)
 in its answer.
 
-Options under the tool's row:
-
-| Option             | Effect                                                                           |
-| ------------------ | -------------------------------------------------------------------------------- |
-| **Country**        | Bias results towards a region                                                    |
-| **Languages**      | Keep results in the languages you choose                                         |
-| **Max Results**    | Sources a search brings back, 1–20 (default 10)                                  |
-| **Deep recall**    | Searches three phrasings plus a broader pass — more sources, more tokens, slower |
-| **Recency Filter** | Past hour, 24 hours, week, month or year                                         |
-| **Domain Filter**  | Comma-separated; prefix with `-` to exclude (`nature.com, .edu`, `-reddit.com`)  |
-
-Ask for pictures or videos ("show me photos of …") and they come back as a
-gallery and video cards under the answer.
-
 <Screenshot
   id="tool-web-search"
   platform="desktop"
@@ -34,11 +20,113 @@ gallery and video cards under the answer.
   caption="A web-search answer: the timeline row “10 search results” opened, citation chips in the text, Sources button with three favicons."
 />
 
+### What one search brings back
+
+A search asks Brave's LLM Context endpoint for the pages it would ground the
+query on, with the text already pulled out of each one. The model gets about
+**ten sources**, numbered, and at most **two from one site**: results of one
+site mostly say the same thing. When ten are not enough, the model searches
+again with a sharper query, or reads one source in full with Web Fetch.
+
+Numbers run through the whole conversation. If the first search of a chat
+gave sources 1–10, the next one starts at 11, and a `[3]` later in the chat
+still means the third source of the first search.
+
+The model also chooses, per search:
+
+| Choice              | When the model uses it                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------- |
+| **Strict**          | A follow-up when the first results were noisy or off-topic: only pages that clearly match are kept |
+| **Images / videos** | You asked for pictures or videos, or it is building something visual                               |
+| **Structured data** | The question is about live figures — see below                                                     |
+
+### Structured data
+
+For some questions Brave has more than pages: the data itself. When you ask
+about one of these, the model asks for it, and it arrives as the **first
+source** of the search:
+
+- weather and forecasts
+- stocks and market indices, cryptocurrencies, exchange rates
+- sports scores and fixtures — football, American football, basketball,
+  baseball, ice hockey, cricket, Formula 1
+- calculations, unit conversions, Unix timestamps, definitions, parcel
+  tracking
+
+The source is named after the provider Brave took the data from, and it holds
+the figures as they are — today's high and low, an index's price and its
+intraday series, the score and the scorers — rather than a page's sentence
+about them. The model reasons from those numbers and cites them like any other
+source, and when it draws a chart or a dashboard as an
+[artifact](/docs/tools/artifacts), it draws it from them.
+
+Try "how is the KOSPI doing today?" or "chart the weather in Beijing this
+week".
+
+### Pictures and videos
+
+Ask for pictures or videos ("show me photos of …") and they come back as a
+gallery and video cards under the answer. Each picture belongs to the page it
+was found on, so the citation under it is that page. A picture from a page the
+search did not read is a source of its own, marked as such.
+
+The gallery shows the thumbnail Brave keeps, never the site's own file, so a
+site that refuses outside requests, or a picture that is gone, does not leave
+a hole.
+
+### Options
+
+Under the tool's row in **Settings → Built-in Tools**:
+
+| Option             | Effect                                                                           |
+| ------------------ | -------------------------------------------------------------------------------- |
+| **Country**        | Bias results towards a region                                                    |
+| **Languages**      | Keep results in the language you choose (Brave uses the first one)               |
+| **Max Results**    | Sources a search brings back, 1–20 (default 10)                                  |
+| **Deep recall**    | Searches three phrasings plus a broader pass — more sources, more tokens, slower |
+| **Recency Filter** | Past 24 hours, week, month or year (past hour searches the past 24 hours)        |
+| **Domain Filter**  | Comma-separated; prefix with `-` to exclude (`nature.com, .edu`, `-reddit.com`)  |
+
+### What a search costs
+
+Brave counts requests. A plain search is **one** request; the rest are added
+only when they are used:
+
+| Part of a search | Requests                               |
+| ---------------- | -------------------------------------- |
+| The search       | 1                                      |
+| Pictures, videos | +1 each                                |
+| Structured data  | +1, and +1 more when Brave has data    |
+| Deep recall      | 6 in all (three phrasings, each twice) |
+
+Deep recall also asks your chat model for the two extra phrasings. Brave's
+free plan answers one request a second; Actovia waits and tries once more when
+it is told to slow down.
+
+### Sources in a long chat
+
+A search's sources stay whole for the reply that made them and the next one,
+so a follow-up can dig into the same results. After that the model keeps one
+line per source — its number, title and link — and can read any of them back
+in full when it needs to, without searching again. That is what keeps a long
+chat with many searches from filling up the model's context.
+
+### When a search fails
+
+A search that fails is not "no results". When Brave rejects the key, the
+plan's quota is used up, the rate limit is reached or Brave cannot be reached,
+the model is told which, and says so — a wrong key is something to fix in
+Settings, not a topic nobody has written about.
+
 ## Web Fetch
 
 Give the model a link ("summarise https://…") and it reads the page itself —
-an article, documentation, an API response or a file on GitHub. A fetched page
-is a source like a search result and can be cited.
+an article, documentation, an API response, a PDF or a file on GitHub. A
+fetched page is a source like a search result and can be cited.
+
+Pages are read through [Jina Reader](https://jina.ai/reader), which renders
+pages built with JavaScript; when it cannot, Actovia reads the page itself and
+keeps its main content.
 
 Web Fetch reads only public addresses: it will not reach your local network or
-Actovia's own API.
+Actovia's own API, and every redirect is checked again before it is followed.
