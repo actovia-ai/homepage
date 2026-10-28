@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/actovia-ai/homepage/compare/v1.2.0...v1.3.0) (2026-10-28)
+
+
+### Features
+
+* **site:** Scenes, a scroll-driven chapter; the iPhone chat shot ([8b0d0c3](https://github.com/actovia-ai/homepage/commit/8b0d0c38cf1a78dc65a496fd56d40ed5cfffe47d))
+
 # [1.2.0](https://github.com/actovia-ai/homepage/compare/v1.1.0...v1.2.0) (2026-10-21)
 
 
