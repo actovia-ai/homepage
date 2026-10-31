@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/actovia-ai/homepage/compare/v1.4.0...v1.5.0) (2026-10-31)
+
+
+### Features
+
+* **site:** surface the iPhone release ([e9f875e](https://github.com/actovia-ai/homepage/commit/e9f875e82fdef4b7d4446536eef63b19c1dbc1e1))
+
 # [1.4.0](https://github.com/actovia-ai/homepage/compare/v1.3.0...v1.4.0) (2026-10-31)
 
 
