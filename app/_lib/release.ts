@@ -15,7 +15,7 @@ export const RELEASES_URL =
   'https://github.com/actovia-ai/actovia/releases/latest'
 export const REPO_URL = 'https://github.com/actovia-ai/actovia'
 export const APP_STORE_URL =
-  'https://apps.apple.com/us/app/actovia/id6824829679'
+  'https://apps.apple.com/app/actovia/id6824829679'
 
 export async function getLatestRelease(): Promise<GithubRelease | null> {
   try {
