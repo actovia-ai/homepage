@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/actovia-ai/homepage/compare/v1.5.0...v1.5.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* **site:** use the official App Store badge ([dfc35da](https://github.com/actovia-ai/homepage/commit/dfc35daf9a5ee7376532bba4ca87de514db53680))
+
 # [1.5.0](https://github.com/actovia-ai/homepage/compare/v1.4.0...v1.5.0) (2026-10-31)
 
 
