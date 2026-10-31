@@ -1,9 +1,7 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
-import { useLenis } from 'lenis/react'
-import Link from 'next/link'
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useEffect, useState } from 'react'
 
 import { OdyIcon } from '@/app/_components/ody-icon'
 import { REPO_URL } from '@/app/_lib/release'
@@ -23,24 +21,9 @@ const LINKS = [
  * right with a dot beside the one in view, the source and the one action.
  */
 export function LocalNav({ downloadHref }: { downloadHref: string }) {
-  const lenis = useLenis()
   const current = useSectionInView(
     LINKS.filter((l) => l.href.startsWith('/#')).map((l) => l.href.slice(2))
   )
-  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
-    // Let links from a secondary route navigate normally. On the home route,
-    // force both Lenis and the browser out of a pinned Scenes stage.
-    if (window.location.pathname !== '/') return
-    event.preventDefault()
-    document.documentElement.removeAttribute('data-scenes-pinned')
-    window.history.replaceState(null, '', '/')
-    const reset = () => {
-      lenis?.scrollTo(0, { immediate: true, force: true })
-      window.scrollTo({ top: 0, behavior: 'instant' })
-    }
-    reset()
-    requestAnimationFrame(reset)
-  }
 
   return (
     <header className="bg-paper/80 border-hairline sticky top-0 z-50 border-b backdrop-blur-md">
@@ -48,12 +31,14 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
         aria-label="Actovia"
         className="mx-auto flex h-16 max-w-[1328px] items-center justify-between gap-6 px-5 sm:px-8"
       >
-        <Link href="/" onClick={goHome} className="flex items-center gap-2.5">
+        {/* Native navigation deliberately resets a pinned product scene, like a product page home link. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a href="/" className="flex items-center gap-2.5">
           <OdyIcon size={28} priority />
           <span className="font-word text-[1.3125rem] leading-none">
             Actovia
           </span>
-        </Link>
+        </a>
         <div className="flex items-center gap-1 text-[0.9375rem]">
           {LINKS.map((l) => {
             const active = current === l.href.slice(2)

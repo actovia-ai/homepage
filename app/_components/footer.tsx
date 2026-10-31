@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { OdyIcon } from '@/app/_components/ody-icon'
 import { RELEASES_URL, REPO_URL } from '@/app/_lib/release'
 
@@ -46,12 +44,13 @@ export function Footer() {
     <footer className="bg-sunk text-graphite border-hairline overflow-hidden border-t">
       <div className="mx-auto grid max-w-[1328px] gap-12 px-5 pt-20 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.6fr_repeat(3,1fr)]">
         <div className="flex flex-col gap-4">
-          <Link href="/" className="text-ink flex items-center gap-2.5">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/" className="text-ink flex items-center gap-2.5">
             <OdyIcon size={32} />
             <span className="font-word text-[1.4rem] leading-none">
               Actovia
             </span>
-          </Link>
+          </a>
           <p className="max-w-[28ch] text-sm leading-relaxed">
             Every model, on your own machine. Free and open source.
           </p>
