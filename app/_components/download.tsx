@@ -137,17 +137,18 @@ export function Download({ downloads }: { downloads: Downloads }) {
                 {platform === 'iphone' && (
                   <>
                     <p className="text-graphite max-w-[56ch] font-light">
-                      Actovia for iPhone is on its way to the App Store. It
-                      pairs with the Mac app, which works on its own until then.
+                      Actovia for iPhone is now on the App Store. It pairs with
+                      the Mac app, which works on its own.
                     </p>
-                    {/* Until the App Store listing exists: the badge's place, not a link. */}
                     <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-                      <span
-                        aria-disabled
-                        className="border-hairline text-graphite inline-flex items-center gap-3 rounded-[3px] border border-dashed px-5 py-3 font-medium"
+                      <a
+                        href="https://apps.apple.com/us/app/actovia/id6824829679"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border-hairline text-graphite hover:text-ink inline-flex items-center gap-3 rounded-[3px] border px-5 py-3 font-medium transition-colors"
                       >
-                        Coming to the App Store
-                      </span>
+                        Download on the App Store
+                      </a>
                       <Link
                         href="/docs/iphone"
                         className="text-graphite hover:text-ink text-sm underline"
