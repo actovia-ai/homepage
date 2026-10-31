@@ -34,7 +34,7 @@ const QUESTIONS: { q: string; a: React.ReactNode; href: string }[] = [
   },
   {
     q: 'How do I update?',
-    a: 'Settings → About checks for a new version. Until the Mac builds are signed, the update opens the releases page to download it.',
+    a: 'Settings → About checks for a new version on your Mac.',
     href: '/docs/installation#updates'
   },
   {

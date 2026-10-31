@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: The desktop app, the first launch on macOS, and the CLI.
+description: The desktop app, updates, the iPhone app, and the CLI.
 icon: Download
 ---
 
@@ -14,28 +14,18 @@ Download the build for your platform from the
 | macOS (Apple silicon) | `Actovia-<version>-arm64.dmg`, or the `.zip`   |
 | Windows               | `Actovia-<version>.Setup.exe`                  |
 | Linux                 | `actovia_<version>_amd64.deb`, `actovia-<version>-1.x86_64.rpm` |
+| iPhone                | [Download from the App Store](https://apps.apple.com/us/app/actovia/id6824829679) |
 
-### First launch on macOS
+## iPhone app
 
-The macOS builds are not notarized by Apple yet, so the first launch of a
-downloaded copy is stopped with _"Apple could not verify 'Actovia' is free of
-malware"_. Either open **System Settings → Privacy & Security** and click
-**Open Anyway**, or clear the quarantine flag:
+[Download Actovia for iPhone from the App Store](https://apps.apple.com/us/app/actovia/id6824829679).
+It pairs with Actovia on your computer and works with the same chats.
 
-```bash
-xattr -dr com.apple.quarantine /Applications/Actovia.app
-```
-
-After every update macOS asks once more for your login password to let
-Actovia read its key in the Keychain (**Actovia Safe Storage**). Choose
-**Always Allow**. This stops once the builds are signed.
-
-### Updates
+## Updates
 
 On Windows the app updates itself. On macOS it checks for a new version at
-launch and when you ask (**Settings → About**); until the builds are signed its
-button opens the release page, and you install the new version the same way as
-the first. On Linux, install the new package from the release page.
+launch and when you ask (**Settings → About**). On Linux, install the new
+package from the release page.
 
 ## CLI
 

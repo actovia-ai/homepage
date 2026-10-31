@@ -41,8 +41,7 @@ computer rather than replacing it. Free, MIT-licensed, no account.
 ## Operating Context
 
 - Downloads come from GitHub releases (`actovia-ai/actovia`); macOS builds are
-  ad-hoc signed and not notarized yet, so the first launch needs "Open Anyway"
-  (documented in /docs/installation).
+  signed and notarized.
 - The `actovia` CLI (`npm install -g @actovia-ai/cli`) looks after the desktop
   app from a terminal and installs skills from skills.sh.
 - Docs live under /docs on the same site (Fumadocs).

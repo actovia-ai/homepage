@@ -6,7 +6,7 @@ import { useId, useState } from 'react'
 
 import { Terminal, Token } from '@/app/_components/terminal'
 import type { Downloads } from '@/app/_lib/release'
-import { RELEASES_URL } from '@/app/_lib/release'
+import { APP_STORE_URL, RELEASES_URL } from '@/app/_lib/release'
 import { cn } from '@/lib/utils'
 
 type Platform = 'mac' | 'windows' | 'linux' | 'cli' | 'iphone'
@@ -43,6 +43,14 @@ export function Download({ downloads }: { downloads: Downloads }) {
             className="text-ink mt-8 inline-block underline decoration-[color:var(--color-hairline)] underline-offset-[0.3em] hover:decoration-current"
           >
             Release notes and every past version
+          </a>
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink mt-4 inline-block underline decoration-[color:var(--color-hairline)] underline-offset-[0.3em] hover:decoration-current"
+          >
+            Get Actovia for iPhone on the App Store
           </a>
         </div>
 
@@ -96,17 +104,6 @@ export function Download({ downloads }: { downloads: Downloads }) {
                       }}
                       secondary={{ label: '.zip', href: downloads.mac.zip }}
                     />
-                    <p className="text-graphite mt-6 max-w-[56ch] text-sm">
-                      The builds are not notarized by Apple yet, so the first
-                      launch needs <em>Open Anyway</em> in System Settings →
-                      Privacy & Security.{' '}
-                      <Link
-                        href="/docs/installation"
-                        className="text-ink underline"
-                      >
-                        How to open it
-                      </Link>
-                    </p>
                   </>
                 )}
                 {platform === 'windows' && (
@@ -142,7 +139,7 @@ export function Download({ downloads }: { downloads: Downloads }) {
                     </p>
                     <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
                       <a
-                        href="https://apps.apple.com/us/app/actovia/id6824829679"
+                        href={APP_STORE_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="border-hairline text-graphite hover:text-ink inline-flex items-center gap-3 rounded-[3px] border px-5 py-3 font-medium transition-colors"

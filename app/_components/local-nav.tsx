@@ -1,6 +1,7 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { OdyIcon } from '@/app/_components/ody-icon'
@@ -31,12 +32,12 @@ export function LocalNav({ downloadHref }: { downloadHref: string }) {
         aria-label="Actovia"
         className="mx-auto flex h-16 max-w-[1328px] items-center justify-between gap-6 px-5 sm:px-8"
       >
-        <a href="#top" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           <OdyIcon size={28} priority />
           <span className="font-word text-[1.3125rem] leading-none">
             Actovia
           </span>
-        </a>
+        </Link>
         <div className="flex items-center gap-1 text-[0.9375rem]">
           {LINKS.map((l) => {
             const active = current === l.href.slice(2)
