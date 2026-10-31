@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/actovia-ai/homepage/compare/v1.6.0...v1.6.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* **site:** let Apple route App Store links by region ([705152d](https://github.com/actovia-ai/homepage/commit/705152de38e8422a475e4f3b349e2a566140faa4))
+
 # [1.6.0](https://github.com/actovia-ai/homepage/compare/v1.5.3...v1.6.0) (2026-10-31)
 
 
