@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/actovia-ai/homepage/compare/v1.3.0...v1.4.0) (2026-10-31)
+
+
+### Features
+
+* **iphone:** link the App Store release ([c87de54](https://github.com/actovia-ai/homepage/commit/c87de546053d0dd2b31fb3bdffac16ae1ece698a))
+
 # [1.3.0](https://github.com/actovia-ai/homepage/compare/v1.2.0...v1.3.0) (2026-10-28)
 
 
