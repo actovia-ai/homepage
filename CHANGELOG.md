@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/actovia-ai/homepage/compare/v1.5.1...v1.5.2) (2026-10-31)
+
+
+### Bug Fixes
+
+* **site:** reset pinned scenes from the home link ([5820e0f](https://github.com/actovia-ai/homepage/commit/5820e0f0075d73602017fdf50e51535c1ddbd46b))
+
 ## [1.5.1](https://github.com/actovia-ai/homepage/compare/v1.5.0...v1.5.1) (2026-10-31)
 
 
