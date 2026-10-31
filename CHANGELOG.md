@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/actovia-ai/homepage/compare/v1.5.3...v1.6.0) (2026-10-31)
+
+
+### Features
+
+* **site:** showcase iPhone Duo and Health with native galleries ([1e65cdc](https://github.com/actovia-ai/homepage/commit/1e65cdc3df3c25eb4940bcea56bb99f7ae7641c9))
+
 ## [1.5.3](https://github.com/actovia-ai/homepage/compare/v1.5.2...v1.5.3) (2026-10-31)
 
 
