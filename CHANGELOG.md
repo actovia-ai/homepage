@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/actovia-ai/homepage/compare/v1.5.2...v1.5.3) (2026-10-31)
+
+
+### Bug Fixes
+
+* **site:** make brand links perform native navigation ([f52f288](https://github.com/actovia-ai/homepage/commit/f52f2887d1aff75aa39eb44c969ad40c4d4e2a96))
+
 ## [1.5.2](https://github.com/actovia-ai/homepage/compare/v1.5.1...v1.5.2) (2026-10-31)
 
 
