@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useId, useState } from 'react'
 
+import { AppStoreBadge } from '@/app/_components/app-store-badge'
 import { Terminal, Token } from '@/app/_components/terminal'
 import type { Downloads } from '@/app/_lib/release'
 import { APP_STORE_URL, RELEASES_URL } from '@/app/_lib/release'
@@ -138,14 +139,7 @@ export function Download({ downloads }: { downloads: Downloads }) {
                       the Mac app, which works on its own.
                     </p>
                     <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-                      <a
-                        href={APP_STORE_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border-hairline text-graphite hover:text-ink inline-flex items-center gap-3 rounded-[3px] border px-5 py-3 font-medium transition-colors"
-                      >
-                        Download on the App Store
-                      </a>
+                      <AppStoreBadge />
                       <Link
                         href="/docs/iphone"
                         className="text-graphite hover:text-ink text-sm underline"

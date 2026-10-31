@@ -1,9 +1,10 @@
-import { ArrowRight, ArrowUpRight, Smartphone } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 
+import { AppStoreBadge } from '@/app/_components/app-store-badge'
 import { GithubMark } from '@/app/_components/local-nav'
 import { ProviderMarks } from '@/app/_components/models'
 import { AppWindow } from '@/app/_components/run-card'
-import { APP_STORE_URL, RELEASES_URL, REPO_URL } from '@/app/_lib/release'
+import { RELEASES_URL, REPO_URL } from '@/app/_lib/release'
 
 /**
  * The first viewport: a pill with the release, a headline whose two places
@@ -65,15 +66,7 @@ export function Hero({
                   className="text-sun size-4.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                 />
               </a>
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-hairline bg-panel text-ink hover:bg-sunk inline-flex items-center gap-2.5 rounded-[6px] border px-5 py-3 text-base font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
-              >
-                <Smartphone aria-hidden className="size-4" />
-                Get it on the App Store
-              </a>
+              <AppStoreBadge />
               <a
                 href={REPO_URL}
                 className="border-hairline bg-panel text-ink hover:bg-sunk inline-flex items-center gap-2.5 rounded-[6px] border px-5 py-3 text-base font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
