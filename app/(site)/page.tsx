@@ -4,9 +4,11 @@ import { join } from 'node:path'
 import { Download } from '@/app/_components/download'
 import { FeaturePanel } from '@/app/_components/feature-panel'
 import { Footer } from '@/app/_components/footer'
+import { Health } from '@/app/_components/health'
 import { Hero } from '@/app/_components/hero'
 import { Highlights } from '@/app/_components/highlights'
 import { IPhone } from '@/app/_components/iphone'
+import { IPhoneDuo } from '@/app/_components/iphone-duo'
 import { LocalNav } from '@/app/_components/local-nav'
 import { Privacy } from '@/app/_components/privacy'
 import { RunStory } from '@/app/_components/run-story'
@@ -49,6 +51,8 @@ export default async function Page() {
           </Terminal>
         </FeaturePanel>
         <IPhone />
+        <IPhoneDuo />
+        <Health />
         <Privacy />
         <Specs />
         <Download downloads={downloads} />

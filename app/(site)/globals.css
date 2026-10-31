@@ -180,47 +180,8 @@
 }
 
 /*
-  Scenes: the page's one scroll-driven chapter. The stage stays put (sticky)
-  while --p, written by the component from the chapter's scroll position
-  (0 → 1), moves the scenes through it; one gesture moves the page one scene
-  (100vh each, the component's own eased move). --t is a scene's distance from the
-  centre, in scenes: the screen travels 22vh per scene and the copy 10vh, so
-  the two drift apart — the parallax. A scene is whole within ±0.45 of the
-  centre and gone past ±0.8, so during a move the one leaving is gone before
-  the one arriving is whole. Transform and opacity only, on the compositor.
-*/
-.scenes {
-  --p: 0;
-  height: calc(var(--n) * 100vh);
-}
-.scenes-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-.scene-copy,
-.scene-shot {
-  --t: calc(var(--p) * (var(--n) - 1) - var(--i));
-  --a: max(var(--t), calc(-1 * var(--t)));
-  --k: clamp(0, calc((0.8 - var(--a)) / 0.35), 1);
-  position: absolute;
-  inset: 0;
-  opacity: var(--k);
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-.scene-copy {
-  transform: translate3d(0, calc(var(--t) * -10vh), 0);
-}
-.scene-shot {
-  transform: translate3d(0, calc(var(--t) * -22vh), 0)
-    scale(calc(1 - 0.06 * min(var(--a), 1)));
-}
-
-/*
   Reveal: a section's blocks fade and rise into view as they arrive
-  (smooth-scroll.tsx marks them). Siblings a beat apart; once in, in.
+  (page-reveal.tsx marks them). Siblings a beat apart; once in, in.
 */
 [data-reveal] {
   opacity: 0;
@@ -233,11 +194,6 @@
 [data-reveal][data-in] {
   opacity: 1;
   transform: none;
-}
-
-/* Lenis smooths the scroll; the browser's own smoothing would fight it. */
-html.lenis {
-  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

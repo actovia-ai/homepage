@@ -39,9 +39,9 @@ export function Hero({
 
         <h1 className="type-hero mt-7 max-w-[18ch]">
           The AI assistant that runs on{' '}
-          <span className="hero-mark bg-ink text-paper">your computer</span>{' '}
-          and answers{' '}
-          <span className="hero-mark bg-sun text-coal">your phone</span>.
+          <span className="hero-mark bg-ink text-paper">your computer</span> and
+          answers <span className="hero-mark bg-sun text-coal">your phone</span>
+          .
         </h1>
 
         <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-x-16 lg:gap-y-8">
@@ -66,7 +66,6 @@ export function Hero({
                   className="text-sun size-4.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
                 />
               </a>
-              <AppStoreBadge />
               <a
                 href={REPO_URL}
                 className="border-hairline bg-panel text-ink hover:bg-sunk inline-flex items-center gap-2.5 rounded-[6px] border px-5 py-3 text-base font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
@@ -86,6 +85,15 @@ export function Hero({
               </a>
               .
             </p>
+            <div className="border-hairline mt-6 flex items-center gap-5 border-t pt-5">
+              <div>
+                <p className="text-ink text-sm font-medium">
+                  Take it with you.
+                </p>
+                <p className="text-graphite mt-1 text-sm">Actovia for iPhone</p>
+              </div>
+              <AppStoreBadge />
+            </div>
           </div>
 
           <ProviderMarks className="lg:-mt-2" />

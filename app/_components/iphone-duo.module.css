@@ -1,0 +1,101 @@
+.track {
+  overflow-x: clip;
+}
+.track[data-moving] {
+  height: 240svh;
+}
+.sticky {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+.track[data-moving] .sticky {
+  position: sticky;
+  top: 0;
+}
+.stage {
+  perspective: 2600px;
+  padding: 24px 0;
+}
+.device {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2853 / 2007;
+  transform-style: preserve-3d;
+  transform-origin: 25% 50%;
+}
+.half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+.left,
+.front,
+.back {
+  overflow: hidden;
+  background: #141413;
+  border: 7px solid #141413;
+}
+.left {
+  left: 0;
+  width: calc(50% + 1px);
+  border-right: 0;
+  border-radius: 24px 0 0 24px;
+}
+.right {
+  left: 50%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.front {
+  border-left: 0;
+  border-radius: 0 24px 24px 0;
+}
+.back {
+  transform: rotateY(180deg) translateZ(1px);
+  border-radius: 24px;
+}
+.face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  max-width: none;
+  object-fit: fill;
+}
+.faceRight {
+  left: -100%;
+}
+.folded {
+  object-fit: cover;
+}
+@media (width < 64rem) {
+  .sticky {
+    min-height: 100svh;
+  }
+  .stage {
+    width: min(100%, 680px);
+    margin-inline: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint {
+    display: none;
+  }
+  .track[data-moving] {
+    height: auto;
+  }
+  .sticky,
+  .track[data-moving] .sticky {
+    position: static;
+    min-height: 0;
+  }
+}

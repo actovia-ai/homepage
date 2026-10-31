@@ -1,22 +1,11 @@
 'use client'
 
-import { ReactLenis } from 'lenis/react'
 import { useEffect, type ReactNode } from 'react'
 
-import 'lenis/dist/lenis.css'
-
-/**
- * The page's scroll (owner's ask, 2026-10-22): Lenis smooths the wheel —
- * 1.2 s of ease-out per gesture — and the blocks of each section fade and
- * rise into view as they arrive (`[data-reveal]`, in globals.css).
- *
- * The Scenes chapter runs its own one-gesture-per-scene move while its stage
- * is pinned; it says so on `<html data-scenes-pinned>`, and Lenis leaves those
- * wheel events alone (`virtualScroll`), so the two never pull at once.
- */
+/** Reveal content on arrival without controlling page scrolling. */
 // A section's blocks: the children of its container; a grid's cells one by one rather than the grid whole.
 const REVEAL = [
-  'main > section:not(#top):not(#scenes) > div > :not(.grid)',
+  'main > section:not(#top):not(#scenes):not(#iphone-duo) > div > :not(.grid)',
   'main > section:not(#top):not(#scenes) > div > .grid > *',
   'main > section:not(#top):not(#scenes) > :is(ul, ol) > li'
 ].join(', ')
@@ -48,22 +37,7 @@ function useReveal() {
   }, [])
 }
 
-export function SmoothScroll({ children }: { children: ReactNode }) {
+export function PageReveal({ children }: { children: ReactNode }) {
   useReveal()
-  return (
-    <ReactLenis
-      root
-      options={{
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        duration: 1.2,
-        smoothWheel: true,
-        // The nav's `#…` links scroll instead of jumping; the header is 72px.
-        anchors: { offset: -72 },
-        // The pinned Scenes chapter takes the wheel itself.
-        virtualScroll: () => !document.documentElement.hasAttribute('data-scenes-pinned')
-      }}
-    >
-      {children}
-    </ReactLenis>
-  )
+  return children
 }

@@ -1,4 +1,4 @@
-import { SmoothScroll } from '@/app/_components/smooth-scroll'
+import { PageReveal } from '@/app/_components/page-reveal'
 import type { Metadata, Viewport } from 'next'
 import {
   Fredoka,
@@ -71,7 +71,7 @@ export default function RootLayout({
       className={`${fredoka.variable} ${display.variable} ${sans.variable} ${mono.variable}`}
     >
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <PageReveal>{children}</PageReveal>
       </body>
     </html>
   )

@@ -28,6 +28,21 @@ export function shotFiles(spec: ShotSpec): string[] {
 }
 
 export const SHOTS = {
+  healthHome: {
+    file: '/docs/shots/ios-health-home.png',
+    size: [720, 1565],
+    brief: 'Health: Ody, the daily note, sleep, activity and recovery.'
+  },
+  healthCalendar: {
+    file: '/docs/shots/ios-health-calendar.png',
+    size: [720, 1565],
+    brief: 'Health: the calendar and monthly trends.'
+  },
+  healthReport: {
+    file: '/docs/shots/ios-health-report.png',
+    size: [720, 1565],
+    brief: 'Health: a monthly report with insights and comparisons.'
+  },
   hero: {
     file: '/shots/hero-main-window.png',
     size: [2880, 1800],
@@ -95,7 +110,8 @@ export const SHOTS = {
   scenePhotos: {
     file: '/shots/scene-photos.png',
     size: [1600, 1000],
-    brief: 'A web search’s pictures under the answer, numbered with the sources.'
+    brief:
+      'A web search’s pictures under the answer, numbered with the sources.'
   },
   sceneStocks: {
     file: '/shots/scene-stocks.png',

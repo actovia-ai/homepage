@@ -169,12 +169,12 @@ by one-pixel rules rather than separated into floating cards.
 The world explicitly rejects the centred-icon, centred-headline,
 black-chapter Apple pastiche it replaced.
 
-One chapter moves with the scroll: **Scenes** (owner's ask, 2026-10-22). Its
-stage stays put while ten screens pass through it, the copy drifting slower
-than the screen — the parallax of a product page, on this page's paper and
-left-set type, never on black. The motion is `transform` and `opacity` only,
-driven by one scroll-progress variable, and under `prefers-reduced-motion`
-the chapter is a plain stacked list.
+**Scenes** is a horizontal product gallery (owner's revision, 2026-10-31):
+large paper-toned cards, the next card peeking in, with manual arrows and
+progress dots. Native horizontal scroll snap supports touch and keyboard;
+vertical scrolling always belongs to the page. Gallery corners are 16px.
+The iPhone Duo chapter uses a passive scroll-linked book fold to demonstrate
+the compact and expanded app layouts; reduced motion shows it unfolded.
 
 **Key Characteristics:**
 - Pale neutral ground and near-black ink; one sunflower accent as a marker.
@@ -368,12 +368,10 @@ bottom-right corner. Keycaps carry a 3px bottom border as their only depth.
 - **Do** divide grouped items with a 1px hairline sheet rather than separate cards.
 - **Do** keep terminals black in both schemes and redefine tokens, not components, for dark mode.
 - **Do** ease everything with `cubic-bezier(0.23, 1, 0.32, 1)` and keep UI transitions at 150–360ms.
-- **Do** keep scroll-driven motion to the Scenes chapter: a sticky stage,
-  scenes moved in `transform`/`opacity` from one progress variable, the copy
-  slower than the screen, one gesture per scene, and a static list under
-  reduced motion.
-- **Do** let the page scroll under Lenis (`smooth-scroll.tsx`: 1.2 s
-  ease-out per gesture) and let a section's blocks fade and rise into view
+- **Do** use native page scrolling and a manual horizontal Scenes gallery;
+  never lock or intercept the visitor's vertical scroll. The Duo fold follows
+  scroll progress without consuming wheel or touch events.
+- **Do** let a section's blocks fade and rise into view
   once, 700 ms, siblings 70 ms apart (`[data-reveal]`); never animate a
   block that is already on screen at load, and never under reduced motion.
 
