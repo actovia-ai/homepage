@@ -99,3 +99,10 @@
     min-height: 0;
   }
 }
+
+/* The picture needs a real box for native lazy loading in the rotating faces. */
+.picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}

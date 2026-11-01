@@ -1,35 +1,32 @@
-# Actovia homepage
+# Actovia website and documentation
 
-The product page for [Actovia](https://github.com/actovia-ai/actovia), in the
-style of an Apple product page: a pinned product bar, a hero with the app
-icon and window, alternating light and dark chapters, a pinned scroll story,
-Tech specs, downloads, and the name edge to edge at the bottom.
+[actovia.yancey.app](https://actovia.yancey.app) is the product homepage and Fumadocs user guide for the [desktop app](https://github.com/actovia-ai/actovia), [native iOS companion](https://apps.apple.com/app/actovia/id6824829679) and [CLI](https://github.com/actovia-ai/cli).
+
+The homepage includes platform downloads, the product gallery, use cases, Philharmonic, Health and a scroll-linked iPhone Duo fold. The compact navigation bar links to sections; the logo returns to the page top. The official App Store badge and all iOS links use a region-neutral App Store URL.
+
+## Develop
 
 ```bash
 pnpm install
 pnpm dev      # http://localhost:3000
 pnpm lint
+pnpm exec tsc --noEmit
 pnpm build
+pnpm start    # preview the production build
 ```
 
-## Screenshots
+Read `AGENTS.md` and the relevant Next.js documentation under `node_modules/next/dist/docs/` before framework changes. The installed Next.js version is the source of truth.
 
-Every screenshot is listed in `app/_lib/shots.ts` with what to capture and at
-what size. Until a file exists, the page shows a window-shaped placeholder
-that says the same. To fill one in, capture the Actovia window at 2x (on macOS,
-⌘⇧4 then Space, and hold Option while clicking to leave out the shadow),
-export it at the listed size, and save it under `public/` at the listed path.
-Each shot has a light and a dark capture: `name.png` in light mode and
-`name-dark.png` in dark mode, and visitors see the one for their system (shots
-marked `darkOnly` sit on black sections and need only the dark one). If one is
-missing the other is used for both. The page picks new files up on the next
-build.
+## Content and screenshots
 
-## Brand
+- `app/(site)/page.tsx` and `app/_components/` contain the marketing page.
+- `content/docs/` contains MDX guides; `components/screenshot.tsx` renders documentation captures.
+- `app/_lib/shots.ts` lists marketing screenshots. `docs/screenshot-shotlist.md` describes capture requirements.
+- Put light captures in `public/shots/name.png` and dark captures in `name-dark.png`. Match the same scene, theme and dimensions; open a real conversation rather than an empty chat. The Duo fold needs both folded and open views in both themes.
+- `public/brand/` and `app` icons come from the desktop repo's `bun run icons`. Provider logos are LobeHub's AI brand SVGs (MIT).
 
-`public/brand/` holds the Ody app icon (the Icon Composer Liquid Glass export)
-and Ody's layers, and `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png`
-and `app/opengraph-image.png` are the web set. All of them are generated in
-the app repo by `bun run icons` (`brand/`); copy them over after a change.
-Provider marks in `public/provider-logos/` are LobeHub's AI brand icons
-(`@lobehub/icons-static-svg`, MIT).
+Never place API keys, personal chat exports or simulator data in this repository. Use curated demo conversations for public screenshots.
+
+## Deployment
+
+The repository includes OpenNext/Cloudflare scripts (`pnpm preview`, `pnpm deploy`) as well as the standard Next.js build used by the configured hosting platform. Keep deployment credentials and project linkage outside source control. A source commit does not itself verify that production has deployed; inspect the host's deployment result separately.

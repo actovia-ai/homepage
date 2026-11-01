@@ -84,13 +84,19 @@ export function IPhoneDuo() {
                   <Face side="right" />
                 </div>
                 <div className={styles.back}>
-                  <Image
-                    src="/shots/duo-folded.png"
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 360px"
-                    className={styles.folded}
-                  />
+                  <picture className={styles.picture}>
+                    <source
+                      srcSet="/shots/duo-folded-dark.png"
+                      media="(prefers-color-scheme: dark)"
+                    />
+                    <Image
+                      src="/shots/duo-folded.png"
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 360px"
+                      className={styles.folded}
+                    />
+                  </picture>
                 </div>
               </div>
             </div>
@@ -103,13 +109,19 @@ export function IPhoneDuo() {
 
 function Face({ side }: { side: 'left' | 'right' }) {
   return (
-    <Image
-      src="/shots/duo-open.png"
-      alt=""
-      width={2853}
-      height={2007}
-      sizes="(max-width: 1024px) 90vw, 800px"
-      className={`${styles.face} ${side === 'right' ? styles.faceRight : ''}`}
-    />
+    <picture className={styles.picture}>
+      <source
+        srcSet="/shots/duo-open-dark.png"
+        media="(prefers-color-scheme: dark)"
+      />
+      <Image
+        src="/shots/duo-open.png"
+        alt=""
+        width={2853}
+        height={2007}
+        sizes="(max-width: 1024px) 90vw, 800px"
+        className={`${styles.face} ${side === 'right' ? styles.faceRight : ''}`}
+      />
+    </picture>
   )
 }
