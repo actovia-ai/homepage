@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/actovia-ai/homepage/compare/v1.6.1...v1.6.2) (2026-11-01)
+
+
+### Bug Fixes
+
+* show real Duo chats in both color schemes ([633adb8](https://github.com/actovia-ai/homepage/commit/633adb837edda0cd3adcf03654ab2bbed3324a7c))
+
 ## [1.6.1](https://github.com/actovia-ai/homepage/compare/v1.6.0...v1.6.1) (2026-10-31)
 
 
