@@ -1,0 +1,139 @@
+---
+title: Actovia Web
+description: Pair a browser as its own device and use Chat and Philharmonic from your private HTTPS address.
+icon: Globe
+---
+
+Actovia Web is a remote terminal for the Actovia app running on your Mac,
+just like the iPhone app. The Mac keeps your chats, API keys and memory and
+runs the models and tools. Each browser profile is paired as a separate
+device; pairing a browser does not reuse or replace your phone.
+
+You need a running Mac host, a private HTTPS address that reaches it, and a
+browser that supports passkeys. There is no separate cloud account or
+hosted copy of your data.
+
+## Set up the connection
+
+The browser access switch starts Actovia's local web server. Tailscale Serve
+provides the private HTTPS reverse proxy to that server; the switch does not
+configure or replace Tailscale. Pairing authorizes each browser independently.
+
+A browser is its own device, separate from your iPhone. Each browser profile
+gets a name, credentials and its own entry in **Settings → Devices**. Reloading
+or unlocking it resumes that device; it does not add another one.
+
+1. Keep Actovia running on your Mac. Install [Tailscale](https://tailscale.com)
+   on the Mac and the computer running the browser, and connect both to your
+   private tailnet.
+2. On the Mac, inspect any existing Serve configuration with
+   `tailscale serve status`. If its HTTPS root is unused, run:
+
+   ```bash
+   tailscale serve --bg http://127.0.0.1:63130
+   ```
+
+   Tailscale may ask you to enable HTTPS certificates. Use the private HTTPS
+   address it prints. Do not replace an existing Serve route that another app
+   uses; choose another HTTPS port if needed, and include it in the address.
+   See the [Serve command reference](https://tailscale.com/docs/reference/tailscale-cli/serve).
+
+3. In Actovia, open **Settings → Devices → Browser terminals**. Enter that
+   HTTPS address, turn on browser access and save. The address must be an
+   origin, such as `https://your-mac.example.ts.net`, without a path or query.
+4. Choose **Pair a browser**. Open the address in the browser, give the device
+   a name, paste the one-time code and create a passkey when prompted. The
+   code expires in two minutes and is consumed once; after a cancelled
+   verification, create a new code.
+
+<Screenshot
+  id="settings-web-access"
+  platform="desktop"
+  layout="content"
+  src="/docs/shots/settings-web-access.png"
+  caption="Browser terminals in the Mac app's Devices settings. This example uses a placeholder HTTPS address; enter the address from your own proxy."
+/>
+
+<Screenshot
+  id="web-pairing"
+  platform="desktop"
+  layout="content"
+  src="/docs/shots/web-pairing.png"
+  caption="The browser's first connection: name this device, enter a fresh pairing code, then create a passkey."
+/>
+
+Actovia does not configure Tailscale, sign you in to a VPN, or enable Funnel.
+Do not forward the trusted local API on port `60223`. A private HTTPS reverse
+proxy other than Tailscale works too: forward to `127.0.0.1:63130`, preserve
+the original `Host`, and allow streaming responses without buffering. The
+proxy address and Actovia's configured browser address must match exactly.
+Tailscale network membership alone never grants access to chats. Use a hostname whose other services you trust: browser cookies are scoped to the hostname, including across ports.
+
+## Connection troubleshooting
+
+Check the browser's system proxy. A browser may send the private Tailscale
+hostname through an HTTP/SOCKS proxy even when `curl` connects directly.
+This can produce `ERR_CONNECTION_CLOSED` before Actovia receives the request.
+
+Add your exact Tailscale hostname, without `https://` or a path, to the proxy
+client's system-proxy bypass list. On macOS, you can also add it under
+**System Settings → Network → your network service → Details → Proxies →
+Bypass proxy settings for these hosts & domains**. Keep the existing entries.
+See [Apple's proxy settings guide](https://support.apple.com/guide/mac-help/mchlp2591/mac).
+
+Turning the system proxy off briefly can distinguish a proxy-routing problem
+from an Actovia or Tailscale problem. You do not need to reconfigure Serve if
+the same HTTPS URL already works when connected directly.
+
+## Use, lock and revoke a browser
+
+After pairing, use Chat, Philharmonic and Scheduled with the same remote
+permissions as a phone, including messages, approvals and stopping work.
+Models, CLI employees and computer/browser automation run on the Mac. File
+uploads and microphone recording use the device running the browser.
+
+A passkey verification unlocks a server-side browser session. It expires after
+30 minutes without user activity, or 12 hours absolutely; polling and open
+streams do not keep it unlocked. An expired session or a Mac app restart
+requires another passkey verification, without pairing again. Locking the Mac
+app invalidates browser sessions too. Verifying a paired browser can unlock
+the app remotely, like the phone's user verification.
+
+<Screenshot
+  id="web-unlock"
+  platform="desktop"
+  layout="content"
+  src="/docs/shots/web-unlock.png"
+  caption="An already paired browser uses its passkey to reconnect. Unlocking resumes the same device."
+/>
+
+Choose **Lock this browser** from its account menu or **Settings → Devices**
+to end only its session. Choose **Forget this browser** to remove only that
+device. Revoke it from the Mac's device list to cut its access and active
+streams; other phones and browsers stay paired. Turning off browser access
+stops its listener and invalidates active Web sessions, while retaining the
+paired-device records and the phone connection.
+
+The browser binding lasts 90 days. Clearing site cookies, using a different
+browser profile or pairing again after the binding expires creates a new
+device; revoke stale entries from the Mac. Passkeys may sync between devices,
+so the browser binding identifies the paired profile rather than claiming a
+non-transferable hardware identity. If you lose its passkey, forget/revoke the
+browser and pair it again. This version requires a passkey-capable browser
+and trusted HTTPS; it has no browser PIN fallback.
+
+Native host controls such as opening Terminal, choosing a Mac folder and
+installing updates remain in the Mac app. Generated HTML Artifacts are shown
+as inert source with download in the browser; interactive execution remains
+in the Mac app. A browser does not gain iPhone HealthKit access.
+
+## Browser automation is a different feature
+
+**Browser terminals** let you use Actovia from a browser. **Browser Use** lets
+the AI operate a separate automated browser on the Mac. Pairing a terminal
+does not connect the automation engine to your personal browser tabs or
+cookies. Configure automation in the Mac app under
+[Computer & Browser Use](/docs/tools/computer-use).
+
+For phone pairing, host listeners and keeping the Mac awake, see
+[Remote access](/docs/remote-access).

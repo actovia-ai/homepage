@@ -28,46 +28,46 @@ export default function PrivacyPage() {
     <>
       <LocalNav downloadHref="/#download" />
       <main className="mx-auto max-w-[1328px] px-5 py-20 sm:px-8 sm:py-28">
-      <header className="max-w-[60ch]">
-        <p className="tag">Privacy policy</p>
-        <h1 className="type-headline mt-6">Your data stays home.</h1>
-        <p className="type-lede text-graphite mt-6">
-          Actovia is an AI assistant that runs on your own computer, and
-          Actovia for iPhone is a remote for it. There is no account, no
-          server of ours in between, and no analytics. The only things that
-          leave your devices are the requests you send to the model provider
-          and the tools you set up yourself. This page says exactly what those
-          are. Effective {EFFECTIVE}.
-        </p>
-      </header>
+        <header className="max-w-[60ch]">
+          <p className="tag">Privacy policy</p>
+          <h1 className="type-headline mt-6">Your data stays home.</h1>
+          <p className="type-lede text-graphite mt-6">
+            Actovia is an AI assistant that runs on your own computer, and
+            Actovia for iPhone is a remote for it. There is no account, no
+            server of ours in between, and no analytics. The only things that
+            leave your devices are the requests you send to the model provider
+            and the tools you set up yourself. This page says exactly what those
+            are. Effective {EFFECTIVE}.
+          </p>
+        </header>
 
-      <div className="mt-16 grid gap-16 lg:grid-cols-12">
-        <nav
-          aria-label="Sections"
-          className="text-graphite text-sm lg:col-span-3 lg:sticky lg:top-24 lg:self-start"
-        >
-          <ol className="space-y-2">
+        <div className="mt-16 grid gap-16 lg:grid-cols-12">
+          <nav
+            aria-label="Sections"
+            className="text-graphite text-sm lg:col-span-3 lg:sticky lg:top-24 lg:self-start"
+          >
+            <ol className="space-y-2">
+              {SECTIONS.map((s) => (
+                <li key={s.id}>
+                  <a href={`#${s.id}`} className="hover:text-ink">
+                    {s.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          <div className="prose-actovia lg:col-span-9">
             {SECTIONS.map((s) => (
-              <li key={s.id}>
-                <a href={`#${s.id}`} className="hover:text-ink">
-                  {s.title}
-                </a>
-              </li>
+              <section key={s.id} id={s.id} className="border-hairline border-t py-10 first:border-t-0 first:pt-0">
+                <h2 className="type-title max-w-[24ch]">{s.title}</h2>
+                <div className="text-graphite mt-5 max-w-[68ch] space-y-4 font-light">
+                  {s.body}
+                </div>
+              </section>
             ))}
-          </ol>
-        </nav>
-
-        <div className="prose-actovia lg:col-span-9">
-          {SECTIONS.map((s) => (
-            <section key={s.id} id={s.id} className="border-hairline border-t py-10 first:border-t-0 first:pt-0">
-              <h2 className="type-title max-w-[24ch]">{s.title}</h2>
-              <div className="text-graphite mt-5 max-w-[68ch] space-y-4 font-light">
-                {s.body}
-              </div>
-            </section>
-          ))}
+          </div>
         </div>
-      </div>
       </main>
       <Footer />
     </>
@@ -138,7 +138,7 @@ const SECTIONS: { id: string; title: string; body: React.ReactNode }[] = [
         </p>
         <p>
           <Dest>Two things of ours</Dest>: the Skills Market browses the
-          skills.sh registry through a relay we host (skills-md.yancey.app),
+          skills.sh registry through a relay we host (skills-sh.yancey.app),
           which receives the search terms and the id of a skill you open or
           install and nothing about you; and the desktop app asks
           update.electronjs.org whether a newer version exists, sending the

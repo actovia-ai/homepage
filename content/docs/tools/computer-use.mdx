@@ -1,77 +1,111 @@
 ---
-title: Computer Use
-description: Experimental. Let the model operate one app window on your Mac, step by step, while you watch.
+title: Computer & Browser Use
+description: Let the AI operate allowlisted desktop apps or a separate automated browser on your computer.
 icon: MousePointer2
 ---
 
-Computer Use lets the model work an app the way a person would: it looks at a
-screenshot of one window, moves a virtual mouse and types, then looks again.
-It is useful for apps that have no other way in.
+Actovia uses two bundled open-source engines:
+[agent-desktop](https://github.com/vercel-labs/agent-desktop) for desktop apps
+and [agent-browser](https://github.com/vercel-labs/agent-browser) for websites.
+The selected model reads the available controls, takes an action, then checks
+the result. You can use these tools in Chat and Philharmonic.
 
 <Callout type="warn" title="Experimental">
-  Computer Use is an early version. It is slow, it can misread the screen or
-  click the wrong thing, and it only acts while the app it works in is in front
-  of every other window. Watch it while it works, and stop it with **⌥⇧⎋** if it
-  goes astray. The **Settings → Computer Use** page carries the same notice.
+  Automation can act on the wrong control or misunderstand a result. Follow its
+  tool activity and stop the current run if needed. **⌥⇧⎋** (Option-Shift-Escape
+  on macOS; Alt-Shift-Escape on Windows/Linux) interrupts active desktop and
+  browser actions on the host.
 </Callout>
 
-It is **off by default** and macOS only. To set it up, open **Settings →
-Computer Use**:
-
-1. **Enable Computer Use**.
-2. Add the apps it may touch under **Allowlisted apps** — pick from the apps
-   installed on this Mac. It never touches anything else, and never Actovia
-   itself. An allowlisted app that is not running is opened for it.
-3. Optionally set **Max steps** (default 25) and **Settle delay** (how long to
-   wait after each action before the next screenshot, default 800 ms).
-
-The model needs to be one that understands images.
-
-## Allow it in macOS
-
-Computer Use needs two macOS permissions, both for Actovia itself. Open
-**System Settings → Privacy & Security** and, on each of the two pages below,
-switch **Actovia** on — or, if it is not in the list, click **+** and choose
-Actovia from Applications. Quit and reopen Actovia afterwards: macOS applies
-the change on the next launch.
-
-- **Accessibility** lets it move the pointer and type. On macOS 27 the page is
-  called **Device Control and Data Access**.
-
-<Screenshot
-  id="macos-device-control"
-  platform="macos"
-  theme="light"
-  src="/docs/shots/macos-device-control.png"
-  caption="System Settings → Privacy & Security → Device Control and Data Access (Accessibility before macOS 27), with Actovia switched on."
-/>
-
-- **Screen Recording** lets it see the window it works in. The page is called
-  **Screen & System Audio Recording**.
-
-<Screenshot
-  id="macos-screen-recording"
-  platform="macos"
-  theme="light"
-  src="/docs/shots/macos-screen-recording.png"
-  caption="System Settings → Privacy & Security → Screen & System Audio Recording, with Actovia switched on."
-/>
-
-Without Screen Recording it cannot see the window; without Accessibility its
-clicks and keystrokes do nothing.
-
-## Watching a session
-
-Ask for something in an allowlisted app ("write a line in Notes") and a
-**Computer Use** card follows each step with its screenshot and action
-(**Step 3: click …**). If the model needs you, it asks in the card — **Type a
-reply, or leave blank when done**. **Stop** ends the session, and so does
-**⌥⇧⎋** (Option-Shift-Escape) from anywhere. Every session is logged.
+Configure both engines in the **Mac app → Settings → Computer & Browser Use**.
+These host settings are not exposed in a paired browser terminal.
 
 <Screenshot
   id="settings-computer-use"
   platform="desktop"
-  theme="light"
+  layout="content"
   src="/docs/shots/settings-computer-use.png"
-  caption="Settings → Computer Use: the Experimental notice, the switch, the allowlisted apps, Max steps and Settle delay."
+  caption="The current Computer & Browser Use settings, with example Notes and Calendar access, separate desktop and browser limits, and the browser window hidden."
 />
+
+## Desktop automation
+
+Computer Use is **off by default**. To enable it:
+
+1. Open the apps you want the AI to work in.
+2. Turn on **Enable Computer Use**.
+3. Add those apps under **Allowlisted apps**. The picker lists running apps,
+   not every installed app. An app must still be running when the AI uses it.
+4. Set **Max steps** if needed. The default is **25** observations and actions
+   per agent run; the allowed range is 1–100.
+
+Only allowlisted targets are accepted, and Actovia cannot target itself.
+The engine reads the app's accessibility tree and acts on the controls it
+finds. Actovia uses its headless mode: actions do not move your pointer or
+take focus. This replaces the earlier screenshot-and-mouse loop; there is no
+**Settle delay** setting in the current UI.
+
+For example, ask: “In Notes, create a note called Weekend checklist and add
+these three items…” The model observes the running app first, then uses
+references from that observation and observes again to verify the result.
+If an app exposes too little accessibility information, the task may be
+blocked even when its window is visible.
+
+### macOS permissions
+
+Desktop accessibility actions require **Accessibility** permission. Open
+**System Settings → Privacy & Security → Accessibility**; on newer macOS
+versions the page may be called **Device Control and Data Access**. Grant
+access to the Actovia host or helper identified by the permission request,
+then retry the task. Development builds can be identified differently from
+the installed app, so follow the actual process named by macOS.
+
+Screen Recording is needed for screenshot operations in the upstream engine;
+it is not a prerequisite for Actovia's current accessibility-only desktop
+workflow. The old instruction to enable both permissions before every task
+no longer applies. See the engine's
+[permission guide](https://github.com/vercel-labs/agent-desktop/blob/v1.1.0/docs/install.md#permissions)
+if a permission error remains.
+
+## Browser automation
+
+Browser Use operates a **separate browser session on the host computer**.
+It does not attach to your normal browser, inherit its tabs or reuse its
+signed-in cookies. Desktop app allowlists do not apply to this session.
+
+| Setting                 | Default | What it changes                                                                                     |
+| ----------------------- | ------- | --------------------------------------------------------------------------------------------------- |
+| Enable Browser Use      | On      | Allows browser actions. Turning it off blocks the next action; an existing session can still close. |
+| Show browser window     | Off     | Shows the automated browser so you can follow it. Changes apply to new sessions.                    |
+| Browser actions per run | 100     | Limits browser calls in one agent run (1–500). Closing remains possible after the limit.            |
+
+Ask for a concrete website task, such as “Open the project documentation and
+find the installation requirements.” The model navigates, inspects the page,
+acts on its controls and checks the outcome. It should ask you when a login,
+CAPTCHA or an owner-only decision is required. Each agent run gets its own
+session, which is closed when the run ends.
+
+Actovia uses an installed Chrome, Edge or Chromium when it finds one. If
+browser startup reports a missing executable, install a supported browser
+on the host and retry. Showing the automated browser window does not switch
+it to your personal browser profile.
+
+## Follow or stop a run
+
+Tool activity in the conversation shows the automation engine, command and
+result, including failures. The current engine reports structured controls
+and action results, rather than the old per-step screenshot card.
+
+Use the conversation's **Stop** control to cancel a run, or the host's
+**⌥⇧⎋** shortcut to interrupt active automation calls. If a step budget is
+reached, the model should report what remains instead of silently continuing
+through another route. Allowlist and enable switches are checked again on
+subsequent actions.
+
+## Three browser features, three purposes
+
+- **Browser Use** lets the AI interact with websites in its own host session.
+- **[Web search & fetch](/docs/tools/web)** retrieves search results and page
+  content without operating a browser UI.
+- **[Actovia Web](/docs/web)** lets you use Chat and Philharmonic from a paired
+  remote browser. It is a device connection, not an automation engine.

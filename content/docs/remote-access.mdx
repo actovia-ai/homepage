@@ -1,15 +1,16 @@
 ---
 title: Remote access
-description: How the iPhone app and the CLI reach the desktop app.
+description: Pair phones and browsers as independent remote terminals for your Mac.
 icon: Smartphone
 ---
 
-The desktop app serves one API on two listeners:
+The desktop app keeps the data and runs the work. Phones and browsers are independently paired remote terminals that reach the same API:
 
-| Listener | Address                    | Who uses it                         |
-| -------- | -------------------------- | ----------------------------------- |
-| Loopback | `http://127.0.0.1:60223`   | The app's own window, the CLI       |
-| Network  | `https://<computer>:63129` | Paired phones (local network, Tailscale) |
+| Listener | Address                                 | Who uses it                              |
+| -------- | --------------------------------------- | ---------------------------------------- |
+| Loopback | `http://127.0.0.1:60223`                | The app's own window, the CLI            |
+| Network  | `https://<computer>:63129`              | Paired phones (local network, Tailscale) |
+| Browser  | Private HTTPS proxy → `127.0.0.1:63130` | Paired browsers; disabled by default     |
 
 The loopback listener cannot be reached from another machine. The network
 listener is HTTPS only, every request on it needs a paired device's token, and
@@ -25,6 +26,18 @@ code works once, and five wrong guesses close it.
 
 The phone keeps the computer's certificate fingerprint and refuses any other.
 The computer keeps only a hash of the phone's token.
+
+## Pairing a browser
+
+[Actovia Web](/docs/web) pairs each browser profile as its own device, separate
+from your phone. Enable **Browser terminals** in the Mac app's **Settings →
+Devices**, forward a private HTTPS address to `127.0.0.1:63130`, then pair with
+a one-time code and a passkey. The browser access switch starts Actovia's
+listener; Tailscale Serve supplies the reverse proxy.
+
+See the [Actovia Web guide](/docs/web) for setup, screenshots, passkey unlock,
+device revocation and connection troubleshooting. Browser automation is a
+separate feature under [Computer & Browser Use](/docs/tools/computer-use).
 
 ## From anywhere
 

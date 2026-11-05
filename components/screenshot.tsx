@@ -45,13 +45,16 @@ const PLATFORM_ICON: Record<Platform, ReactNode> = {
 /** The dark-scheme file of a capture, if one is published beside it. */
 function darkSourceOf(src: string): string | undefined {
   const dark = src.replace(/\.png$/u, '-dark.png')
-  return dark !== src && existsSync(join(process.cwd(), 'public', dark)) ? dark : undefined
+  return dark !== src && existsSync(join(process.cwd(), 'public', dark))
+    ? dark
+    : undefined
 }
 
 export function Screenshot({
   id,
   platform = 'desktop',
   theme = 'either',
+  layout = 'window',
   caption,
   src
 }: {
@@ -59,6 +62,8 @@ export function Screenshot({
   platform?: Platform
   /** The scheme the brief was written for; the capture itself follows the reader's scheme. */
   theme?: Theme
+  /** Content crops keep their own aspect instead of a full desktop window's. */
+  layout?: 'window' | 'content'
   /** What the shot shows — the brief while it is a slot, the caption once it is filled. */
   caption: string
   src?: string
@@ -77,16 +82,19 @@ export function Screenshot({
         <picture
           className={cn(
             FRAME[platform],
+            layout === 'content' && 'aspect-auto',
             'border-fd-border block overflow-hidden rounded-xl border'
           )}
         >
-          {dark && <source srcSet={dark} media="(prefers-color-scheme: dark)" />}
+          {dark && (
+            <source srcSet={dark} media="(prefers-color-scheme: dark)" />
+          )}
           <img
             src={src}
             alt={caption}
             loading="lazy"
             className={cn(
-              'size-full',
+              layout === 'content' ? 'h-auto w-full' : 'size-full',
               platform === 'macos' ? 'object-contain' : 'object-cover'
             )}
           />
@@ -123,7 +131,13 @@ export function Screenshot({
 }
 
 /** Phone shots side by side (two, or three with `cols={3}`), wrapping on a narrow screen. */
-export function ShotRow({ children, cols = 2 }: { children: ReactNode; cols?: 2 | 3 }) {
+export function ShotRow({
+  children,
+  cols = 2
+}: {
+  children: ReactNode
+  cols?: 2 | 3
+}) {
   return (
     <div
       className={cn(
