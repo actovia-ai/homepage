@@ -16,7 +16,7 @@ import { notFound } from 'next/navigation'
 type Props = { params: Promise<{ slug?: string[] }> }
 
 const CONTENT_ON_GITHUB =
-  'https://github.com/actovia-ai/homepage/blob/main/content/docs'
+  'https://github.com/actovia-ai/homepage/blob/master/content/docs'
 
 export default async function Page(props: Props) {
   const params = await props.params

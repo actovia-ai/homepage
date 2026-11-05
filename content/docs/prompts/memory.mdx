@@ -12,7 +12,7 @@ These internal tasks have dedicated formats. The conversational writing defaults
 
 Extracts and updates durable user memory.
 
-[Source: CONSOLIDATE_SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L150)
+[Source: CONSOLIDATE_SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L150)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -63,7 +63,7 @@ Return { "operations": [] } when nothing durable was learned and nothing known h
 
 Applies the user’s explicit memory edits.
 
-[Source: INSTRUCTION_SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L190)
+[Source: INSTRUCTION_SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L190)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -92,7 +92,7 @@ Return { "operations": [] } if the instruction doesn't call for a memory change.
 
 Selects entries relevant to the current message.
 
-[Source: READ_FILTER_SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L400)
+[Source: READ_FILTER_SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L400)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -109,7 +109,7 @@ If nothing is relevant: { "selectedMemoryIds": [] }
 
 The consolidation request envelope and validated response handling.
 
-[Source: runMemoryConsolidation](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L207)
+[Source: runMemoryConsolidation](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L207)
 
 ```typescript
 async function runMemoryConsolidation(
@@ -178,7 +178,7 @@ async function runMemoryConsolidation(
 
 The existing memory and owner instruction supplied to the editor.
 
-[Source: runMemoryInstruction](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L295)
+[Source: runMemoryInstruction](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L295)
 
 ```typescript
 async function runMemoryInstruction(
@@ -288,7 +288,7 @@ async function runMemoryInstruction(
 
 The memory index and current question supplied to the relevance filter.
 
-[Source: loadRelevantMemories](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/manager.ts#L409)
+[Source: loadRelevantMemories](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/manager.ts#L409)
 
 ```typescript
 async function loadRelevantMemories(
@@ -354,7 +354,7 @@ async function loadRelevantMemories(
 
 Selected memory is prepended to the user message rather than changing the system prompt.
 
-[Source: formatRunMemory](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/memory/run-memory.ts#L33)
+[Source: formatRunMemory](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/memory/run-memory.ts#L33)
 
 ```typescript
 function formatRunMemory(memories: MemoryRow[]): string {
@@ -371,7 +371,7 @@ function formatRunMemory(memories: MemoryRow[]): string {
 
 Detailed segment compaction with optional previous context.
 
-[Source: getLeafSummaryPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/context-management/prompts.ts#L10)
+[Source: getLeafSummaryPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/context-management/prompts.ts#L10)
 
 ```typescript
 function getLeafSummaryPrompt(previousContext: string): string {
@@ -395,7 +395,7 @@ Rules:
 
 Condenses segments into a session history.
 
-[Source: getD1SummaryPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/context-management/prompts.ts#L26)
+[Source: getD1SummaryPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/context-management/prompts.ts#L26)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -417,7 +417,7 @@ Rules:
 
 Preserves decisions and outcomes across sessions.
 
-[Source: getD2SummaryPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/context-management/prompts.ts#L38)
+[Source: getD2SummaryPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/context-management/prompts.ts#L38)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -440,7 +440,7 @@ Rules:
 
 Retains only durable strategic context.
 
-[Source: getDeeperSummaryPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/context-management/prompts.ts#L51)
+[Source: getDeeperSummaryPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/context-management/prompts.ts#L51)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -463,7 +463,7 @@ Rules:
 
 Normal and aggressive retry length constraints.
 
-[Source: targetNote](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/context-management/compaction.ts#L73)
+[Source: targetNote](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/context-management/compaction.ts#L73)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -481,7 +481,7 @@ Be aggressive. Target length: {{Math.min(640, Math.floor(targetMax * 0.2))}} tok
 
 Answers from retrieved summaries, citing summary IDs.
 
-[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/calling-tools/lcm-expand.ts#L128)
+[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/calling-tools/lcm-expand.ts#L128)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 

@@ -12,7 +12,7 @@ Health uses structured responses for the iPhone UI. Snapshot values and relevant
 
 Locale, evidence, tone, safe interpretation and JSON structure for a daily note.
 
-[Source: HEALTH_SUMMARY_SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/server/routes/health.ts#L30)
+[Source: HEALTH_SUMMARY_SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/server/routes/health.ts#L30)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -43,7 +43,7 @@ Respond ONLY with JSON in exactly that shape.
 
 The daily snapshot and memory envelope.
 
-[Source: userText](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/server/routes/health.ts#L65)
+[Source: userText](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/server/routes/health.ts#L65)
 
 ```typescript
 function userText(s: HealthSnapshot, memories: MemoryRow[]): string {
@@ -55,7 +55,7 @@ function userText(s: HealthSnapshot, memories: MemoryRow[]): string {
 
 Weekly, monthly, quarterly and yearly report instructions.
 
-[Source: HEALTH_PERIOD_REPORT_SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/server/routes/health.ts#L69)
+[Source: HEALTH_PERIOD_REPORT_SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/server/routes/health.ts#L69)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -94,7 +94,7 @@ Respond ONLY with JSON in exactly that shape.
 
 Period aggregates, comparisons and memories supplied to the reporter.
 
-[Source: periodUserText](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/server/routes/health.ts#L108)
+[Source: periodUserText](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/server/routes/health.ts#L108)
 
 ```typescript
 function periodUserText(r: PeriodReportRequest, memories: MemoryRow[]): string {

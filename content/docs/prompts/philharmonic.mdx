@@ -12,7 +12,7 @@ The PM and employees append the current workspace, group brief and permitted too
 
 Planning, delegation, review, quotas, autonomy and completion. Includes the shared response-format block by reference.
 
-[Source: PM_SYSTEM_PROMPT](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/pm-prompt.ts#L3)
+[Source: PM_SYSTEM_PROMPT](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/pm-prompt.ts#L3)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -56,7 +56,7 @@ Respect the configured Staff concurrency limit. Never use a visual Artifact for 
 
 Conditional instructions for connected MCP servers.
 
-[Source: pmMcpSection](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/pm-prompt.ts#L39)
+[Source: pmMcpSection](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/pm-prompt.ts#L39)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -73,7 +73,7 @@ These MCP servers are the owner's, connected for you. Use list_mcp_tools to see 
 
 How the current workspace, roster, quota and plan are attached.
 
-[Source: pmSystemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/pm-coordinator.ts#L892)
+[Source: pmSystemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/pm-coordinator.ts#L892)
 
 ```typescript
 const pmSystemPrompt =
@@ -89,7 +89,7 @@ const pmSystemPrompt =
 
 Built-in employee identity and execution/reporting instructions, plus the shared response format. Team and employee prompts are user configuration.
 
-[Source: buildEmployeeSystemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L105)
+[Source: buildEmployeeSystemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L105)
 
 ```typescript
 function buildEmployeeSystemPrompt(agent: Agent, team: Team | null): string {
@@ -114,7 +114,7 @@ function buildEmployeeSystemPrompt(agent: Agent, team: Team | null): string {
 
 Included only when the employee can search or fetch the web.
 
-[Source: WEB_CITATIONS](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L71)
+[Source: WEB_CITATIONS](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L71)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -128,7 +128,7 @@ Citing the web: whoever reads your report cannot see your search results, so nev
 
 Conditional MCP discovery guidance.
 
-[Source: mcpServersBlock](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L101)
+[Source: mcpServersBlock](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L101)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -145,7 +145,7 @@ These MCP servers are connected. Use list_mcp_tools to see a server's tools and 
 
 Continuity guidance around earlier reports. Report bodies are runtime data.
 
-[Source: earlierReportsBlock](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L83)
+[Source: earlierReportsBlock](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L83)
 
 ```typescript
 function earlierReportsBlock(
@@ -170,7 +170,7 @@ function earlierReportsBlock(
 
 Conditional wrappers around reviewed lessons and group-local notes.
 
-[Source: memoryBlock](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L181)
+[Source: memoryBlock](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L181)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -184,7 +184,7 @@ Conditional wrappers around reviewed lessons and group-local notes.
 
 How workspace, citations, memories, reports, skills and MCP instructions are combined.
 
-[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/employee-loop.ts#L196)
+[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/employee-loop.ts#L196)
 
 ```typescript
 const systemPrompt =
@@ -203,7 +203,7 @@ const systemPrompt =
 
 Default working folder and availability rules. Includes the group brief separately.
 
-[Source: groupWorkspace](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/workspace.ts#L9)
+[Source: groupWorkspace](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/workspace.ts#L9)
 
 ```typescript
 async function groupWorkspace(conversationId: string) {
@@ -225,7 +225,7 @@ async function groupWorkspace(conversationId: string) {
 
 Durable owner constraints and precedence of newer owner instructions.
 
-[Source: groupBriefPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/group-brief.ts#L79)
+[Source: groupBriefPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/group-brief.ts#L79)
 
 ```typescript
 async function groupBriefPrompt(id: string) {
@@ -239,7 +239,7 @@ async function groupBriefPrompt(id: string) {
 
 The employee instructions, delegated task and brief, followed by RESPONSE_FORMAT_PROMPT. The CLI’s own system/tool/permission prompts are not replaced.
 
-[Source: taskPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/agents/run-agent-employee.ts#L373)
+[Source: taskPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/agents/run-agent-employee.ts#L373)
 
 ```typescript
 const taskPrompt = agent.systemPrompt?.trim()
@@ -251,7 +251,7 @@ const taskPrompt = agent.systemPrompt?.trim()
 
 The exact task payload sent to the coding CLI, including the shared writing defaults.
 
-[Source: prompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/agents/run-agent-employee.ts#L378)
+[Source: prompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/agents/run-agent-employee.ts#L378)
 
 ```typescript
 const prompt = `${taskPrompt}\n\n${RESPONSE_FORMAT_PROMPT}`
@@ -261,7 +261,7 @@ const prompt = `${taskPrompt}\n\n${RESPONSE_FORMAT_PROMPT}`
 
 Generates an employee specification as JSON.
 
-[Source: SPEC_PROMPT](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/recruit.ts#L17)
+[Source: SPEC_PROMPT](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/recruit.ts#L17)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -278,7 +278,7 @@ Leave "name" empty — it is assigned separately.
 
 The deterministic role prompt when spec generation is unavailable.
 
-[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/recruit.ts#L145)
+[Source: systemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/recruit.ts#L145)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -292,7 +292,7 @@ You are a virtual employee. Your role: {{params.role}}.
 
 Extracts reusable lessons from work the PM has accepted.
 
-[Source: REFLECTION_PROMPT](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/agent-memory.ts#L25)
+[Source: REFLECTION_PROMPT](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/agent-memory.ts#L25)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -309,7 +309,7 @@ Respond only with JSON: {"lessons":[{"title":"short topic","lesson":"actionable 
 
 Task, role, output and prior lessons sent for review. Shown as a builder to retain the exact data envelope.
 
-[Source: reflectOnReviewedTask](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/agent-memory.ts#L48)
+[Source: reflectOnReviewedTask](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/agent-memory.ts#L48)
 
 ```typescript
 async function reflectOnReviewedTask(args: {
@@ -406,7 +406,7 @@ async function reflectOnReviewedTask(args: {
 
 Compresses older group messages into one paragraph.
 
-[Source: SYSTEM_PROMPT](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/lcm/summarize.ts#L12)
+[Source: SYSTEM_PROMPT](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/lcm/summarize.ts#L12)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -428,7 +428,7 @@ Do NOT speculate or restate generic process. Do NOT use lists. Output only the p
 
 Preserves role labels, directed employee mentions and any previous summary.
 
-[Source: formatTranscript](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/philharmonic/lcm/summarize.ts#L77)
+[Source: formatTranscript](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/philharmonic/lcm/summarize.ts#L77)
 
 ```typescript
 function formatTranscript(
@@ -468,7 +468,7 @@ function formatTranscript(
 
 Instructions appended when the owner directs a request to selected active employees, preserving PM coordination and review rules.
 
-[Source: withGroupMentions](https://github.com/actovia-ai/actovia/blob/main/packages/shared/src/types/philharmonic.ts#L293)
+[Source: withGroupMentions](https://github.com/actovia-ai/actovia/blob/master/packages/shared/src/types/philharmonic.ts#L293)
 
 ```typescript
 function withGroupMentions(

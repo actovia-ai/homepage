@@ -12,7 +12,7 @@ Deep Research uses its own system prompt and task-specific JSON envelopes. The c
 
 Initial research clarification.
 
-[Source: deepResearchBootPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/prompts.ts#L222)
+[Source: deepResearchBootPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/prompts.ts#L222)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -26,7 +26,7 @@ You are an expert researcher tasked with exploring a subject provided by the use
 
 The shared researcher role and standards.
 
-[Source: deepResearchSystemPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/prompts.ts#L230)
+[Source: deepResearchSystemPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/prompts.ts#L230)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -52,7 +52,7 @@ You are an expert researcher. Today is {{new Date().toISOString()}}. Follow thes
 
 Research query request and JSON response contract.
 
-[Source: prompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/deep-research/generate-queries.ts#L41)
+[Source: prompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/deep-research/generate-queries.ts#L41)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -77,7 +77,7 @@ Respond with a JSON object: {"queries": [{"query": string, "researchGoal": strin
 
 Extracts findings, citations and follow-up questions in the topic’s language.
 
-[Source: prompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/deep-research/process-search-results.ts#L52)
+[Source: prompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/deep-research/process-search-results.ts#L52)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -104,7 +104,7 @@ Respond with a JSON object: {"learnings": [{"learning": string, "citations": [nu
 
 Report assembly, factual citations and image instructions.
 
-[Source: userPrompt](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/deep-research/final-report.ts#L31)
+[Source: userPrompt](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/deep-research/final-report.ts#L31)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
@@ -127,7 +127,7 @@ Respond with a JSON object: {"report": "<markdown report text>"}
 
 Produces complementary query variants as a JSON array.
 
-[Source: SYSTEM](https://github.com/actovia-ai/actovia/blob/main/src/main/lib/ai/utils/query-expansion.ts#L5)
+[Source: SYSTEM](https://github.com/actovia-ai/actovia/blob/master/src/main/lib/ai/utils/query-expansion.ts#L5)
 
 <div className="min-w-0 [&_pre]:w-full [&_pre]:min-w-0 [&_pre]:whitespace-pre-wrap [&_code]:whitespace-pre-wrap [&_code]:break-words">
 
