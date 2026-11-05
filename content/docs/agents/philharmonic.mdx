@@ -31,6 +31,60 @@ Each group has its own working folder for the files its members make. A group
 can also be pointed at a folder of yours — **Open folder…**, or **New project…**
 to start one — which is where [coding agents](/docs/agents/coding-agents) work.
 
+## Composer commands (desktop)
+
+Type `/` at the start of the composer to open the command menu. Keep typing
+to filter it, use **↑ / ↓** to choose an entry, then **Enter** or **Tab** to
+select it. **Escape** closes the menu. **Shift+Enter** adds a new line; Enter
+used to confirm an IME candidate does not send the message.
+
+| Command    | Action                                                                       |
+| ---------- | ---------------------------------------------------------------------------- |
+| `/compact` | Summarize older context and show the estimated token count before and after. |
+| `/brief`   | Open the group's `AGENTS.md` for reading or editing.                         |
+| `/status`  | Open the monitor with context usage and team activity.                       |
+| `/archive` | Open the group's completed deliverables.                                     |
+| `/stop`    | Interrupt the PM and the group's staff tasks.                                |
+
+For `/compact`, wait until the current PM round finishes and enable context
+management in **Settings → Memory**. Compaction keeps the latest six messages
+alongside the summary, and the full conversation history remains available.
+The group brief is loaded separately from this summary. If there is no older
+context to absorb, the command reports that the context is already compact.
+A failed or cancelled attempt leaves the previous summary available.
+
+## Mention an employee (desktop)
+
+Type `@` at a word boundary and start an employee's name to search active
+employees. Choose one with **Enter**, **Tab** or a click. Each selection appears
+as a recipient chip above the composer; click a chip to remove it. You can
+select up to ten employees, then write your request and send it.
+
+For example, select Avery and write **Review the report's sources before we
+publish it**. The PM receives the selected employee IDs with your request and
+coordinates the work through the group's plan, concurrency limits and review
+process. Employee renames keep the recipient relationship intact. If sending
+fails, your draft, attachments and recipients stay in the composer for retry.
+
+## The group brief (desktop)
+
+Each group has its own **AGENTS.md**: a durable brief containing the objective,
+constraints, decisions, acceptance criteria and open handoffs. The first
+request creates a starting brief. The PM can maintain it as requirements and
+decisions evolve, and the PM, model-based employees and coding-agent employees
+receive the current brief when starting a new round or task.
+
+Open it with `/brief` or the **AGENTS.md** button above the composer. Choose
+**Edit**, change the Markdown, then **Save** or **Cmd/Ctrl+Enter**. The preview
+shows the saved version. If another edit arrives before yours is saved, your
+draft stays available and the save reports a conflict. **Reload & discard edits**
+loads the current version so you can review it before making a new edit.
+
+The file lives in `~/.actovia/groups/<group-id>/AGENTS.md`. It belongs to the
+group, separately from the `AGENTS.md` or `CLAUDE.md` in a folder you bind to it.
+Use it for requirements and decisions that should survive context compaction;
+keep routine progress updates in the conversation.
+
 ## Decision process
 
 Under each PM message, **Decision process** opens the record of that round:
@@ -68,9 +122,11 @@ and optionally:
 
 ## Dashboard
 
-**Dashboard** is the schedule: what Philharmonic will run next and what runs
-on a repeat — see [Schedules & quotas](/docs/agents/schedules). Philharmonic
-counts tokens, not money: a round's usage is in its **Decision process**.
+**Dashboard** shows active and recent execution plans, recent plan activity,
+and the distribution of steps by status. Open **Scheduled** from the Chat
+sidebar to manage scheduled work. See [Schedules & quotas](/docs/agents/schedules)
+for scheduling and coding-agent quotas. A PM round's token usage is in its
+**Decision process**.
 
 ## On iPhone
 

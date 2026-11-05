@@ -1,0 +1,71 @@
+---
+title: Built-in Prompts
+description: The prompts shipped with Actovia, organized by purpose and generated from source.
+icon: FileText
+---
+
+Actovia ships task-specific prompts for conversations and background work.
+This catalogue contains **53 prompt templates and builders** across 7 categories,
+generated from the desktop source. Each entry includes its purpose, full static
+text or construction function, and a link to the implementation.
+
+| Category | Contents |
+| --- | --- |
+| [Response formatting](/docs/prompts/writing) | Shared writing defaults for Chat and Philharmonic. |
+| [Chat](/docs/prompts/chat) | Chat identity, tools, personalization, interactive blocks and conversation titles. |
+| [Philharmonic](/docs/prompts/philharmonic) | PM coordination, employee reports, recruitment and group context. |
+| [Memory & context](/docs/prompts/memory) | Long-term memory, relevance filtering and depth-aware conversation summaries. |
+| [Research & search](/docs/prompts/research) | Deep Research prompts and search query expansion. |
+| [Discover](/docs/prompts/discover) | Daily personalized news queries and relevance checks. |
+| [Health](/docs/prompts/health) | Daily Health notes and completed-period reports for iPhone. |
+
+## Reading the templates
+
+Values in double braces are runtime substitutions, such as the current date,
+workspace, configured tools, selected skills or the user's message. Conditional
+template sections show both branches. Complex builders are shown as TypeScript
+so their optional instructions and precedence are visible. Static shared blocks
+are listed once and referenced by name elsewhere.
+
+These pages contain built-in instructions only. They do not contain API keys,
+saved conversations, user memories, workspace files, custom instructions or
+configured team/employee prompts. Tool schemas and descriptions are a separate
+part of a model request; see [Tools](/docs/tools). Coding-agent CLIs
+supply their own system prompts; Actovia's task wrapper is documented under
+[Philharmonic](/docs/prompts/philharmonic).
+
+## Response formatting
+
+Chat and Philharmonic share [writing defaults](/docs/prompts/writing): paragraphs
+for connected explanations, short headings for substantial sections, bullets for
+parallel items, numbers for ordered steps and tables for comparisons. Code and
+paths keep their exact text. Explicit requested formats and structured task
+contracts take precedence. These are generation guidelines, not a transformation
+of saved replies, and model adherence can vary.
+
+The policy was informed by [Claude's published system prompt](https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4-5),
+[Anthropic's formatting guidance](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices),
+the Microsoft writing guides for [headings](https://learn.microsoft.com/en-us/style-guide/scannable-content/headings)
+and [lists](https://learn.microsoft.com/en-us/style-guide/scannable-content/lists),
+and [markdownlint's structural rules](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md).
+We also inspected community [Claude/ChatGPT prompt collections](https://github.com/jujumilk3/leaked-system-prompts);
+those collections are not authenticated vendor specifications. Markdownlint can
+check syntax and conventions, but cannot decide whether an idea needs a heading
+or whether a table is easier to read than prose. It is not a runtime filter in
+Actovia.
+
+## Keeping this catalogue current
+
+From the desktop repository, run:
+
+```sh
+bun scripts/export-built-in-prompts.mjs
+bun scripts/export-built-in-prompts.mjs --check
+```
+
+
+The exporter reads source text without importing the app or opening its database.
+It fails if a documented symbol moves or disappears; check mode also fails when
+the generated pages differ. When adding a new model task, add its prompt to the
+exporter's catalogue. Generated pages are committed in the documentation site
+repository alongside its navigation.
