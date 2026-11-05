@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/actovia-ai/homepage/compare/v1.6.2...v1.6.3) (2026-11-05)
+
+
+### Bug Fixes
+
+* update failed link ([a17e866](https://github.com/actovia-ai/homepage/commit/a17e866be585c433195ac43bfdeb54a78820810b))
+
 ## [1.6.2](https://github.com/actovia-ai/homepage/compare/v1.6.1...v1.6.2) (2026-11-01)
 
 
