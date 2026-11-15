@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/actovia-ai/homepage/compare/v1.7.0...v1.8.0) (2026-11-15)
+
+
+### Features
+
+* integrate cloudflare worker ([81a5490](https://github.com/actovia-ai/homepage/commit/81a549070f809aef91802e0e1540004fde7a46a2))
+
 # [1.7.0](https://github.com/actovia-ai/homepage/compare/v1.6.3...v1.7.0) (2026-11-05)
 
 
