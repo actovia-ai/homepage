@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/actovia-ai/homepage/compare/v1.6.3...v1.7.0) (2026-11-05)
+
+
+### Features
+
+* add new multi language ([7940648](https://github.com/actovia-ai/homepage/commit/79406485814410642cfac11978207b145fc90b54))
+
 ## [1.6.3](https://github.com/actovia-ai/homepage/compare/v1.6.2...v1.6.3) (2026-11-05)
 
 
