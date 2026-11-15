@@ -1,10 +1,13 @@
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { Monitor, Smartphone } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
+
+const availableShots = new Set(
+  Object.keys(import.meta.glob('/public/docs/shots/**/*.png')).map((file) =>
+    file.slice('/public'.length)
+  )
+)
 
 /**
  * A screenshot in the docs, or the slot one will fill.
@@ -45,9 +48,7 @@ const PLATFORM_ICON: Record<Platform, ReactNode> = {
 /** The dark-scheme file of a capture, if one is published beside it. */
 function darkSourceOf(src: string): string | undefined {
   const dark = src.replace(/\.png$/u, '-dark.png')
-  return dark !== src && existsSync(join(process.cwd(), 'public', dark))
-    ? dark
-    : undefined
+  return dark !== src && availableShots.has(dark) ? dark : undefined
 }
 
 export function Screenshot({

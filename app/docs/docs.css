@@ -2,3 +2,6 @@
 @import '@fumadocs/base-ui/css/neutral.css';
 @import '@fumadocs/base-ui/css/generated/spacious.css';
 @import '@fumadocs/base-ui/css/preset.css';
+
+/* Scan the component source as well as the package's generated class list. */
+@source '../../node_modules/@fumadocs/base-ui/dist/**/*.js';

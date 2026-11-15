@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { Download } from '@/app/_components/download'
 import { FeaturePanel } from '@/app/_components/feature-panel'
 import { Footer } from '@/app/_components/footer'
@@ -19,12 +16,23 @@ import { Terminal, Token } from '@/app/_components/terminal'
 import { getLatestRelease, resolveDownloads } from '@/app/_lib/release'
 import { SHOTS, shotFiles } from '@/app/_lib/shots'
 
+// Public assets are deployed separately from the Worker filesystem.
+const availableShots = new Set(
+  Object.keys(
+    import.meta.glob('/public/{shots,docs/shots}/**/*.png', {
+      eager: true,
+      query: '?url',
+      import: 'default'
+    })
+  ).map((file) => file.slice('/public'.length))
+)
+
 export default async function Page() {
   const downloads = resolveDownloads(await getLatestRelease())
   // Screenshots that have been dropped into public/ replace their placeholders.
   const ready = Object.values(SHOTS)
     .flatMap(shotFiles)
-    .filter((f) => existsSync(join(process.cwd(), 'public', f)))
+    .filter((file) => availableShots.has(file))
 
   return (
     <ShotsProvider ready={ready}>

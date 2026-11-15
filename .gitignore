@@ -46,3 +46,10 @@ next-env.d.ts
 .open-next
 # impeccable review captures
 .impeccable/
+/dist/
+.vinext/
+
+# Cloudflare build output and local package cache
+.cloudflare/
+.wrangler/
+.pnpm-store/

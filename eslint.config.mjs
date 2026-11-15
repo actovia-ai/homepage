@@ -9,5 +9,14 @@ export default defineConfig([
   // eslint-plugin-react 7 detects the React version through an API ESLint 10
   // removed (context.getFilename); naming the version skips the detection.
   { settings: { react: { version: '19.2' } } },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts'])
+  globalIgnores([
+    '.next/**',
+    '.cloudflare/**',
+    '.vinext/**',
+    '.wrangler/**',
+    'dist/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts'
+  ])
 ])

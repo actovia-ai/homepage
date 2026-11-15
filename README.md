@@ -29,4 +29,13 @@ Never place API keys, personal chat exports or simulator data in this repository
 
 ## Deployment
 
-The repository includes OpenNext/Cloudflare scripts (`pnpm preview`, `pnpm deploy`) as well as the standard Next.js build used by the configured hosting platform. Keep deployment credentials and project linkage outside source control. A source commit does not itself verify that production has deployed; inspect the host's deployment result separately.
+The app runs on vinext and Cloudflare Workers. `cloudflare.config.ts` defines the `actovia-homepage` Worker and `actovia.yancey.app` domain; `vite.config.ts` configures Fumadocs, CSS Modules and the Workers Cache CDN adapter. There is no KV data cache or Cloudflare Images binding. Screenshot availability is resolved during the build because Workers cannot inspect the source repository's filesystem.
+
+```bash
+pnpm exec cf auth login
+pnpm deploy               # build and deploy
+pnpm preview              # preview a production build locally
+pnpm cf-typegen           # regenerate Cloudflare binding types
+```
+
+Keep deployment credentials outside source control. Generated `.cloudflare/`, `.wrangler/` and `dist/` output is ignored. See [APPLE-CREDENTIALS.md](APPLE-CREDENTIALS.md) for the Hikki credentials needed by the separate blog and Hikki website Workers.
