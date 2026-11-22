@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/actovia-ai/homepage/compare/v1.8.0...v1.9.0) (2026-11-22)
+
+
+### Features
+
+* detect download platforms and publish signing policy ([68720ac](https://github.com/actovia-ai/homepage/commit/68720ac948b0790c3cf8bfe2ad9b87b88ee096ec))
+
 # [1.8.0](https://github.com/actovia-ai/homepage/compare/v1.7.0...v1.8.0) (2026-11-15)
 
 
