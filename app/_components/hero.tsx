@@ -1,24 +1,17 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
-import { AppStoreBadge } from '@/app/_components/app-store-badge'
-import { GithubMark } from '@/app/_components/local-nav'
+import { HeroDownload } from '@/app/_components/hero-download'
 import { ProviderMarks } from '@/app/_components/models'
 import { AppWindow } from '@/app/_components/run-card'
-import { RELEASES_URL, REPO_URL } from '@/app/_lib/release'
+import { RELEASES_URL, type Downloads } from '@/app/_lib/release'
 
 /**
  * The first viewport: a pill with the release, a headline whose two places
  * are set on solid blocks (the computer it runs on, the phone that reaches
  * it), the description beside the two actions, and the app window under it.
  */
-export function Hero({
-  macHref,
-  version
-}: {
-  macHref: string
-  version: string | null
-}) {
-  const v = version?.replace(/^v/u, '') ?? null
+export function Hero({ downloads }: { downloads: Downloads }) {
+  const v = downloads.version?.replace(/^v/u, '') ?? null
 
   return (
     <section id="top" className="overflow-hidden">
@@ -54,47 +47,7 @@ export function Hero({
             </p>
           </div>
 
-          <div className="lg:row-span-2 lg:pt-1">
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={macHref}
-                className="group bg-ink text-paper inline-flex items-center gap-2.5 rounded-[6px] px-5 py-3 text-base font-medium transition-[opacity,scale] duration-150 hover:opacity-90 active:scale-[0.97]"
-              >
-                Download for Mac
-                <ArrowRight
-                  aria-hidden
-                  className="text-sun size-4.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                />
-              </a>
-              <a
-                href={REPO_URL}
-                className="border-hairline bg-panel text-ink hover:bg-sunk inline-flex items-center gap-2.5 rounded-[6px] border px-5 py-3 text-base font-medium transition-[background-color,scale] duration-150 active:scale-[0.97]"
-              >
-                <GithubMark className="size-4" />
-                Source
-                <ArrowUpRight aria-hidden className="text-graphite size-4" />
-              </a>
-            </div>
-            <p className="text-graphite mt-4 font-mono text-xs">
-              MIT · no account · your own model keys
-            </p>
-            <p className="text-graphite mt-1.5 text-sm">
-              Apple silicon. Also for{' '}
-              <a href="#download" className="text-ink underline">
-                Windows and Linux
-              </a>
-              .
-            </p>
-            <div className="border-hairline mt-6 flex items-center gap-5 border-t pt-5">
-              <div>
-                <p className="text-ink text-sm font-medium">
-                  Take it with you.
-                </p>
-                <p className="text-graphite mt-1 text-sm">Actovia for iPhone</p>
-              </div>
-              <AppStoreBadge />
-            </div>
-          </div>
+          <HeroDownload downloads={downloads} />
 
           <ProviderMarks className="lg:-mt-2" />
         </div>

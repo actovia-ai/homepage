@@ -20,6 +20,7 @@ const COLUMNS = [
       { label: 'Docs', href: '/docs' },
       { label: 'Source code', href: REPO_URL },
       { label: 'Releases', href: RELEASES_URL },
+      { label: 'Code signing policy', href: '/code-signing' },
       { label: 'Support', href: '/support' },
       { label: 'Report an issue', href: `${REPO_URL}/issues` },
       { label: 'MIT License', href: `${REPO_URL}/blob/master/LICENSE` }

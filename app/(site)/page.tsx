@@ -38,7 +38,7 @@ export default async function Page() {
     <ShotsProvider ready={ready}>
       <LocalNav downloadHref="#download" />
       <main>
-        <Hero macHref={downloads.mac.dmg} version={downloads.version} />
+        <Hero downloads={downloads} />
         <Highlights />
         <Scenes />
         <RunStory />

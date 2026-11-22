@@ -6,18 +6,34 @@ import { useId, useState } from 'react'
 
 import { AppStoreBadge } from '@/app/_components/app-store-badge'
 import { Terminal, Token } from '@/app/_components/terminal'
+import type {
+  DownloadArchitecture,
+  DownloadPlatform
+} from '@/app/_lib/platform'
 import type { Downloads } from '@/app/_lib/release'
 import { APP_STORE_URL, RELEASES_URL } from '@/app/_lib/release'
+import { useDetectedArchitecture } from '@/app/_lib/use-detected-architecture'
+import { useDetectedPlatform } from '@/app/_lib/use-detected-platform'
 import { cn } from '@/lib/utils'
 
-type Platform = 'mac' | 'windows' | 'linux' | 'cli' | 'iphone'
+type Platform = DownloadPlatform | 'cli'
 
 /**
  * The close: what to do, in order. The first step is open, with a tab per
  * platform; the next two say what comes after the download.
  */
 export function Download({ downloads }: { downloads: Downloads }) {
-  const [platform, setPlatform] = useState<Platform>('mac')
+  const detected = useDetectedPlatform()
+  const [selected, setPlatform] = useState<Platform | null>(null)
+  const platform = selected ?? detected
+  const detectedArchitecture = useDetectedArchitecture()
+  const [selectedArchitecture, setArchitecture] =
+    useState<DownloadArchitecture | null>(null)
+  const architecture = selectedArchitecture ?? detectedArchitecture
+  const windows =
+    architecture === 'arm64' ? downloads.windows.arm64 : downloads.windows
+  const linux =
+    architecture === 'arm64' ? downloads.linux.arm64 : downloads.linux
   const id = useId()
   const version = downloads.version?.replace(/^v/u, '')
 
@@ -45,6 +61,12 @@ export function Download({ downloads }: { downloads: Downloads }) {
           >
             Release notes and every past version
           </a>
+          <Link
+            href="/code-signing"
+            className="text-ink mt-4 block w-fit underline decoration-[color:var(--color-hairline)] underline-offset-[0.3em] hover:decoration-current"
+          >
+            Code signing policy
+          </Link>
           <a
             href={APP_STORE_URL}
             target="_blank"
@@ -86,13 +108,39 @@ export function Download({ downloads }: { downloads: Downloads }) {
                 ))}
               </div>
 
+              {(platform === 'windows' || platform === 'linux') && (
+                <label className="text-graphite mt-5 flex flex-col items-start gap-3 text-sm sm:flex-row sm:items-center">
+                  Architecture
+                  <select
+                    className="border-hairline bg-paper text-ink max-w-full min-w-0 rounded-[4px] border px-3 py-2"
+                    value={architecture ?? ''}
+                    onChange={(event) =>
+                      setArchitecture(
+                        event.target.value as DownloadArchitecture
+                      )
+                    }
+                  >
+                    <option value="" disabled>
+                      Choose architecture
+                    </option>
+                    <option value="x64">x64 (Intel / AMD)</option>
+                    <option value="arm64">ARM64 (Snapdragon / Apple VM)</option>
+                  </select>
+                </label>
+              )}
+
               <div
                 key={platform}
                 id={`${id}-panel`}
                 role="tabpanel"
-                aria-labelledby={`${id}-${platform}`}
+                aria-labelledby={platform ? `${id}-${platform}` : undefined}
                 className="panel-swap mt-6"
               >
+                {platform === null && (
+                  <p className="text-graphite font-light">
+                    Choose your platform above.
+                  </p>
+                )}
                 {platform === 'mac' && (
                   <>
                     <p className="text-graphite font-light">
@@ -110,25 +158,39 @@ export function Download({ downloads }: { downloads: Downloads }) {
                 {platform === 'windows' && (
                   <>
                     <p className="text-graphite font-light">
-                      For 64-bit Windows. It updates itself.
+                      {architecture === 'arm64'
+                        ? 'For Windows on ARM64.'
+                        : architecture === 'x64'
+                          ? 'For Windows on Intel or AMD.'
+                          : 'Choose your computer’s architecture above.'}{' '}
+                      It updates itself.
                     </p>
                     <Buttons
                       primary={{
-                        label: 'Download installer',
-                        href: downloads.windows.exe
+                        label: 'Download installer (.exe)',
+                        href: architecture === null ? '#download' : windows.exe
                       }}
                     />
                   </>
                 )}
                 {platform === 'linux' && (
                   <>
-                    <p className="text-graphite font-light">For x86-64.</p>
+                    <p className="text-graphite font-light">
+                      {architecture === 'arm64'
+                        ? 'For ARM64 Linux.'
+                        : architecture === 'x64'
+                          ? 'For x86-64 Linux.'
+                          : 'Choose your computer’s architecture above.'}
+                    </p>
                     <Buttons
                       primary={{
                         label: 'Download .deb',
-                        href: downloads.linux.deb
+                        href: architecture === null ? '#download' : linux.deb
                       }}
-                      secondary={{ label: '.rpm', href: downloads.linux.rpm }}
+                      secondary={{
+                        label: '.rpm',
+                        href: architecture === null ? '#download' : linux.rpm
+                      }}
                     />
                   </>
                 )}
@@ -187,14 +249,14 @@ export function Download({ downloads }: { downloads: Downloads }) {
               from home, put both on one{' '}
               <a
                 href="https://tailscale.com"
-                className="text-ink underline decoration-hairline underline-offset-4 hover:decoration-ink"
+                className="text-ink decoration-hairline hover:decoration-ink underline underline-offset-4"
               >
                 Tailscale
               </a>{' '}
               network with MagicDNS on, and keep the computer from sleeping —{' '}
               <Link
                 href="/docs/remote-access#from-anywhere"
-                className="text-ink underline decoration-hairline underline-offset-4 hover:decoration-ink"
+                className="text-ink decoration-hairline hover:decoration-ink underline underline-offset-4"
               >
                 how to set it up
               </Link>
